@@ -1,0 +1,25 @@
+---
+title: I'll AFO
+date: 2017-11-09 13:49:59
+tags: AFO
+toc: false
+---
+
+因为奥妙重重的原因博主沉迷颓废无法自拔，如果 noip 之后没有 AFO，一定会好好更博客（flag）。
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++
+NOIP2017 RP++

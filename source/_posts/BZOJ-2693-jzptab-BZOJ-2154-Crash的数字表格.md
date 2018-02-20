@@ -1,0 +1,182 @@
+layout: post
+title: 'BZOJ 2693: jzptab & BZOJ 2154: Crash的数字表格'
+date: 2017-04-11 13:58:37
+tags: 数论
+categories: 题解
+---
+# 题面
+都是要你求
+$$\sum_{i=1}^{n} \sum_{j=1}^{m} lcm(i, j)$$
+
+# Simple Input
+4 5
+
+# Simple Output
+122
+
+# 题解
+不会做+看题解+公式恐惧症、、、
+下面是某爬虫网站抄来的，也不知道作者是谁、、先orz一波
+
+下面均设n<=m
+$$\sum_{i=1}^{n} \sum_{j=1}^{m} lcm(i, j) = \sum_{i=1}^{n} \sum_{j=1}^{m} \frac{ij}{(i,j)}$$
+
+然后我们要想枚举$d=(i,j)$，那么就要确定$ij$怎么取，显然我们只需要先除去$i$和$j$的$d$，也就是$(i/d,j/d)=1$就行了，那么设
+$$F(x, y) = \sum_{i=1}^{x} \sum_{j=1}^{y} ij[(i,j)=1]$$
+那么原式变成
+$$\sum_{d=1}^{n} \frac{d^2 F(\lfloor \frac{n}{d} \rfloor, \lfloor \frac{m}{d} \rfloor)}{d} = \sum_{d=1}^{n} d F(\lfloor \frac{n}{d} \rfloor, \lfloor \frac{m}{d} \rfloor)$$
+考虑求$F(x,y)$
+$$
+\begin{align}
+F(x, y) & = \sum_{i=1}^{x} \sum_{j=1}^{y} ij[(i,j)=1] \\
+& = \sum_{i=1}^{x} \sum_{j=1}^{y} ij \sum_{d|(i,j)} \mu (d) \\
+& = \sum_{d=1}^{x} \mu (d) \sum_{d|i}^{x} i \sum_{d|j}^{y} j \\
+& = \sum_{d=1}^{x} \mu (d) d^2 \sum_{i=1}^{\lfloor \frac{x}{d} \rfloor} \sum_{j=1}^{\lfloor \frac{y}{d} \rfloor} 1 \\
+& = \sum_{d=1}^{x} \mu (d) d^2 \frac{\lfloor \frac{x}{d} \rfloor (\lfloor \frac{x}{d} \rfloor +1)}{2} \frac{\lfloor \frac{y}{d} \rfloor (\lfloor \frac{y}{d} \rfloor +1)}{2} \\
+\end{align}
+$$
+带回原式得
+$$
+\begin{align}
+& \sum_{d=1}^{n} d F(\lfloor \frac{n}{d} \rfloor, \lfloor \frac{m}{d} \rfloor) \\
+= & \sum_{d=1}^{n} d \sum_{i=1}^{\lfloor \frac{n}{d} \rfloor} \mu (i) i^2 \frac{\lfloor \frac{\lfloor \frac{n}{d} \rfloor}{i} \rfloor (\lfloor \frac{\lfloor \frac{n}{d} \rfloor}{i} \rfloor +1)}{2} \frac{\lfloor \frac{\lfloor \frac{m}{d} \rfloor}{i} \rfloor (\lfloor \frac{\lfloor \frac{m}{d} \rfloor}{i} \rfloor +1)}{2} \\
+= & \sum_{d=1}^{n} d \sum_{i=1}^{\lfloor \frac{n}{d} \rfloor} \mu (i) i^2 \frac{\lfloor \frac{n}{di} \rfloor (\lfloor \frac{n}{di} \rfloor +1)}{2} \frac{\lfloor \frac{m}{di} \rfloor (\lfloor \frac{m}{di} \rfloor +1)}{2} \\
+\end{align}
+$$
+现在已经可以$O(\sqrt n \sqrt n) = O(n)$单次查询了，可以完成那道数字表格了
+```cpp
+#include <bits/stdc++.h>
+#define zyy 20101009
+#define N 10000020
+#define ll long long
+using namespace std;
+ll mu[N], pri[N], s[N], cnt;
+bool mark[N];
+ll ans, x, y;
+inline ll read(){
+	ll x=0,f=1;char ch=getchar();
+	while(ch>'9'||ch<'0'){if(ch=='-')f=-1;ch=getchar();}
+	while(ch<='9'&&ch>='0'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+inline void write(ll a){
+	if(a>9)write(a/10);
+	putchar(a%10+'0');
+}
+ll sum(ll a, ll b){
+	return (a*(a+1)/2)%zyy*(b*(b+1)/2%zyy)%zyy;
+}
+ll f(ll a, ll b){
+	ll ans = 0;
+	for(ll i = 1, last; i <= min(a, b); i = last+1){
+		last = min(a/(a/i), b/(b/i));
+		ans = (ans+(s[last]-s[i-1])*sum(a/i, b/i)%zyy)%zyy;
+		// printf("ans  = %d\n", ans);
+	}
+	return ans;
+}
+int main(){
+	cin >> x >> y;
+	mu[1] = 1;
+	for(ll i = 2; i <= min(x, y); i++){
+		if(!mark[i])pri[++cnt]=i,mu[i]=-1;
+		for(ll j = 1; j <= cnt && i*pri[j] <= min(x, y); j++){
+			mark[pri[j]*i] = 1, mu[pri[j]*i] = -mu[i];
+			if(i%pri[j]==0){mu[pri[j]*i] = 0; break;}
+		}
+	}
+	for(ll i = 1; i <= min(x, y); i++)
+		s[i] = (s[i-1]+i*i*mu[i]%zyy)%zyy;
+	for(ll i = 1, last; i <= min(x, y); i = last+1){
+		last = min(x/(x/i), y/(y/i));
+		ans = (ans+(i+last)*(last-i+1)/2%zyy*f(x/i, y/i)%zyy)%zyy;
+		// printf("ans2 = %d\n", ans);
+	}
+	cout<<(ans+zyy)%zyy<<endl;
+}
+```
+但是交到第一题还是TLE，我们继续化简
+令$T = di$，则$i|T,d = T/i$，换掉指标，得
+$$
+\begin{align}
+& \sum_{d=1}^{n} d \sum_{i=1}^{\lfloor \frac{n}{d} \rfloor} \mu (i) i^2 \frac{\lfloor \frac{n}{di} \rfloor (\lfloor \frac{n}{di} \rfloor +1)}{2} \frac{\lfloor \frac{m}{di} \rfloor (\lfloor \frac{m}{di} \rfloor +1)}{2} \\
+= &
+\sum_{T=1}^{n} \frac{\lfloor \frac{n}{T} \rfloor (\lfloor \frac{n}{T} \rfloor +1)}{2} \frac{\lfloor \frac{m}{T} \rfloor (\lfloor \frac{m}{T} \rfloor +1)}{2} \sum_{i|T} \frac{T}{i} \mu (i) i^2 \\
+= & \sum_{T=1}^{n} \frac{\lfloor \frac{n}{T} \rfloor (\lfloor \frac{n}{T} \rfloor +1)}{2} \frac{\lfloor \frac{m}{T} \rfloor (\lfloor \frac{m}{T} \rfloor +1)}{2} T \sum_{i|T} \mu (i) i \\
+\end{align}
+$$
+设$g(T)=T \sum_{i|T} \mu (i) i$，我们再设$f(T)=\sum_{i|T} \mu (i) i$那么$g(T)=Tf(T)$，考虑求$f(T)$
+在线性筛中，外层为$k$，内层为$p_y$，所以求$f(kp_y)=\sum_{i|T} \mu(i) i$
+
+当$p_y|k$时
+当$i$取的数的因子中不包含新加入的$p_y$时，答案就是$f(k)$
+当$i$取包含新加入的因子$p_y$时，由于此时$p_y$指数已经>=2，所以$\mu (i)=0$，因此贡献为0
+综上，当$p_y|k$时，答案为$f(k)$
+
+当$p_y∤k$时
+当$i$取的数的因子中不包含新加入的$p_y$时，同上，答案是$f(k)$
+当$i$取的数的因子包含新加入的$p_y$时，由于指数为1，所以我们考虑$i=ap_y$，原式变为
+$$\begin{align}
+& \sum_{i|T} \mu(i) i \\
+= & \sum_{ap_y|kp_y} \mu (ap_y) ap_y \\
+= & p_y \sum_{a|k} \mu (a) \mu(p_y) a \\
+= & -p_y \sum_{a|k} \mu(a) a \\
+= & -p_y f(k) \\
+\end{align}$$
+综上，当$p_y∤k$时，答案为$(1−p_y)f(k)$
+然后线性筛随便搞搞即可，最后答案就是
+$$\sum_{T=1}^{n} \frac{\lfloor \frac{n}{T} \rfloor (\lfloor \frac{n}{T} \rfloor +1)}{2} \frac{\lfloor \frac{m}{T} \rfloor (\lfloor \frac{m}{T} \rfloor +1)}{2} g(T)$$
+$$F(x,y)= \sum_{i=1}^{x} \sum_{j=1}^{y} ij[(i,j)=1] = \sum_{i=1}^{x} \sum_{j=1}^{y} ij \sum_{d|(i,j)} \mu (d)$$
+
+接着第一题也可以做了（小心被卡常数！
+```cpp
+#include <bits/stdc++.h>
+#define zyy 100000009
+#define N 10000020
+#define ll long long
+using namespace std;
+int mu[N], pri[N], cnt;
+ll s[N];
+bool mark[N];
+ll x, y;
+inline ll read(){
+	ll x=0,f=1;char ch=getchar();
+	while(ch>'9'||ch<'0'){if(ch=='-')f=-1;ch=getchar();}
+	while(ch<='9'&&ch>='0'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+ll sum(ll a, ll b){
+	return (a*(a+1)/2%zyy)*(b*(b+1)/2%zyy)%zyy;
+}
+ll f(ll a, ll b){
+	ll ans = 0;
+	for(ll i = 1, last; i <= a; i = last+1){
+		last = min(a/(a/i), b/(b/i));
+		ans = (ans+(s[last]-s[i-1]+zyy)%zyy*sum(a/i, b/i)%zyy)%zyy;
+		// printf("ans  = %d\n", ans);
+	}
+	return ans;
+}
+int main(){
+	mu[1] = s[1] = 1;
+	for(int i = 2; i < N; i++){
+		if(!mark[i])pri[++cnt]=i,mu[i]=-1,s[i]=1-i;
+		for(int j = 1; j <= cnt && i*pri[j] < N; j++){
+			mark[pri[j]*i] = 1;
+			if(i%pri[j]==0){mu[pri[j]*i] = 0; s[i*pri[j]]=s[i]; break;}
+			s[i*pri[j]] = (s[i]*s[pri[j]])%zyy; mu[pri[j]*i] = -mu[i];
+		}
+	}
+	for(int i = 1; i < N; i++)
+		s[i] = (s[i-1]+i*s[i]%zyy)%zyy;
+	int T = read();
+	while(T--){
+		x = read(); y = read();
+		if(x > y) swap(x, y);
+		printf("%lld\n", (f(x, y)+zyy)%zyy);
+	}
+}
+```
+做完感觉人已经完全傻掉了
+调了半个小时才知道BZOJ和cin cout有仇
+<img src="https://swwind.github.io/img/haipa.png"/>

@@ -1,0 +1,79 @@
+layout: post
+title: 'BZOJ 2820: YY的GCD & 51nod 1192 Gcd表中的质数'
+date: 2017-04-13 11:39:54
+tags: 数论
+categories: 题解
+---
+# 题面
+求
+$$
+\sum_{i=1}^{a}{\sum_{j=1}^{b}{isprime(gcd(i,j))}}
+$$
+
+# Simple Input
+2
+10 10
+100 100
+
+# Simple Output
+30
+2791
+
+
+# 题解
+当然还是枚举质数p
+式子是从51nod的讨论里抄来的
+$$
+\begin{align}
+ans(m,n) &=\sum_p\sum_{i=1}^{\left\lfloor \frac np\right\rfloor}\sum_{j=1}^{\left\lfloor \frac mp\right\rfloor}[(i,j)=1][p] \\
+&=\sum_p\sum_{i=1}^{\left\lfloor \frac np\right\rfloor}\sum_{j=1}^{\left\lfloor \frac mp\right\rfloor}\sum_{k=1}\mu(k)[k|i,k|j][p] \\
+&=\sum_p\sum_{k=1}^{\left\lfloor \frac np\right\rfloor}\sum_{i=1}^{\left\lfloor \frac n{kp}\right\rfloor}\sum_{j=1}^{\left\lfloor \frac m{kp}\right\rfloor}\mu(k)[p] \\
+&=\sum_{k=1}^n\sum_{p=1}^{\left\lfloor \frac n{k}\right\rfloor}{\left\lfloor \frac n{kp}\right\rfloor}{\left\lfloor \frac m{kp}\right\rfloor}\mu(k)[p] \\
+&=\sum_{k=1}^n\sum_{p|k}{\left\lfloor \frac n{k}\right\rfloor}{\left\lfloor \frac m{k}\right\rfloor}\mu(\frac kp)[p] \\
+&=\sum_{k=1}^n{\left\lfloor \frac n{k}\right\rfloor}{\left\lfloor \frac m{k}\right\rfloor}\sum_{p|k}\mu(\frac kp)[p] \\
+&=\sum_{k=1}^n{\left\lfloor \frac n{k}\right\rfloor}{\left\lfloor \frac m{k}\right\rfloor}f(k)
+\end{align}
+$$
+
+# 代码
+```cpp
+#include <bits/stdc++.h>
+#define N 10000020
+#define ll long long
+using namespace std;
+inline int read(){
+	int x=0,f=1;char ch=getchar();
+	while(ch>'9'||ch<'0'){if(ch=='-')f=-1;ch=getchar();}
+	while(ch<='9'&&ch>='0'){x=x*10+ch-'0';ch=getchar();}
+	return x*f;
+}
+int pri[670000], mu[N], cnt, f[N];
+bool mark[N];
+ll n, m, ans;
+int main(){
+	mu[1] = 1;
+	for(int i = 2; i < N; i++){
+		if(!mark[i])pri[++cnt]=i,mu[i]=-1;
+		for(int j = 1; j <= cnt && pri[j]*i < N; j++){
+			mark[pri[j]*i] = 1;
+			if(i%pri[j])mu[pri[j]*i] = -mu[i];
+			else{mu[pri[j]*i] = 0; break;}
+		}
+	}
+	for(int i = 1; i <= cnt; i++)
+		for(int j = 1; j*pri[i] < N; j++)
+			f[pri[i]*j] += mu[j];
+	for(int i = 1; i < N; i++)
+		f[i] += f[i-1];
+	int T = read();
+	while(T--){
+		n = read(), m = read(), ans = 0;
+		if(n > m) swap(n, m);
+		for(ll i = 1, last; i <= n; i = last+1){
+			last = min(n/(n/i), m/(m/i));
+			ans += (n/i)*(m/i)*(f[last]-f[i-1]);
+		}
+		printf("%lld\n", ans);
+	}
+}
+```

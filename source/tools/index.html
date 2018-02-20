@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>一些小工具</title>
+	<script type="text/javascript">
+		function doit(){
+			if(document.getElementById('874').value == "")return;
+			document.getElementById('154').src = "http://skins.minecraft.net/MinecraftSkins/" +
+				document.getElementById('874').value + ".png";
+			document.getElementById('544').innerHTML = "Loading..."
+		}
+		function ok(){
+			document.getElementById('544').innerHTML = document.getElementById('874').value + "\'s skin:";
+		}
+		function no(){
+			document.getElementById('544').innerHTML = "Who is "+document.getElementById('874').value+"?";
+		}
+	</script>
+</head>
+<body><center>
+	<h2>Minecraft skin checker</h2>
+	<input type="text" id="874" onchange="doit()" placeholder="Enter your name here!">
+	<button onclick="doit()">Get!</button>
+	<p id="544">Please Input Your Name</p>
+	<img id="154" onload="ok()" onerror="no()">
+</center></body>
+</html>
