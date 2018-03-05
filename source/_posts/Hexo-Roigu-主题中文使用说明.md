@@ -13,9 +13,19 @@ warning: 本主题完全不支持 IE！！！
 
 你已经在预览了。
 
+## 优点
+
+- 简洁的 UI（~~灰白的配色~~
+- 完美地兼容 Chrome 和 Firefox（~~<span class="meiryo">私の好きなことは、新しい機能を使うことですから、IEをサポートしていません。</span><span class="truth" title="2333">好吧我是用 Google 翻译的</span>~~
+- 混合了各大网站的优秀设计（~~其实是在抄 UI~~
+
 ## 主题配置
 
-配置文件`_config.yml`注释都写在里边，自己看去，我还良心的用了中文。<span class="truth">其实是不会英语</span>
+配置文件 `_config.yml` 注释都写在里边，自己看去，我还良心的用了中文。<span class="truth" title="QwQ">其实是不会英语</span>
+
+{% remark %}
+为了方便使用 `git pull` 来更新主题的同学，本人将 `_config.yml` 重命名为 `_config.template.yml`。
+{% endremark %}
 
 ## 页面的开关
 
@@ -38,7 +48,9 @@ warning: 本主题完全不支持 IE！！！ # 可选，警告框
 ---
 ```
 
-**注意：**本主题不使用 `<!-- more -->` 来区分前言和正文，请使用 `desc` 属性代替。
+{% remark %}
+本主题不使用 `<!-- more -->` 来区分前言和正文，请使用 `desc` 属性代替。
+{% endremark %}
 
 ### 关于 MathJax 与 Markdown 冲突的解决办法
 
@@ -55,7 +67,7 @@ warning: 本主题完全不支持 IE！！！ # 可选，警告框
   ```javascript
   escape: /^\\([`*\[\]()#+\-.!_>])/,
   ```
-  这一步是取消了 Markdown 对`\\`、`\{`、`\}`的转义。
+  这一步是取消了 Markdown 对 `\\`、`\{`、`\}` 的转义。
 
 3. 找到
   ```javascript
@@ -65,7 +77,7 @@ warning: 本主题完全不支持 IE！！！ # 可选，警告框
   ```javascript
   em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
   ```
-  这一步取消了对`_Italic_`的转义，若要继续使用斜体请使用`*Italic*`。
+  这一步取消了对 `_Italic_` 的转义，若要继续使用斜体请使用 `*Italic*`。
 
 ## 特殊页面
 
@@ -77,7 +89,7 @@ warning: 本主题完全不支持 IE！！！ # 可选，警告框
 $ hexo n page "tags"
 ```
 
-之后打开`/source/tags/index.md`，将其改为如下内容
+之后打开 `/source/tags/index.md`，将其改为如下内容
 
 ```text
 ---
@@ -85,7 +97,7 @@ layout: tags
 ---
 ```
 
-之后就可以在`localhost:4000/tags/`看到标签云页面了。（[预览](/tags)）
+之后就可以在 `localhost:4000/tags/` 看到标签云页面了。（[预览](/tags)）
 
 ### categories 分类云
 
@@ -95,7 +107,7 @@ layout: tags
 $ hexo n page "categories"
 ```
 
-之后打开`/source/categories/index.md`，将其改为如下内容
+之后打开 `/source/categories/index.md`，将其改为如下内容
 
 ```text
 ---
@@ -103,7 +115,7 @@ layout: categories
 ---
 ```
 
-之后就可以在`localhost:4000/categories/`看到标签云页面了。（[预览](/categories)）
+之后就可以在 `localhost:4000/categories/` 看到标签云页面了。（[预览](/categories)）
 
 ### links 友情链接
 
@@ -113,7 +125,7 @@ layout: categories
 $ hexo n page "links"
 ```
 
-之后打开`/source/links/index.md`，将其改为如下内容
+之后打开 `/source/links/index.md`，将其改为如下内容
 
 ```text
 ---
@@ -121,11 +133,11 @@ layout: links
 ---
 ```
 
-之后就可以在`localhost:4000/links/`看到标签云页面了。（[预览](/links)）
+之后就可以在 `localhost:4000/links/` 看到标签云页面了。（[预览](/links)）
 
 ### search 站内搜索
 
-如果要启用的话请先导入`hexo-generator-search`插件。
+如果要启用的话请先导入 `hexo-generator-search` 插件。
 具体方法如下：
 
 1. 在 hexo 博客的根目录下输入以下指令：
@@ -139,7 +151,7 @@ layout: links
     path: search.xml
     field: post|page|all
   ```
-  其中的`field`表示搜索的范围，`post`为全部文章，`page`为全部页面，`all`包括了`post`和`page`。
+  其中的 `field` 表示搜索的范围，`post` 为全部文章，`page` 为全部页面，`all` 包括了 `post` 和 `page`。
 
 3. 在根目录输入
   ```bash
@@ -155,7 +167,7 @@ layout: links
   ```
 
 然后你就可以在`/search`页面搜索了。（[预览](/search)）
-具体可以参见 https://github.com/PaicHyperionDev/hexo-generator-search
+具体可以参见 <https://github.com/PaicHyperionDev/hexo-generator-search>
 
 ## 内置类
 
