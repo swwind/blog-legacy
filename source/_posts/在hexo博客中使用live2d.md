@@ -3,6 +3,10 @@ title: 在 hexo 博客中使用 live2d
 date: 2018-03-16 18:06:01
 toc: false
 desc: 应该还没过时。。。
+tags:
+- hexo
+- live2d
+categories: 颓废
 ---
 
 你肯定已经在许多博客里看到过 live2d 的技术了吧。
