@@ -7,7 +7,7 @@ search: false
 我打算把日记搬到这里来。该链接是保密的。除非你找到了入口链接或者查看了我的github源码。
 超链接的入口只有我知道。
 
-以下便是日记。<script src="/js/mz.gif.js"></script>
+以下便是日记。
 
 ### 2017-3-29
 将多说改为Disque，目前需要（番羽）（土啬）才能评论。谁让多说倒闭了呢<img src="/img/haipa.png">
@@ -322,3 +322,4 @@ zhzh2001 大佬都开始在博客里写必修一了，害怕。。。
 我要好好准备省选了（~~flag~~
 
 
+<script src="/js/mz.gif.js"></script>

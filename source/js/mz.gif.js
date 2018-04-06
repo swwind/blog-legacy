@@ -1,10 +1,10 @@
 var aya = 0;
-function mz_gif(){
+function loadGIF(){
 	aya = (aya+1)%27;
-	$(".mz").each(function(){
-		$(this).attr("src", "/img/mz/mz"+aya+".png");
-	});
-	setTimeout('mz_gif()', 100);
+	document.querySelectorAll('.mz').forEach(function(x){
+		x.src="/img/mz/mz"+aya+".png";
+	})
+	setTimeout(loadGIF, 100);
 }
 var images = new Array()
 function preload() {
@@ -14,8 +14,13 @@ function preload() {
 	}
 }
 
-$(document).ready(function(){
-	if($("img").hasClass("mz")){
+// document.onload=function(){
+	var all = document.querySelectorAll("img")
+	var ok = true;
+	all.forEach(function (x) {
+		ok = ok && x.classList.contains('mz');
+	})
+	if(ok){
 		preload(
 			"/img/mz/mz0.png",
 			"/img/mz/mz1.png",
@@ -44,6 +49,6 @@ $(document).ready(function(){
 			"/img/mz/mz24.png",
 			"/img/mz/mz25.png",
 			"/img/mz/mz26.png");
-		mz_gif();
+		loadGIF();
 	}
-});
+// };
