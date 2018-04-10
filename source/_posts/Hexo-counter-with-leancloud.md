@@ -80,62 +80,40 @@ query.find().then(function (results) {
 
 有了以上三个样例就可以开发了。
 想要锻炼一下自己的同学可以尝试自己写一个出来。
-没有学过 javascript 的同学使用下面我已经写好的。
-关于如何获取 App ID 和 App Key，请参阅 [这篇文章](https://valine.js.org/#/quickstart?id=获取appid和appkey)。
+没有学过 javascript 的同学可以使用下面我已经写好了的。
+~~其实绝大部分主题都有自带~~
 
 ```javascript
-// 三个参数：
-// app_id: 就是 LeanCloud 应用中提供的 App ID
-// app_key: 同上
-// res_id: 表示阅读次数的元素的 id，如果元素不存在就不进行询问。
-var request_read_times = function (app_id, app_key, res_id) {
-	if (!app_id || !app_key) return console.error('Read_Counter: Check your appid and appkey!');
-	var page_path = window.location.pathname.replace(/index\.(html|htm)$/,"")
+window.requestReadTimes = (appId, appKey, res) => {
+  if (!appId || !appKey) return console.error('ReadCounter: Check your appid and appkey!');
+  var page_path = encodeURI(decodeURI(window.location.pathname)).replace(/index\.html?$/,"")
 
-	try {
-		if (!AV) return console.error('Can not find object "AV".');
-		var res_element = document.getElementById(res_id);
-		if (!res_element) return;
-		res_element.innerHTML = '?';
-		try {
-			AV.init({
-				appId: app_id,
-				appKey: app_key
-			});
-		} catch (e) {
-		}
-		var query = new AV.Query('Read_Count');
-		var Read_Count = AV.Object.extend('Read_Count');
-		query.equalTo('link', page_path);
-		query.find().then(function (todo) {
-			if (!todo.length) {
-				res_element.innerHTML = '1';
-				todo = [new Read_Count()];
-				todo[0].set('link', page_path);
-				todo[0].set('value', 1);
-				show('您是第一位访问该文章的用户！')
-			} else {
-				res_element.innerHTML = todo[0].attributes.value + 1;
-				todo[0].set('value', todo[0].attributes.value + 1);
-			}
-			todo[0].save().then(function (todo) {
-			}, function (error) {
-				console.error('Failed to load read times, with error message: ' + error.message);
-			});
-		}, function (error) {
-			res_element.innerHTML = '1';
-			var todo = new Read_Count();
-			todo.set('link', page_path);
-			todo.set('value', 1);
-			todo.save().then(function () {
-				show('您是第一位访问该文章的用户！')
-			}, function () {
-				console.error('Initialize failed');
-			})
-		});
-	} catch (e) {
-		console.error('Read_Counter: Check your appid and appkey!')
-	}
+  // prepare
+  if (!AV) return console.error('Error: Can not find object "AV".');
+  var el = document.querySelector(res);
+  if (!el) return;
+  el.innerHTML = '?';
+  if (!AV.applicationId && !AV.applicationKey)
+    AV.init(appId, appKey);
+  // work
+  var query = new AV.Query('Counter');
+  var ReadCount = AV.Object.extend('Counter');
+  query.equalTo('link', page_path);
+  query.find().then(todo => {
+    let obj = todo[0] || new ReadCount({link: page_path, value: 0});
+    obj.increment('value');
+    return obj.save()
+  }).then(obj => {
+    el.innerHTML = obj.get('value');
+  }).catch(err => {
+    console.error('Failed to save read times, with error message: ' + err.message);
+  });
 }
 ```
+
+但是你会发现 IE11 不资瓷 Primise 和 ES6 呢。
+那怎么办办呢？
+我们可不能轻易的放弃支持 IE 的梦想。<span class="truth" title="你知道的太多了">然而我已经放弃了</span>
+你只需要一个类似 Bluebird 的 Primise 仓库，并且使用 Babel 来转译就可以了。
+
 

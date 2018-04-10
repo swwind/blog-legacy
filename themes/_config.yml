@@ -5,66 +5,67 @@ menu:
   标签: /tags
   分类: /categories
   友链: /links
+  RSS: /atom.xml
 
 author_img: img/author.jpg
 favicon: img/favicon.ico # 站标
 
 # 友链
 links:
-- name: black_moon
-  desc: ljz大佬
-  link: https://littleredstar.github.io/
-  avatar: img/avatar/black_moon.jpg
-- name: Fop_zz
-  desc: 小猪
-  link: http://blog.csdn.net/Fop_zz/
-  avatar: img/avatar/fop_zz.jpg
-- name: Hammer_cwz_77
-  desc: 不知名大佬
-  link: http://www.cnblogs.com/Hammer-cwz-77/
-- name: jzq233jzq
-  desc: 金犇
-  link: https://jzqjzq.coding.me/
-  avatar: img/avatar/jzq233jzq.jpg
-- name: largecub233
-  desc: 巨形方块
-  link: http://blog.csdn.net/largecub233/
-  avatar: img/avatar/largecub233.jpg
-- name: mdnd
-  desc: 萌呆
-  link: http://blog.csdn.net/mdnd1234/
-  avatar: img/avatar/mdnd.jpg
-- name: nn020701
-  desc: 陈天才
-  link: https://nn020701.coding.me/
-  avatar: img/avatar/nn020701.jpg
-- name: problem233
-  desc: Haskell爷
-  link: https://problem233.github.io/
-  avatar: img/avatar/problem233.png
-- name: q234rty
-  desc: lbc大佬
-  link: https://q234rty.top/
-  avatar: img/avatar/q234rty.jpg
-- name: SHENZHEBEI
-  desc: 贝爷
-  link: https://shenzhebei.github.io/
-- name: zhouyuyang233
-  desc: 初三一本爷
-  link: http://blog.csdn.net/zhouyuyang233/
-  avatar: img/avatar/zhouyuyang233.jpg
-- name: zhzh2001
-  desc: zhzh巨佬
-  link: https://zhzh2001.github.io/
-  avatar: img/avatar/zhzh2001.png
-- name: cogito
-  desc: co gay 头
-  link: https://cogito.coding.me/
-  avatar: img/avatar/cogito.png
-- name: fancydreams
-  desc: 大佬
-  link: https://fancydreams.top/
-  avatar: https://secure.gravatar.com/avatar/b8204e5e9d1fd3d7eb24822cc2acd33f?s=64&d=mm&r=g
+  - name: black_moon
+    desc: ljz大佬
+    link: https://littleredstar.github.io/
+    avatar: img/avatar/black_moon.jpg
+  - name: Fop_zz
+    desc: 小猪
+    link: http://blog.csdn.net/Fop_zz/
+    avatar: img/avatar/fop_zz.jpg
+  - name: Hammer_cwz_77
+    desc: 不知名大佬
+    link: http://www.cnblogs.com/Hammer-cwz-77/
+  - name: jzq233jzq
+    desc: 金犇
+    link: https://jzqjzq.coding.me/
+    avatar: img/avatar/jzq233jzq.jpg
+  - name: largecub233
+    desc: 巨形方块
+    link: http://blog.csdn.net/largecub233/
+    avatar: img/avatar/largecub233.jpg
+  - name: mdnd
+    desc: 萌呆
+    link: http://blog.csdn.net/mdnd1234/
+    avatar: img/avatar/mdnd.jpg
+  - name: nn020701
+    desc: 陈天才
+    link: https://nn020701.coding.me/
+    avatar: img/avatar/nn020701.jpg
+  - name: problem233
+    desc: Haskell爷
+    link: https://problem233.github.io/
+    avatar: img/avatar/problem233.png
+  - name: q234rty
+    desc: lbc大佬
+    link: https://q234rty.top/
+    avatar: img/avatar/q234rty.jpg
+  - name: SHENZHEBEI
+    desc: 贝爷
+    link: https://shenzhebei.github.io/
+  - name: zhouyuyang233
+    desc: 初三一本爷
+    link: http://blog.csdn.net/zhouyuyang233/
+    avatar: img/avatar/zhouyuyang233.jpg
+  - name: zhzh2001
+    desc: zhzh巨佬
+    link: https://zhzh2001.github.io/
+    avatar: img/avatar/zhzh2001.png
+  - name: cogito
+    desc: co gay 头
+    link: https://cogito.coding.me/
+    avatar: img/avatar/cogito.png
+  - name: fancydreams
+    desc: 大佬
+    link: https://fancydreams.top/
+    avatar: https://secure.gravatar.com/avatar/b8204e5e9d1fd3d7eb24822cc2acd33f?s=64&d=mm&r=g
 
 # valine 评论框
 # https://valine.js.org/#/configuration
