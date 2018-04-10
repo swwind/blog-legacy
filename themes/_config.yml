@@ -1,0 +1,105 @@
+menu:
+  SW_Wind: /
+  关于: /about
+  归档: /archives
+  标签: /tags
+  分类: /categories
+  友链: /links
+
+author_img: img/author.jpg
+favicon: img/favicon.ico # 站标
+
+# 友链
+links:
+- name: black_moon
+  desc: ljz大佬
+  link: https://littleredstar.github.io/
+  avatar: img/avatar/black_moon.jpg
+- name: Fop_zz
+  desc: 小猪
+  link: http://blog.csdn.net/Fop_zz/
+  avatar: img/avatar/fop_zz.jpg
+- name: Hammer_cwz_77
+  desc: 不知名大佬
+  link: http://www.cnblogs.com/Hammer-cwz-77/
+- name: jzq233jzq
+  desc: 金犇
+  link: https://jzqjzq.coding.me/
+  avatar: img/avatar/jzq233jzq.jpg
+- name: largecub233
+  desc: 巨形方块
+  link: http://blog.csdn.net/largecub233/
+  avatar: img/avatar/largecub233.jpg
+- name: mdnd
+  desc: 萌呆
+  link: http://blog.csdn.net/mdnd1234/
+  avatar: img/avatar/mdnd.jpg
+- name: nn020701
+  desc: 陈天才
+  link: https://nn020701.coding.me/
+  avatar: img/avatar/nn020701.jpg
+- name: problem233
+  desc: Haskell爷
+  link: https://problem233.github.io/
+  avatar: img/avatar/problem233.png
+- name: q234rty
+  desc: lbc大佬
+  link: https://q234rty.top/
+  avatar: img/avatar/q234rty.jpg
+- name: SHENZHEBEI
+  desc: 贝爷
+  link: https://shenzhebei.github.io/
+- name: zhouyuyang233
+  desc: 初三一本爷
+  link: http://blog.csdn.net/zhouyuyang233/
+  avatar: img/avatar/zhouyuyang233.jpg
+- name: zhzh2001
+  desc: zhzh巨佬
+  link: https://zhzh2001.github.io/
+  avatar: img/avatar/zhzh2001.png
+- name: cogito
+  desc: co gay 头
+  link: https://cogito.coding.me/
+  avatar: img/avatar/cogito.png
+- name: fancydreams
+  desc: 大佬
+  link: https://fancydreams.top/
+  avatar: https://secure.gravatar.com/avatar/b8204e5e9d1fd3d7eb24822cc2acd33f?s=64&d=mm&r=g
+
+# valine 评论框
+# https://valine.js.org/#/configuration
+valine: # https://github.com/xCss/Valine
+  enable: true
+  appId: h3fpaex2rIrXIA4BXkhAT9H0-gzGzoHsz
+  appKey: Ar7Yt5v6dLnd0v7G3reEnXkL
+  region: cn
+  placeholder: 啊♂乖乖站好
+  notify: false # 邮件提醒
+  verify: false # 验证码
+  avatar: mm # 默认头像
+  pageSize: 10 # 每页显示评论数
+
+# 谷歌统计
+google_analytics: # https://analytics.google.com/
+  enable: true
+  id: UA-99238066-1
+  site: blog.swwind.top
+
+# 使从百度链接过来的用户跳出提示框
+no_baidu: true
+
+# coding pages
+hosted_by_coding_pages: true
+
+# tab size
+tab_size: 2
+
+# 自定义壁纸
+wallpaper: https://i.loli.net/2018/02/20/5a8bce074a5d7.jpg
+
+# 阅读次数统计，基于 leancloud
+# 你可以使用和 Valine 一样的 appid 和 appkey，或者选择新建一个。
+read_count:
+  enable: true
+  appId: h3fpaex2rIrXIA4BXkhAT9H0-gzGzoHsz
+  appKey: Ar7Yt5v6dLnd0v7G3reEnXkL
