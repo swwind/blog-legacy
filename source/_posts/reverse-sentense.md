@@ -178,7 +178,7 @@ var vuedemo = new Vue({
 ```
 
 ```html
-<div id="vue-demo" class="demo">
+<div id="vue-demo">
   <p><b>Vue Demo</b></p>
   <textarea v-on:input="handle"></textarea>
   <div>{{ result }}</div>
@@ -227,6 +227,8 @@ Vue | 2 | 2 | 86KB
 ~~看看人家 BZOJ，用户名合法性验证写在前端~~
 ~~中文 ID 随便注册~~
 
+经过打包压缩后的 React 可不这么容易破解。
+
 ### 反翻转
 
 我发现顺便写个反翻转的可能以后会有点用处。
@@ -247,7 +249,7 @@ for (let key in trans) {
 String.prototype.rereverse = function () {
   return [...this].reverse().map(c => antitrans[c] || c).join([])
 }
-var vuedemo = new Vue({
+var whatTheFake = new Vue({
   el: '#anti-reverse',
   data: {
     result: ''
