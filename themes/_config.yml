@@ -73,12 +73,10 @@ valine: # https://github.com/xCss/Valine
   enable: true
   appId: h3fpaex2rIrXIA4BXkhAT9H0-gzGzoHsz
   appKey: Ar7Yt5v6dLnd0v7G3reEnXkL
-  region: cn
   placeholder: 啊♂乖乖站好
   notify: false # 邮件提醒
   verify: false # 验证码
   avatar: mm # 默认头像
-  pageSize: 10 # 每页显示评论数
 
 # 谷歌统计
 google_analytics: # https://analytics.google.com/

@@ -69,7 +69,7 @@ theme: roigu
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://git.coding.net/swwind/swwind.coding.me.git
+  repo: git@git.coding.net:swwind/swwind.coding.me.git
   branch: master
 
 search:
