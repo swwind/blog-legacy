@@ -40,7 +40,7 @@ $$(a+b)^n = \sum_{i=0}^nC^i_na^{n-i}b^i$$
 设$A=\begin{bmatrix}1&1\\1&0\end{bmatrix}$
 $$f[i]=A^i[0][0]$$
 于是我们可以得出以下结论
-$$\begin{align}原式&=\sum_{i=0}^nC_n^iA^i\\&=(A+1)^n\end{align}$$
+$$\begin{aligned}原式&=\sum_{i=0}^nC_n^iA^i\\&=(A+1)^n\end{aligned}$$
 $1$用单位矩阵$\begin{bmatrix}1&0\\0&1\end{bmatrix}$代替，那么答案就是
 $$\begin{bmatrix}2&1\\1&1\end{bmatrix}^n$$
 注意到$A^2$就是$\begin{bmatrix}2&1\\1&1\end{bmatrix}$，所以答案就是
