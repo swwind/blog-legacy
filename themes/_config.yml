@@ -102,3 +102,5 @@ read_count:
   enable: true
   appId: h3fpaex2rIrXIA4BXkhAT9H0-gzGzoHsz
   appKey: Ar7Yt5v6dLnd0v7G3reEnXkL
+
+mathjax: katex
