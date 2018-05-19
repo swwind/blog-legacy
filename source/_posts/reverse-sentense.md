@@ -123,6 +123,7 @@ ReactDOM.render(
 ```
 
 <div id="react-demo" class="demo"></div>
+{% raw %}
 <script type="text/babel">
   class Reverser extends React.Component {
     constructor(props) {
@@ -152,6 +153,7 @@ ReactDOM.render(
     document.getElementById('react-demo')
   )
 </script>
+{% endraw %}
 
 <script src="https://cdn.bootcss.com/react/16.4.0-alpha.0911da3/umd/react.production.min.js"></script>
 <script src="https://cdn.bootcss.com/react-dom/16.4.0-alpha.0911da3/umd/react-dom.production.min.js"></script>
