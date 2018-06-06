@@ -64,11 +64,11 @@ $('#jquery textarea').on('input', (e) => {
   <div id="jquery-result"></div>
 </div>
 <!-- cdn -->
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 ```
 
 <div id="jquery" class="demo"><p><b>jQuery Demo</b></p><textarea></textarea><div id="jquery-result"></div></div>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $('#jquery textarea').on('input', (e) => {
   let elem = $(e.currentTarget)
@@ -117,9 +117,9 @@ ReactDOM.render(
 ```html
 <div id="react-demo"></div>
 <!-- 下面素质三连 -->
-<script src="https://cdn.bootcss.com/react/16.4.0-alpha.0911da3/umd/react.production.min.js"></script>
-<script src="https://cdn.bootcss.com/react-dom/16.4.0-alpha.0911da3/umd/react-dom.production.min.js"></script>
-<script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0-alpha.0911da3/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0-alpha.0911da3/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.0.0-beta.3/babel.min.js"></script>
 ```
 
 <div id="react-demo" class="demo"></div>
@@ -155,9 +155,9 @@ ReactDOM.render(
 </script>
 {% endraw %}
 
-<script src="https://cdn.bootcss.com/react/16.4.0-alpha.0911da3/umd/react.production.min.js"></script>
-<script src="https://cdn.bootcss.com/react-dom/16.4.0-alpha.0911da3/umd/react-dom.production.min.js"></script>
-<script src="https://cdn.bootcss.com/babel-standalone/7.0.0-beta.3/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0-alpha.0911da3/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0-alpha.0911da3/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.0.0-beta.3/babel.min.js"></script>
 
 ### Vue 大法
 
@@ -186,7 +186,7 @@ var vuedemo = new Vue({
   <div>{{ result }}</div>
 </div>
 <!-- cdn -->
-<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.min.js"></script>
 ```
 
 {% raw %}
@@ -196,7 +196,7 @@ var vuedemo = new Vue({
   <div>{{ result }}</div>
 </div>
 {% endraw %}
-<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.min.js"></script>
 
 <script type="text/javascript">
 var vuedemo = new Vue({

@@ -94,7 +94,7 @@ hosted_by_coding_pages: true
 tab_size: 2
 
 # 自定义壁纸
-wallpaper: https://i.loli.net/2018/02/20/5a8bce074a5d7.jpg
+wallpaper: https://cdn.vijos.org/fs/178e44a35827b8b39a3840859112afacd77c5381
 
 # 阅读次数统计，基于 leancloud
 # 你可以使用和 Valine 一样的 appid 和 appkey，或者选择新建一个。

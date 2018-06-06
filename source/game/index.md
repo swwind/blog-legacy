@@ -10,5 +10,5 @@ toc: false
 
 这是我在某爬虫网站上找来的，我也不知道原作者是谁。
 如果有谁知道可以在评论区里给我留言。
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/game.js"></script>
