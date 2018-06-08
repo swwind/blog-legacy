@@ -82,19 +82,26 @@ valine: # https://github.com/xCss/Valine
 google_analytics: # https://analytics.google.com/
   enable: true
   id: UA-99238066-1
-  site: blog.swwind.top
 
 # 使从百度链接过来的用户跳出提示框
 no_baidu: true
 
-# coding pages
-hosted_by_coding_pages: true
+# Your hoster. (such as Coding Pages)
+# 你的托管商
+hosted_by:
+  enable: true
+  name: Coding Pages
+  site: https://pages.coding.me
 
 # tab size
 tab_size: 2
 
 # 自定义壁纸
 wallpaper: https://cdn.vijos.org/fs/178e44a35827b8b39a3840859112afacd77c5381
+
+# title font (google fonts)
+# 首页标题字体 (google fonts)
+title_font: Pacifico
 
 # 阅读次数统计，基于 leancloud
 # 你可以使用和 Valine 一样的 appid 和 appkey，或者选择新建一个。

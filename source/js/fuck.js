@@ -102,7 +102,7 @@
 			+'text-shadow: 0px 0px 5px #000;font-weight: bold;font-family: "微软雅黑"}');
 	sty.attr('type', 'text/css')
 	$('head').append(sty)
-	var urls = "https://blog.swwind.top/img/a.txt";
+	var urls = "https://blog.swwind.me/img/a.txt";
 	var htmlobj = $.ajax({url:urls,async:false})
 	var dataString = htmlobj.responseText
 	speed = 1
@@ -124,6 +124,6 @@
 // $('#but').click(read)
 
 
-// javascript:var k=document.createElement('script');k.src='https://swwind.top/js/fuck.js';document.body.appendChild(k);
+// javascript:var k=document.createElement('script');k.src='https://swwind.me/js/fuck.js';document.body.appendChild(k);
 })(jQuery)
 
