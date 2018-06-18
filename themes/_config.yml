@@ -74,8 +74,6 @@ valine: # https://github.com/xCss/Valine
   appId: h3fpaex2rIrXIA4BXkhAT9H0-gzGzoHsz
   appKey: Ar7Yt5v6dLnd0v7G3reEnXkL
   placeholder: 啊♂乖乖站好
-  notify: false # 邮件提醒
-  verify: false # 验证码
   avatar: mm # 默认头像
 
 # 谷歌统计
