@@ -33,6 +33,10 @@ Valine 原本是使用 localStore 来储存 username、email 和 link 的。
 ![password-joke](/img/password-joke.jpg)
 *图源：[Telegram@programmerhumor][phumor]*
 
+> **update**
+>
+> 我貌似已经有了一个绝妙的主意
+
 ## 回复提醒
 
 Valine 是采用 leancloud 的通过邮箱找回密码功能发送回复提醒邮件的。
@@ -50,7 +54,7 @@ Valine 是采用 leancloud 的通过邮箱找回密码功能发送回复提醒�
 ![email-joke](/img/email-joke.jpg)
 *图源：[Telegram@programmerhumor][phumor]*
 
-赶紧来个人给我提个建议啊啊啊啊
+谁来帮帮我啊 QAQ
 
 [phumor]: https://t.me/programmerhumor
 
