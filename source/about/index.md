@@ -5,30 +5,31 @@ date: 2017-03-14 17:36:38
 
 # 博客简介
 
-博客现在使用 Hexo 静态生成博客技术生成博客，托管于 GitHub Pages & Coding Pages，使用~~我自己写的~~ Roigu 主题。
-博客现在使用 Valine 评论系统，没有自动清理垃圾评论的功能，请各位文明用语。
+博客现在使用 Hexo 静态生成博客技术生成博客，托管于 Coding Pages，使用~~我自己写的~~ Roigu 主题。
+博客现在使用 [ValineEX 评论系统](https://github.com/swwind/valine-ex)，没有自动清理垃圾评论的功能（也许会简单写一个），请各位文明用语。
 
 # 博主简介
 
 博主蒟蒻~~（非自谦，真的弱，只会刷奶牛题~~
 若有不足请多多指教qwq
 <span class="meiryo">どうぞよろしくお願いします。</span>
-<script type="text/javascript">console.log('我的企鹅是2670529647。');</script>
+<script type="text/javascript">console.log('我已经不用企鹅了');</script>
 
 # 连接
 
 ## 本博客导航
 
-[小工具](/tools)
+[个人首页](https://swwind.me) （more about me）
+
 [音♂乐](/music)
 [一个小游戏](/game)
 [代码模板](/code)
-[瞎写的一个播放器](/musicplayer)
+[小工具](/tools) （好像已经萎掉了
+[瞎写的一个播放器](/musicplayer) （好像完全不能用了
 
 ## 良心网站
 
-[Stackedit.io](https://stackedit.io/app)（在线 Markdown 预览）~~（居然更新了）~~
-[MathJax 帮助](http://mlworks.cn/posts/introduction-to-mathjax-and-latex-expression/)（很好的一个文档，不过后来好像 404 了）
+[Stackedit.io](https://stackedit.io/app)（在线 Markdown 预览）~~（居然会更新）~~
 
 # 日记
 
