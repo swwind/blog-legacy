@@ -6,8 +6,19 @@ date: 2017-04-06 20:39:57
 感受音♂乐的律动吧！
 我在网易云上的ID：swwind
 
+**如果无法播放请右键下载**
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
 <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+function download(url) {
+  var a = document.createElement('a');
+  a.setAttribute('rel', 'noreferrer');
+  a.setAttribute('href', url);
+  a.setAttribute('target', '_blank');
+  a.click();
+}
+</script>
 
 # Sun♂burst
 
@@ -17,7 +28,15 @@ let video1 = new DPlayer({
   container: document.getElementById('video1'),
   video: {
     url: 'https://tb-video.bdstatic.com/tieba-smallvideo/12752532_dff8bcfcf5383a88d23b04bd7c66ae5b.mp4'
-  }
+  },
+  contextmenu: [
+    {
+      text: '下载',
+      click: function () {
+        download('https://tb-video.bdstatic.com/tieba-smallvideo/12752532_dff8bcfcf5383a88d23b04bd7c66ae5b.mp4');
+      }
+    }
+  ]
 });
 </script>
 
@@ -29,6 +48,14 @@ let video2 = new DPlayer({
   container: document.getElementById('video2'),
   video: {
     url: 'http://i.snssdk.com/neihan/video/playback/?video_id=c147d111e5e446099210addc2298c93f&quality=480p&line=0&is_gif=0.mp4'
-  }
+  },
+  contextmenu: [
+    {
+      text: '下载',
+      click: function () {
+        download('http://i.snssdk.com/neihan/video/playback/?video_id=c147d111e5e446099210addc2298c93f&quality=480p&line=0&is_gif=0.mp4');
+      }
+    }
+  ]
 });
 </script>
