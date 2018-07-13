@@ -66,6 +66,10 @@ links:
     desc: 大佬
     link: https://fancydreams.top/
     avatar: https://secure.gravatar.com/avatar/b8204e5e9d1fd3d7eb24822cc2acd33f?s=64&d=mm&r=g
+  - name: zhuerding
+    desc: 朱二丁的小窝
+    link: http://yangwanlt.com/wordpress/
+    avatar: http://www.yangwanlt.com/wordpress/wp-content/uploads/2018/06/3e1a8455-150x150.jpg
 
 # valine 评论框
 # https://valine.js.org/#/configuration

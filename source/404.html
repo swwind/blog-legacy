@@ -4,32 +4,16 @@
 	<title>页面失踪了</title>
 	<meta charset="utf-8"/>
 	<link rel="icon" href="/img/favicon.ico">
-	<link rel="stylesheet" href="/css/style.css">
-	<script type="text/javascript">;(function(){
-		var k=10;
-		setInterval(function b(){
-			if(k--===10) document.getElementById('233').innerHTML=`将会在<span id="sc">${k}</span>秒后把你送回主页，<a href="/" class="a-ui">立即返回</a>`;
-			else if(k)document.getElementById('sc').innerHTML=k;
-			else window.location.href = '/';
-		},1000);
-		var x=1;
-		window.onload = function(){
-			b()
-			document.getElementById('go').onclick=function(){
-				if(++x===6)
-					window.location.href="/riji"
-			}
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css"> -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script> -->
+	<style type="text/css">
+		body {
+			text-align: center;
 		}
-	})
-	</script>
-	<style type="text/css">#sc{margin:0 5px;color: #ed5f82}body{user-select: none;}</style>
+	</style>
 </head>
 <body>
-	<div style="margin: auto;position: fixed;top:0;bottom: 0;left: 0;right: 0;display: inline-block;width: 1000px;text-align: center;height: 375px;">
-		<p style="color: #546515;font-size: 40pt;margin: 0;font-weight: lighter;">Sorry...这个页面飞走了_(:з」∠)_</p>
-		<p id="233" style="margin: 30pt 0;">少女祈祷中...</p>
-		<img class="mz go" id="go">
-	</div>
-	<script src="/js/mz.gif.js"></script>
+	<h1>404 NOT FOUND</h1>
+	<p>QWQ</p>
 </body>
 </html>
