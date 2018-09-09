@@ -148,16 +148,6 @@ const dp = new DPlayer({
 
 然后我就被 Blob、Buffer、ArrayBuffer 等一大堆东西的互相转换搞得头大死了。
 
-最后发现我的显卡不行，连个图片自转都到不了 60 FPS。
-
-接着就想用我的另一台 win10 来测试，结果发现 windows 在 update。
-
-等了好久之后打开电脑发现网卡炸掉了，怎么修也修不好。
-
-选择回退 win10 之后发现原来的用户密码假掉了（并且还是连不上网）。
-
-![窒息](/img/zx.jpg)
-
 ## 参考资料
 
 <https://github.com/fbsamples/Canvas-Streaming-Example>
