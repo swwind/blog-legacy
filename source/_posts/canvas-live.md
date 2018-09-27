@@ -33,23 +33,31 @@ categories: 颓废
 
 ## 前端
 
-短的不得了
-
-```html
-<canvas></canvas>
-```
+MediaStream 可以轻松的添加流轨道（Track）。
 
 ```js
 const ws = new WebSocket('ws://localhost:16547');
 
 ws.addEventListener('open', (e) => {
 
-  const mediaStream = document.querySelector('canvas').captureStream(30); // 30 FPS
+  const mediaStream = new MediaStream();
 
+  // 添加视频轨
+  const video = document.querySelector('canvas').captureStream(30);
+  video.getTracks().forEach(mediaStream.addTrack.bind(mediaStream));
+
+  // 添加音频轨（From <audio> element）
+  const audioContext = new AudioContext();
+  const audioSrc = audioContext.createMediaElementSource(document.querySelector('audio'));
+  const destination = audioContext.createMediaStreamDestination();
+  audioSrc.connect(destination);
+  destination.stream.getTracks().forEach(mediaStream.addTrack.bind(mediaStream));
+
+  // 创建 MediaRecorder
   const mediaRecorder = new MediaRecorder(mediaStream, {
     mimeType: 'video/webm;codecs=h264',
-    // audioBitsPerSecond: 44100,       // 44.1kHz
-    videoBitsPerSecond: 3 * 1024 * 1024 // 3000k 画质
+    audioBitsPerSecond: 44100,  // 44.1kHz
+    videoBitsPerSecond: 3000000 // 3000k 画质
   });
 
   mediaRecorder.addEventListener('dataavailable', (e) => {
@@ -149,15 +157,13 @@ const dp = new DPlayer({
 
 由于我最终使用 electron 包装，所以 WebSocket 这一步就免了。
 
-然后我就被 Blob、Buffer、ArrayBuffer 等一大堆东西的互相转换搞得头大死了。
+然后唯一的问题就是 Blob 转 Buffer 了。
+
+可以用 npm 上一个包 `blob-to-buffer` 解决。
 
 ## 参考资料
 
 <https://github.com/fbsamples/Canvas-Streaming-Example>
-
-P.S.
-
-关于怎么合入音轨我不是很了解，也许你需要另行 Google。
 
 [end]
 
