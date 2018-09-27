@@ -58,6 +58,9 @@ ws.addEventListener('open', (e) => {
     ws.send(e.data);
   });
 
+  // 开始录制并每隔 1s 发送一次数据
+  mediaRecorder.start(1000);
+
 });
 ```
 
