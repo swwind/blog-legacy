@@ -85,7 +85,7 @@ date: 2018-10-07 15:09:52
         const r1 = hash(md5(h1 + h2 + h3), this.type, 10);
         const r2 = hash(md5(h4 + h5 + h6), this.type, 10);
 
-        this.res = hash(r1, r2, 10).slice(0, 16);
+        this.res = btoa(hash(r1, r2, 10)).slice(0, 16);
       }
     }
   });
