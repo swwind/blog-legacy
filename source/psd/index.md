@@ -33,7 +33,7 @@ date: 2018-10-07 15:09:52
     </tr>
     <tr>
       <td>
-        <span>Type</span>
+        <span>分区</span>
       </td>
       <td>
         <input type="text" v-model="type" @input="handleChange">
