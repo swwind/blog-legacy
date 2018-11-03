@@ -246,7 +246,7 @@ main = print $ frac 100
 
 > 计算斐波那契数列。
 
-先来一个 $O(n^2)$ 暴力。
+先来一个 $O(F_n)$ 暴力。
 
 ```haskell
 fib 0 = 0
