@@ -37,20 +37,32 @@ header
     position relative
     @media mini
       width 100%
+      display flex
       box-sizing border-box
-      padding-right 50px
-      padding-left 50px
     .top-menu-links
-      float left
       margin 0
-      margin-left -15px
-      height 100%
       padding 0
+      height 100%
+      @media notmini
+        float left
+        margin-left -15px
+      @media mini
+        padding 0 15px
+        overflow-y hidden
+        overflow-x -moz-scrollbars-none
+        overflow-x auto
+        text-align left
+        white-space nowrap
+        &::-webkit-scrollbar
+          display none
       li
-        display inline-block
-        text-align center
-        height 100%
-        vertical-align middle
+        @media notmini
+          display inline-block
+          text-align center
+          height 100%
+          vertical-align middle
+        @media mini
+          display inline-block
         a
           height 100%
           color #aaa
@@ -63,6 +75,8 @@ header
             color #444
             transition color .3s
     form
+      @media mini
+        display none
       display inline-block
       height 100%
       float right
@@ -70,6 +84,18 @@ header
       box-sizing border-box
       input
         font-size 16px !important
+    a.search
+      @media notmini
+        display none
+      display inline-block
+      text-decoration none
+      width 50px
+      min-width 50px
+      height 50px
+      &:before
+        line-height 50px
+        font-size 20px
+        padding 0 15px
 .header-fixed
   box-shadow 0 0 5px #666
   transition box-shadow .3s
@@ -123,8 +149,9 @@ header
   @media mini
     width 100%
     box-sizing border-box
-    padding-right 50px
-    padding-left 50px
+    padding-right 16px
+    padding-left 16px
+    margin 60px auto
   *[class$="-cloud"]
     text-align center
     margin 0
@@ -171,6 +198,8 @@ header
           margin 0
           color #666
           word-wrap break-word
+          @media mini
+            display none
         .search-keyword
           font-weight bold
           color #444
@@ -346,21 +375,31 @@ header
     border-top 2px solid #666
     border-bottom 2px solid #666
     text-align center
+    padding 30px 0
+    @media mini
+      text-align left
+      border none
+      padding 0
     h1
       font-size 40px
       font-weight lighter
       color #666
-      margin 30px 0
-      margin-bottom 10px
+      margin 0
+      @media mini
+        font-size 1.55rem
+        margin 10px 0
     p
       font-size 16px
       margin 10px 0
-      margin-bottom 30px
       span
         color #999
         margin 0 25px
         &:before
           color #999
+        @media mini
+          display block
+          margin 5px 0
+          font-size 12px
   .only-title
     margin 0 auto
     .desc-name
@@ -383,40 +422,41 @@ header
 .artc
   img
     max-width 100%
-  h1,h2,h3,h4,h5,h6
-    color gray
-    padding 0
-  h1
-    font-size 40px
-    font-weight lighter
-    margin 33.5px 0
-  h2
-    font-size 35px
-    font-weight lighter
-    margin 20px 0
-  h3
-    font-size 30px
-    font-weight lighter
-    margin 10px 0
-  h4
-    font-size 25px
-    font-weight lighter
-    margin 10px 0
-  h5
-    font-size 20px
-    font-weight normal
-    margin 10px 0
-  h6
-    font-size 16px
-    font-weight bold
-    margin 10px 0
+  @media notmini
+    h1,h2,h3,h4,h5,h6
+      color gray
+      padding 0
+    h1
+      font-size 40px
+      font-weight lighter
+      margin 33.5px 0
+    h2
+      font-size 35px
+      font-weight lighter
+      margin 20px 0
+    h3
+      font-size 30px
+      font-weight lighter
+      margin 10px 0
+    h4
+      font-size 25px
+      font-weight lighter
+      margin 10px 0
+    h5
+      font-size 20px
+      font-weight normal
+      margin 10px 0
+    h6
+      font-size 16px
+      font-weight bold
+      margin 10px 0
   code
     font-family font-code
     background #eee
     color #666
     padding 0 5px
     margin 0 2px
-    white-space nowrap
+    white-space pre-line
   .code,.gutter
     padding 0
   >pre
@@ -548,6 +588,8 @@ footer
     &:hover
       border-bottom-color #666
       transition border-bottom-color .3s
+  @media mini
+    font-size 12px
 
 *[class$="-icon"]:before
   font-family fontello
