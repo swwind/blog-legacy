@@ -100,8 +100,8 @@ no_baidu: true
 # 你的托管商
 hosted_by:
   enable: true
-  name: Coding Pages
-  site: https://pages.coding.me
+  name: Netlify
+  site: https://netlify.com
 
 # tab size
 tab_size: 2
