@@ -1,0 +1,17 @@
+links: 友情链接
+contents: 文章目录
+archive_a: 归档
+archive_b: "归档: %s"
+archive_date: "MMM YYYY"
+hitokoto: 一言
+tags: 标签云
+categories: 分类
+search: 站内搜索
+warning: 警告
+no_iframe: 您的浏览器不支持 iframe
+remark: 备注
+locked: 这篇文章已被锁定。
+unlock: 解锁
+is-this-password: 解码是否正常？
+nope: 糟糕透了
+yes: 棒极了

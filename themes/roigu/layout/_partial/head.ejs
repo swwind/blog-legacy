@@ -1,0 +1,65 @@
+<meta charset="utf-8">
+<%
+var title = page.title;
+
+if (is_archive()) {
+  title = __('archive_a');
+
+  if (is_month()) {
+    title += ': ' + page.year + '/' + page.month;
+  } else if (is_year()) {
+    title += ': ' + page.year;
+  }
+} else if (is_category()) {
+  title =  __('categories')+' : ' + page.category;
+} else if (is_tag()) {
+  title = __('tags')+' : ' + page.tag;
+}
+%>
+<title><% if (title) { %><%= title %> - <% } %><%= config.title %></title>
+
+<meta name="description" content="<%= page.desc || config.description %>">
+<meta name="author" content="<%= page.author || config.author %>">
+<meta name="renderer" content="webkit">
+
+<!-- The Open Graph protocol -->
+<meta property="og:url" content="<%= url %>">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="<%= page.title || config.title %>">
+<meta property="og:image" content="<%- url_for(theme.favicon) %>">
+<meta property="og:description" content="<%= page.desc || config.description %>">
+<!-- end The Open Graph protocol -->
+
+<!-- theme js and css -->
+<%- js('js/roigu.min.js') %>
+<%- css('css/style.css') %>
+<!-- end theme js and css -->
+
+<!-- favicon -->
+<% if (theme.favicon) { %>
+<%- favicon_tag(theme.favicon) %>
+<% } %>
+<!-- end favicon -->
+
+<!-- Mathjax -->
+<% if (page.mathjax !== false && theme.mathjax && !(typeof theme.mathjax === 'string' && theme.mathjax !== 'mathjax')) { %>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}});
+  </script>
+  <script type="text/javascript" async
+    src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+<% } %>
+<!-- end Mathjax -->
+
+<!-- KaTeX -->
+<% if (page.mathjax !== false && theme.mathjax === 'katex') { %>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
+<% } %>
+<!-- end KaTeX -->
+
+<!-- LeanCloud -->
+<% if (theme.valine.enable || theme.read_count.enable) { %>
+  <script src="//cdn1.lncld.net/static/js/3.6.4/av-min.js"></script>
+<% } %>
+<!-- end LeanCloud -->

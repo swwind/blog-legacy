@@ -1,0 +1,683 @@
+body
+  margin 0
+  padding 0
+  background-color #fcfcfc
+  font-family Open Sans,Seravek,Segoe UI,Verdana,PingFang SC,Lantinghei SC,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,"sans-serif"
+
+*:focus
+  outline none
+*
+  font-family inherit
+
+::selection
+  background-color #ddd
+::-o-selection
+  background-color #ddd
+::-ms-selection
+  background-color #ddd
+::-moz-selection
+  background-color #ddd
+::-webkit-selection
+  background-color #ddd
+
+header
+  width 100%
+  position fixed
+  z-index 500
+  height 50px
+  user-select none
+  transition box-shadow .3s
+  background-color #fcfcfc
+  .top-menu-div
+    height 100%
+    display block
+    width 900px
+    text-align right
+    margin 0 auto
+    position relative
+    @media mini
+      width 100%
+      box-sizing border-box
+      padding-right 50px
+      padding-left 50px
+    .top-menu-links
+      float left
+      margin 0
+      margin-left -15px
+      height 100%
+      padding 0
+      li
+        display inline-block
+        text-align center
+        height 100%
+        vertical-align middle
+        a
+          height 100%
+          color #aaa
+          transition color .3s
+          text-decoration none
+          line-height 50px
+          display block
+          padding 0 15px
+          &:hover
+            color #444
+            transition color .3s
+    form
+      display inline-block
+      height 100%
+      float right
+      padding-top 8px
+      box-sizing border-box
+      input
+        font-size 16px !important
+.header-fixed
+  box-shadow 0 0 5px #666
+  transition box-shadow .3s
+
+.index-header
+  background url(wallpaper) center center no-repeat
+  background-size cover
+  background-color #666
+  width 100%
+  height 100%
+  display block
+  position fixed
+  .blog-title
+    position absolute
+    display inline-block
+    margin -100px 0
+    top 50%
+    bottom 0
+    height 150px
+    width 100%
+    text-align center
+    user-select none
+    color #fff
+    text-shadow 0 0 10px #222
+    .title
+      font-size 3em
+      margin 0
+    .subtitle
+      font-family Meiryo
+      font-weight bold
+      font-size 24px
+
+
+.index-body
+  box-shadow 0 0 50px #444
+  position absolute
+  background-color rgba(255, 255, 255, .8)
+  top 100%
+  width 100%
+  .container
+    margin 50px auto
+  footer
+    width 100%
+    bottom 0
+
+
+.container
+  width 900px
+  margin 100px auto
+  margin-bottom 0
+  @media mini
+    width 100%
+    box-sizing border-box
+    padding-right 50px
+    padding-left 50px
+  *[class$="-cloud"]
+    text-align center
+    margin 0
+    .cloud-title
+      color #666
+      font-size 30px
+  .search-main
+    text-align center
+    margin 0
+    #local-search-input
+      width 255px
+      &:focus
+        border-color #ed5f82
+        transition all .5s
+    .search-checkboxes
+      display block
+      margin 0
+      padding 0
+    #local-search-result
+      margin 50px 0
+      .search-failed
+        color #666
+        font-weight lighter
+        font-size 30px
+        margin 30px 0
+      ul,li
+        text-align left
+        list-style none
+        margin 0
+        padding 0
+      li>a
+        display block
+        margin 0
+        padding 10px 20px
+        text-decoration none
+        transition all .3s
+        .search-result-title
+          margin 0
+          color #666
+          font-size 24px
+          font-width lighter
+          border-bottom 1px solid #666
+        .search-result
+          margin 0
+          color #666
+          word-wrap break-word
+        .search-keyword
+          font-weight bold
+          color #444
+        &:hover
+          background-color rgba(0, 0, 0, .125)
+          transition all .3s
+  .tag-cloud>.items
+    margin 0 auto
+    width 90%
+    .cloud-item
+      color #666
+      padding 5px 10px
+      margin 2px 5px
+      display inline-block
+      text-decoration none
+      font-size 20px
+      transition all 1s
+      background-color #fcfcfc
+      &:hover
+        background-color #ccc
+        transition all .1s
+  .category-cloud>.items
+    margin 0 auto
+    display inline-block
+    text-align left
+    .cloud-item
+      color #666
+      padding 5px 50px
+      margin 2px 5px
+      display block
+      text-decoration none
+      font-size 20px
+      transition all 1s
+      background-color #fcfcfc
+      &:hover
+        background-color #ccc
+        transition all .1s
+  .article-catetags
+    user-select none
+    margin 10px 0
+    div
+      display inline-block
+      margin 0 5px
+    a
+      padding 5px 10px
+      margin 3px 5px
+      display inline-block
+      color #666
+      background-color #eee
+      text-decoration none
+      transition all .3s
+      &:hover
+        background-color #ccc
+        transition all .3s
+  .sidebar
+    width 20%
+    float right
+    @media mini
+      display none
+    .sidebar-item:first-child
+      .sidebar-title
+        margin-top 0
+    .sidebar-title
+      color #666
+      font-size 25px
+      padding 10px 0
+      border-bottom 2px solid #666
+      margin 0
+      margin-top 20px
+    .sidebar-main
+      padding .7rem
+      form
+        position relative
+        input
+          width 100%
+        p
+          position absolute
+          top 100%
+          left 0
+          color #666
+          margin 0
+    .linkslist
+      ul
+        padding 0
+        margin 0
+        li
+          list-style-type none
+    .hitokoto
+      color #666
+      .hitokoto-text
+        text-indent 32px
+        padding .5rem 3%
+      #yiyan-author
+        padding 0 .5rem
+  .toc-father
+    margin 20px 0
+    ol,li
+      list-style none
+    .toc
+      margin 1em 0
+    ol
+      margin 0
+      padding-left 40px
+  .archive-block
+    margin 0
+    .archive-title
+      margin-bottom 40px
+      .title
+        font-size 30px
+        color #666
+        font-weight lighter
+        &:before
+          padding-right 10px
+      ul,li
+        list-style none
+      ul
+        padding-left 40px
+        margin 0 auto
+        a.archive-list-link
+          color #666
+          text-decoration none
+          border-bottom 1px solid #ccc
+          transition all .3s
+          &:hover
+            border-bottom 1px solid #666
+            transition all .3s
+        span.archive-list-count
+          color #666
+          &:before
+            content " - "
+    .archive-part
+      .index-section:first-child
+        margin-top 0
+  .index-section
+    margin-top 50px
+    .link
+      text-decoration none
+      padding 0
+      margin 5px 0
+      color gray
+      font-size 32px
+      font-weight lighter
+      display inline-block
+    .time
+      color #aaa
+      font-size 14px
+      font-weight normal
+      display block
+      &:before
+        color #aaa
+    .artc
+      padding 0
+      overflow hidden
+      position relative
+      h1:first-child
+        margin-top 0
+      h1
+        font-size 35px
+    .readmore
+      margin 20px 0
+      a
+        font-size 20px
+        font-weight lighter
+        padding 0
+        text-decoration none
+        color #666
+        border-bottom 1px solid #ccc
+        transition all .3s
+        &:hover
+          border-bottom-color #666
+          transition all .3s
+  .artc-title
+    border-top 2px solid #666
+    border-bottom 2px solid #666
+    text-align center
+    h1
+      font-size 40px
+      font-weight lighter
+      color #666
+      margin 30px 0
+      margin-bottom 10px
+    p
+      font-size 16px
+      margin 10px 0
+      margin-bottom 30px
+      span
+        color #999
+        margin 0 25px
+        &:before
+          color #999
+  .only-title
+    margin 0 auto
+    .desc-name
+      margin 0 !important
+      .title
+        font-size 30px !important
+  .post,.page
+    .artc
+      padding-bottom 20px
+      margin-top 20px
+      border-bottom 2px solid #666
+  &:after
+    content: ""
+    display: block
+    height: 0
+    clear: both
+  .__comment__
+    margin-top 50px
+
+.artc
+  img
+    max-width 100%
+  h1,h2,h3,h4,h5,h6
+    color gray
+    padding 0
+  h1
+    font-size 40px
+    font-weight lighter
+    margin 33.5px 0
+  h2
+    font-size 35px
+    font-weight lighter
+    margin 20px 0
+  h3
+    font-size 30px
+    font-weight lighter
+    margin 10px 0
+  h4
+    font-size 25px
+    font-weight lighter
+    margin 10px 0
+  h5
+    font-size 20px
+    font-weight normal
+    margin 10px 0
+  h6
+    font-size 16px
+    font-weight bold
+    margin 10px 0
+  code
+    font-family font-code
+    background #eee
+    color #666
+    padding 0 5px
+    margin 0 2px
+    white-space nowrap
+  .code,.gutter
+    padding 0
+  >pre
+    background-color #eee
+    padding 15px
+    code
+      margin 0
+      padding 0
+      white-space pre
+  figure
+    margin 20px 0
+    padding 15px
+    background-color #eee
+    overflow-x auto
+    tab-size tab-size
+    -o-tab-size tab-size
+    -moz-tab-size tab-size
+    -webkit-tab-size tab-size
+    .gutter
+      pre
+        padding-right 10px
+        margin-right 10px
+        border-right 1px solid #aaa
+        text-align right
+        user-select none
+    pre
+      padding 0
+      margin 0
+      .line
+        line-height 1.15em
+        min-height 1.15em
+      .comment, .title
+        color #8e908c
+      .variable, .attribute, .tag, .regexp, .ruby .constant, .xml .tag .title, .xml .pi, .xml .doctype, .html .doctype, .css .id, .css .class, .css .pseudo
+        color #c82829
+      .number, .preprocessor, .built_in, .literal, .params, .constant
+        color #f5871f
+      .class, .ruby .class .title, .css .rules .attribute
+        color #718c00
+      .string, .value, .inheritance, .header, .ruby .symbol, .xml .cdata
+        color #718c00
+      .css .hexcolor
+        color #3e999f
+      .function, .python .decorator, .python .title, .ruby .function .title, .ruby .title .keyword, .perl .sub, .javascript .title, .coffeescript .title
+        color #4271ae
+      .keyword, .javascript .function
+        color #8959a8
+    *
+      font-family font-code
+  color #666
+  .headerlink
+    margin 0
+  a
+    color #aaa
+    transition all .3s
+    text-decoration none
+    border-bottom 1px solid #aaa
+    margin 0
+    cursor pointer
+    span
+      color #666
+    &:hover
+      color #666
+      border-bottom 1px solid #666
+      transition all .3s
+  p
+    margin 16px 0
+  blockquote
+    margin 16px 0
+    padding 1em 40px
+    border-left 5px solid #ccc
+    background-color #f5f5f5
+    p:first-child
+      margin-top 0
+    p:last-child
+      margin-bottom 0
+  table
+    border-collapse collapse
+    thead
+      border-bottom 2px solid #666
+    th
+      padding 5px 10px
+    td
+      padding 2px 10px
+  #more
+    padding 0
+    margin 0
+  .video-container
+    width 100%
+    text-align center
+    margin 20px 0
+  .aplayer
+    margin 16px 5px
+    width 450px
+  .dplayer
+    margin 16px auto
+    width 750px
+    height 421.875px
+  .remark
+    background #dedede
+    padding 20px
+    background linear-gradient(135deg, transparent 25px, #dedede 0), linear-gradient(135deg, #dedede 15px, #666 0)
+    .rmk-title
+      font-weight bold
+      margin-top 0
+    >p:last-child
+      margin-bottom 0
+
+body,.index-body
+  display flex
+  display -webkit-flex
+  flex-direction column
+  min-height 100vh
+.container
+  -webkit-flex 1
+  flex 1
+
+
+footer
+  color #666
+  text-align center
+  p
+    margin 1.5em 0
+  a
+    color #666
+    text-decoration none
+    border-bottom 1px solid #ccc
+    transition border-bottom-color .3s
+    &:hover
+      border-bottom-color #666
+      transition border-bottom-color .3s
+
+*[class$="-icon"]:before
+  font-family fontello
+  color #666
+  padding-right 5px
+
+input[type="text"]:not(.vinput),input[type="password"]:not(.vinput)
+  border none
+  color #666
+  border-bottom 1px solid #ccc
+  font-size 20px
+  padding 5px 0
+  background-color rgba(255, 255, 255, 0)
+  transition all .3s
+  &:focus
+    border-bottom-color #ed5f82
+    transition all .3s
+input[type="checkbox"]
+  cursor pointer
+  position relative
+  -webkit-appearance none
+  -moz-appearance none
+  appearance none
+  width 1rem
+  height 1rem
+  border 1px solid #ccc
+  padding 0
+  line-height normal
+  transition all .1s
+  vertical-align top
+  margin .2rem 5px
+  display inline-block
+  box-sizing border-box
+  &:checked
+    background #ed5f82
+    border-color #ed5f82
+    transition all .1s
+    &:after
+      opacity 1
+      transform rotate(-45deg)
+      transition all .1s
+  &:after
+    box-sizing border-box
+    content ""
+    width .625rem
+    height .375rem
+    position absolute
+    top .1875rem
+    left .125rem
+    border 2px solid #fff
+    border-top none
+    border-right none
+    background transparent
+    transform rotate(-65deg) scale(.5)
+    opacity 0
+    transition all .1s
+
+nav
+  user-select none
+.end-float
+  &:after
+    content ""
+    height 0
+    display block
+    clear both
+.page-nav
+  margin-top 50px
+  text-align center
+  a
+    text-decoration none
+  .page-number,.extend,.space
+    margin 0
+    padding 5px 20px
+    color #aaa
+    transition all .3s
+  .current
+    border-bottom 2px solid #ed5f82
+    color #ed5f82
+  .space
+    border-bottom 2px solid transparent
+  .page-number:not(.current),.extend
+    border-bottom 2px solid transparent
+    &:hover
+      color #666
+      border-bottom 2px solid #5f9fd6
+      transition all .3s
+.links-block
+  .links-title
+    color #666
+    font-weight lighter
+  ul.links-ul, ul.links-ul li
+    list-style-type none
+    list-style none
+    margin 0
+    padding 0
+  ul.end-float.links-ul
+    border-bottom 2px solid #666
+    padding-bottom 30px
+  ul.links-ul li
+    display inline-block
+    box-shadow 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12)
+    margin 20px 10px
+    float left
+    transition all .2s
+    &:hover
+      box-shadow 0 4px 10px rgba(0, 0, 0, 0.3)
+      transition all .2s
+  .friend-link-block
+    display inline-block
+    width 280px
+    height 75px
+    background-color #fff
+    text-decoration none
+    img
+      height 75px
+      width 75px
+      float left
+    .name-desc
+      width 100%
+      display block
+      box-sizing border-box
+      text-align center
+      padding-top 10px
+      height 100%
+      span
+        font-weight lighter
+        display inline-block
+      .friend-link-name
+        font-size 24px
+        color #666
+      .friend-link-desc
+        font-size 16px
+        color #ccc

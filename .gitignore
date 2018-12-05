@@ -5,7 +5,6 @@ db.json
 node_modules/
 public/
 .deploy*/
-themes/roigu/
 
 package-lock.json
 

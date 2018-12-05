@@ -1,0 +1,17 @@
+links: links
+contents: contests
+archive_a: Archives
+archive_b: "Archives: %s"
+archive_date: "MMM YYYY"
+hitokoto: hitokoto
+tags: tags
+categories: categories
+search: search
+warning: WARNING
+no_iframe: Your browser did not suppost iframes
+remark: Remarks
+locked: This post has been locked.
+unlock: unlock
+is-this-password: Can it be read?
+nope: nope
+yes: yes

@@ -1,0 +1,28 @@
+<div class="<%- item.layout %>">
+  <article>
+    <div class="artc-title">
+      <h1><%= item.title %></h1>
+      <p><span class="time-icon"><%= item.date.format(config.date_format) %></span><span class="author-icon"><%= config.author %></span><% if (theme.read_count.enable) { %><span class="book-icon" id="read-times">?</span><% } %></p>
+    </div>
+    <div class="artc">
+      <% if (item.sora === true) { %>
+        <%- partial('top_block/sora') %>
+      <% } %>
+      <% if (item.warning) { %>
+        <%- partial('top_block/warning', {msg: item.warning}) %>
+      <% } %>
+      <% if (item.toc !== false) { %>
+        <div class="toc-father">
+          <strong class="toc-title"><%= __('contents') %></strong>
+          <% if (item.list_number === false) {%>
+            <%- toc(item.content, {list_number: false}) %>
+          <% } else { %>
+            <%- toc(item.content) %>
+          <% } %>
+        </div>
+      <% } %>
+      <%- item.content %>
+    </div>
+    <%- partial('catetags') %>
+  </article>
+</div>  

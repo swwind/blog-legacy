@@ -1,0 +1,14 @@
+<header>
+  <div class="top-menu-div">
+    <ul class="top-menu-links"><%
+      for (var i in theme.menu) {
+      %><li class="ripple"><a href="<%- theme.menu[i] %>"><%= i %></a></li><%
+      }
+    %></ul>
+    <% if (page.layout !== 'search') { %>
+      <form action="/search/" method="get" class="search-icon">
+        <input type="text" name="s" placeholder="<%= __('search') %>...">
+      </form>
+    <% } %>
+  </div>
+</header>

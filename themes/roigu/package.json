@@ -1,0 +1,34 @@
+{
+  "name": "roigu",
+  "version": "1.0.0",
+  "description": "A lovely hexo theme",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "webpack --watch --display-modules",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swwind/roigu.git"
+  },
+  "author": "swwind",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/swwind/roigu/issues"
+  },
+  "homepage": "https://github.com/swwind/roigu#readme",
+  "dependencies": {
+    "jsonp": "^0.2.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "svg-inline-loader": "^0.8.0",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
+  }
+}

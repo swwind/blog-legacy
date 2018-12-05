@@ -1,0 +1,180 @@
+<% if (page.layout == 'post' || page.layout == 'locked') { %>
+
+<!-- post -->
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+  <head>
+    <%- partial('_partial/head') %>
+  </head>
+  <body>
+    <%- partial('_partial/header') %>
+    <div class="container">
+      <%- body %>
+      <% if (page.comments !== false) { %>
+        <%- partial('_partial/post/comment') %>
+      <% } %>
+    </div>
+    <footer>
+      <%- partial('_partial/footer') %>
+    </footer>
+    <%- partial('_partial/after_footer') %>
+  </body>
+</html>
+
+<% } else if (page.layout == 'page') { %>
+
+  <% if(page.source.match(/\.md$/)){ %>
+
+<!-- page -->
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+  <head>
+    <%- partial('_partial/head') %>
+  </head>
+  <body>
+    <%- partial('_partial/header') %>
+    <div class="container">
+      <%- body %>
+      <% if (page.comments !== false) { %>
+        <%- partial('_partial/post/comment') %>
+      <% } %>
+    </div>
+    <footer>
+      <%- partial('_partial/footer') %>
+    </footer>
+    <%- partial('_partial/after_footer') %>
+  </body>
+</html>
+
+  <% } else { %>
+
+<!-- html page -->
+<%- page.content %>
+
+  <% } %>
+
+<% } else if (page.layout == 'tags') { %>
+
+<!-- tags -->
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+  <head>
+    <%- partial('_partial/head') %>
+  </head>
+  <body>
+    <%- partial('_partial/header') %>
+    <div class="container">
+      <%- partial('_partial/tags') %>
+    </div>
+    <footer>
+      <%- partial('_partial/footer') %>
+    </footer>
+    <%- partial('_partial/after_footer') %>
+  </body>
+</html>
+
+<% } else if (page.layout == 'categories') { %>
+
+<!-- categories -->
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+  <head>
+    <%- partial('_partial/head') %>
+  </head>
+  <body>
+    <%- partial('_partial/header') %>
+    <div class="container">
+      <%- partial('_partial/categories') %>
+    </div>
+    <footer>
+      <%- partial('_partial/footer') %>
+    </footer>
+    <%- partial('_partial/after_footer') %>
+  </body>
+</html>
+
+<% } else if (page.layout == 'search') { %>
+
+<!-- search -->
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+  <head>
+    <%- partial('_partial/head') %>
+  </head>
+  <body style="overflow-y: scroll;">
+    <%- partial('_partial/header') %>
+    <div class="container">
+      <%- partial('_partial/search') %>
+    </div>
+    <footer>
+      <%- partial('_partial/footer') %>
+    </footer>
+    <%- partial('_partial/after_footer') %>
+  </body>
+</html>
+
+<% } else if (page.layout == 'links') { %>
+
+<!-- links -->
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+  <head>
+    <%- partial('_partial/head') %>
+  </head>
+  <body>
+    <%- partial('_partial/header') %>
+    <div class="container">
+      <%- partial('_partial/links') %>
+    </div>
+    <footer>
+      <%- partial('_partial/footer') %>
+    </footer>
+    <%- partial('_partial/after_footer') %>
+  </body>
+</html>
+
+<% } else if (page.category != null || page.tag != null || page.archive != null) { %>
+
+<!-- category | tag | archive -->
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+  <head>
+    <%- partial('_partial/head') %>
+  </head>
+  <body>
+    <%- partial('_partial/header') %>
+    <div class="container">
+      <%- body %>
+    </div>
+    <footer>
+      <%- partial('_partial/footer') %>
+    </footer>
+    <%- partial('_partial/after_footer') %>
+  </body>
+</html>
+
+<% } else { %>
+
+<!-- index -->
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+  <head>
+    <%- partial('_partial/head') %>
+  </head>
+  <body>
+    <div class="index-header">
+      <%- partial('_partial/index_header') %>
+    </div>
+    <div class="index-body">
+      <div class="container">
+        <%- body %>
+      </div>
+      <footer>
+        <%- partial('_partial/footer') %>
+      </footer>
+    </div>
+    <%- partial('_partial/after_footer') %>
+  </body>
+</html>
+
+<% } %>

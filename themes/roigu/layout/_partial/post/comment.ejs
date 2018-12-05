@@ -1,0 +1,13 @@
+<% if (theme.valine.enable) { %>
+  <%- js('https://valine.swwind.me/dist/valine-ex.min.js') %>
+  <div class="__comment__" id="comments"></div>
+  <script type="text/javascript">
+    new Valine({
+      el: '#comments',
+      appId: '<%= theme.valine.appId %>',
+      appKey: '<%= theme.valine.appKey %>',
+      placeholder: '<%= theme.valine.placeholder.replace("'", "\\'") %>',
+      avatar: '<%= theme.valine.avatar %>'
+    });
+  </script>
+<% } %>
