@@ -1,8 +1,27 @@
 'use strict';
 
 import jsonp from 'jsonp';
-import image from './image.js';
-import Icons from './icons';
+
+const image = (url, el) => {
+  if (typeof window.fetch === 'undefined')
+    return new Error('Error: `window.fetch` is not recognized as a function');
+  fetch(url, {
+    method: 'GET',
+    referrerPolicy: 'no-referrer'
+  }).then(x => x.blob()).then(x => {
+    if (/^image\/.*$/.test(x.type)) {
+      el.src = URL.createObjectURL(x);
+    }
+  });
+}
+
+import Play from './icon/play.svg';
+import Comments from './icon/comments.svg';
+
+const Icons = {
+  play: Play,
+  comments: Comments
+};
 
 const bilibili = (el) => {
   const aid = el.getAttribute('data-aid');

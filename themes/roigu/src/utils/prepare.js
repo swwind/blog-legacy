@@ -2,7 +2,7 @@
 
 import fly from './fly.js';
 import ripple from './ripple.js';
-import bilibili from './bilibili.js';
+import bilibili from './bilibili';
 import onscroll from './onscroll.js';
 import placeholder from './placeholder.js';
 
