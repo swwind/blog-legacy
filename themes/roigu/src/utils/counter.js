@@ -5,13 +5,7 @@ const counter = (res) => {
   const elem = document.querySelector(res);
   if (!elem) return;
   elem.innerHTML = '?';
-  const formData = new FormData();
-  formData.append('link', page_path);
-  fetch('https://mc.swwind.me/count/', {
-    method: 'POST',
-    body: formData,
-    mode: "no-cors"
-  })
+  fetch('https://mc.swwind.me/count?link=' + encodeURI(page_path))
   .then(res => res.json())
   .then(res => elem.innerHTML = res.data);
 }
