@@ -290,7 +290,7 @@ const counter = (res) => {
   const elem = document.querySelector(res);
   if (!elem) return;
   elem.innerHTML = '?';
-  fetch('https://mc.swwind.me/count?link=' + encodeURI(page_path))
+  fetch('/count?url=' + encodeURI(page_path))
   .then(res => res.json())
   .then(res => elem.innerHTML = res.data);
 }

@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/swwind/roigu#readme",
   "dependencies": {
-    "jsonp": "^0.2.1"
+    "blueimp-md5": "^2.10.0",
+    "jsonp": "^0.2.1",
+    "marked": "^0.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
