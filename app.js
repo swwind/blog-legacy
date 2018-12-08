@@ -50,6 +50,18 @@ const createComment = (url, nick, mail, link, content, rid, ua) => {
   return obj;
 }
 
+const createCommentMaster = (url, nick, mail, link, content, rid, ua, createTime, id, title) => {
+  const obj = { rid, ua, id, link, nick, title, content, mail, createTime };
+  if (!comments.get(url)) {
+    comments.set(url, [obj]);
+  } else {
+    comments.set(url, comments.get(url).concat(obj));
+  }
+  return {
+    ok: true
+  };
+}
+
 const getComments = (url) => {
   return comments.get(url) || [];
 }
@@ -66,7 +78,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://blog.swwind.me');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
@@ -101,6 +113,22 @@ app.post('/comment', upload.any(), (req, res) => {
   } else {
     res.status(200).json(createComment(url, nick, mail, link, content, rid, ua));
   }
+});
+
+
+app.post('/comas', upload.any(), (req, res) => {
+  res.header('Content-Type', 'application/json');
+  const url     = req.body.url     || '';
+  const nick    = req.body.nick    || '';
+  const mail    = req.body.mail    || '';
+  const link    = req.body.link    || '';
+  const content = req.body.content || '';
+  const rid     = req.body.rid     || '';
+  const ua      = req.body.ua      || '';
+  const createAt= req.body.createAt|| '';
+  const id      = req.body.id      || '';
+  const title   = req.body.title   || '';
+  res.status(200).json(createCommentMaster(url, nick, mail, link, content, rid, ua, createAt, id, title));
 });
 
 app.get('/getcomment', upload.any(), (req, res) => {
