@@ -8,4 +8,5 @@ public/
 data/
 
 package-lock.json
-
+cert.crt
+cert.key
