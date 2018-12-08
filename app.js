@@ -49,7 +49,7 @@ const createComment = (url, nick, mail, link, content, rid, ua) => {
   }
   return obj;
 }
-
+/*
 const createCommentMaster = (url, nick, mail, link, content, rid, ua, createTime, id, title) => {
   const obj = { rid, ua, id, link, nick, title, content, mail, createTime };
   if (!comments.get(url)) {
@@ -61,7 +61,7 @@ const createCommentMaster = (url, nick, mail, link, content, rid, ua, createTime
     ok: true
   };
 }
-
+*/
 const getComments = (url) => {
   return comments.get(url) || [];
 }
@@ -115,7 +115,7 @@ app.post('/comment', upload.any(), (req, res) => {
   }
 });
 
-
+/*
 app.post('/comas', upload.any(), (req, res) => {
   res.header('Content-Type', 'application/json');
   const url     = req.body.url     || '';
@@ -130,7 +130,7 @@ app.post('/comas', upload.any(), (req, res) => {
   const title   = req.body.title   || '';
   res.status(200).json(createCommentMaster(url, nick, mail, link, content, rid, ua, createAt, id, title));
 });
-
+*/
 app.get('/getcomment', upload.any(), (req, res) => {
   res.header('Content-Type', 'application/json');
   if (!req.query.url) {
