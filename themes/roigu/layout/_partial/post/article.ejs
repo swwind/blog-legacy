@@ -2,7 +2,7 @@
   <article>
     <div class="artc-title">
       <h1><%= item.title %></h1>
-      <p><span class="time-icon"><%= item.date.format(config.date_format) %></span><span class="author-icon"><%= config.author %></span><% if (theme.read_count.enable) { %><span class="book-icon" id="read-times">?</span><% } %></p>
+      <p><span class="time-icon"><%= item.date.format(config.date_format) %></span><span class="author-icon"><%= config.author %></span><span class="book-icon" id="read-times">?</span></p>
     </div>
     <div class="artc">
       <% if (item.sora === true) { %>

@@ -59,3 +59,25 @@ let video2 = new DPlayer({
   ]
 });
 </script>
+
+# 安利
+
+{% bilibili 11331774 %}
+
+> Alone 是 masshole 所制作的一首电音。讲述了主人公 Van♂漾最开始收到欺负，之后又遇到各种倒霉的事。内心低落的他，自己回到家一个人开始摔♂跤，之后被人看到，赢得了其他哲学家的尊重，Van♂漾脸上露出了熏肉味の笑容，从此 Van♂有了很多朋友，一起练习摔跤。
+
+{% bilibili 28797685 %}
+
+> 。。。
+
+# 正经的安利
+
+**Animestep | Kawaii Bass**
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=498373511&auto=0&height=66"></iframe>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=424262363&auto=0&height=66"></iframe>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=448520486&auto=0&height=66"></iframe>
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=409646684&auto=0&height=66"></iframe>

@@ -79,27 +79,15 @@ links:
     link: https://timber2523.bitbucket.io/
     avatar: https://timber2523.bitbucket.io/img/avatar.png
 
-# valine 评论框
-# https://valine.js.org/#/configuration
-valine: # https://github.com/xCss/Valine
-  enable: true
-  appId: h3fpaex2rIrXIA4BXkhAT9H0-gzGzoHsz
-  appKey: Ar7Yt5v6dLnd0v7G3reEnXkL
-  placeholder: 啊♂乖乖站好
-  avatar: mm # 默认头像
-
 # 谷歌统计
 google_analytics: # https://analytics.google.com/
   enable: true
   id: UA-99238066-1
 
-# 使从百度链接过来的用户跳出提示框
-no_baidu: true
-
 # Your hoster. (such as Coding Pages)
 # 你的托管商
 hosted_by:
-  enable: true
+  enable: false
   name: Netlify
   site: https://netlify.com
 
@@ -112,12 +100,3 @@ wallpaper: /img/background.jpg
 # title font (google fonts)
 # 首页标题字体 (google fonts)
 title_font: Pacifico
-
-# 阅读次数统计，基于 leancloud
-# 你可以使用和 Valine 一样的 appid 和 appkey，或者选择新建一个。
-read_count:
-  enable: true
-  appId: h3fpaex2rIrXIA4BXkhAT9H0-gzGzoHsz
-  appKey: Ar7Yt5v6dLnd0v7G3reEnXkL
-
-mathjax: katex
