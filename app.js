@@ -99,6 +99,7 @@ app.get('/count', (req, res) => {
   }
 });
 
+// 评论
 app.post('/comment', upload.any(), (req, res) => {
   res.header('Content-Type', 'application/json');
   const url     = req.body.url     || '';
@@ -109,10 +110,42 @@ app.post('/comment', upload.any(), (req, res) => {
   const rid     = req.body.rid     || '';
   const ua      = req.get('User-Agent');
   if (!content || !url) {
-    res.status(451).json({ message: 'forbidden' });
+    res.status(403).json({ message: 'forbidden' });
   } else {
     res.status(200).json(createComment(url, nick, mail, link, content, rid, ua));
   }
+});
+
+// 获取评论
+app.get('/getcomment', upload.any(), (req, res) => {
+  res.header('Content-Type', 'application/json');
+  if (!req.query.url) {
+    res.status(403).json({ message: 'forbidden' });
+  } else {
+    res.status(200).json(getComments(req.query.url));
+  }
+});
+
+const ejs = require('ejs');
+const comments_template = fs.readFileSync('./backend/comments.xml', 'utf-8');
+const template = ejs.compile(comments_template);
+
+// 订阅评论
+app.get('/comments.xml', (req, res) => {
+  res.header('Content-Type', 'application/xml');
+  const fake_data = comments.get();
+  const data = [];
+  for (const key in fake_data) {
+    fake_data[key].forEach(item => {
+      data.push({ ...item, url: key });
+    });
+  }
+  data.sort((a, b) => {
+    return (+new Date(a.createTime)) - (+new Date(b.createTime));
+  });
+  res.status(200).end(template({
+    data: data.slice(-20).reverse()
+  }));
 });
 
 /*
@@ -131,14 +164,6 @@ app.post('/comas', upload.any(), (req, res) => {
   res.status(200).json(createCommentMaster(url, nick, mail, link, content, rid, ua, createAt, id, title));
 });
 */
-app.get('/getcomment', upload.any(), (req, res) => {
-  res.header('Content-Type', 'application/json');
-  if (!req.query.url) {
-    res.status(451).json({ message: 'forbidden' });
-  } else {
-    res.status(200).json(getComments(req.query.url));
-  }
-});
 
 app.use(express.static('public'));
 
