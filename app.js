@@ -3,69 +3,6 @@
 const fs = require('fs');
 const https = require('https');
 
-const Store = require('./data-store.js');
-const count = Store('count');
-const comments = Store('comment');
-
-const countInc = (url) => {
-  if (!count.get(url)) {
-    count.set(url, 1);
-  } else {
-    count.set(url, count.get(url) + 1);
-  }
-  return { url, data: count.get(url) };
-}
-
-const getRandomId = () => {
-  let res = '';
-  for (let i = 0; i < 16; ++ i) {
-    res += Math.floor(Math.random() * 16).toString(16);
-  }
-  return res;
-}
-
-// { rid, ua, id, link, nick, title, content, mail, createTime }
-const createComment = (url, nick, mail, link, content, rid, ua) => {
-  // check mail
-  if (!/[\w-\.]+@([\w-]+\.)+[a-z]{2,3}/.test(mail)) {
-    mail = '';
-  }
-  // check link
-  if (!/(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/.test(link)) {
-    link = '';
-  }
-  if (!nick) {
-    nick = 'tourist';
-  }
-
-  const createTime = new Date().toISOString();
-  const title = '';
-  const id = getRandomId();
-  const obj = { rid, ua, id, link, nick, title, content, mail, createTime };
-  if (!comments.get(url)) {
-    comments.set(url, [obj]);
-  } else {
-    comments.set(url, comments.get(url).concat(obj));
-  }
-  return obj;
-}
-/*
-const createCommentMaster = (url, nick, mail, link, content, rid, ua, createTime, id, title) => {
-  const obj = { rid, ua, id, link, nick, title, content, mail, createTime };
-  if (!comments.get(url)) {
-    comments.set(url, [obj]);
-  } else {
-    comments.set(url, comments.get(url).concat(obj));
-  }
-  return {
-    ok: true
-  };
-}
-*/
-const getComments = (url) => {
-  return comments.get(url) || [];
-}
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
@@ -77,96 +14,28 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
-
 const options = {
   cert: fs.readFileSync('cert.crt'),
   key: fs.readFileSync('cert.key')
 }
 
+const { count } = require('./backend/count');
 // 统计阅读量
-app.get('/count', (req, res) => {
-  res.header('Content-Type', 'application/json');
-  if (!req.query.url) {
-    res.end(JSON.stringify(count.get()));
-  } else {
-    res.end(JSON.stringify(countInc(req.query.url)));
-  }
-});
+app.get('/count', count);
 
+const {
+  createComment,
+  getComment,
+  rssComment,
+} = require('./backend/comment');
 // 评论
-app.post('/comment', upload.any(), (req, res) => {
-  res.header('Content-Type', 'application/json');
-  const url     = req.body.url     || '';
-  const nick    = req.body.nick    || '';
-  const mail    = req.body.mail    || '';
-  const link    = req.body.link    || '';
-  const content = req.body.content || '';
-  const rid     = req.body.rid     || '';
-  const ua      = req.get('User-Agent');
-  if (!content || !url) {
-    res.status(403).json({ message: 'forbidden' });
-  } else {
-    res.status(200).json(createComment(url, nick, mail, link, content, rid, ua));
-  }
-});
-
+app.post('/comment', upload.any(), createComment);
 // 获取评论
-app.get('/getcomment', upload.any(), (req, res) => {
-  res.header('Content-Type', 'application/json');
-  if (!req.query.url) {
-    res.status(403).json({ message: 'forbidden' });
-  } else {
-    res.status(200).json(getComments(req.query.url));
-  }
-});
-
-const ejs = require('ejs');
-const comments_template = fs.readFileSync('./backend/comments.xml', 'utf-8');
-const template = ejs.compile(comments_template);
-
+app.get('/getcomment', getComment);
 // 订阅评论
-app.get('/comments.xml', (req, res) => {
-  res.header('Content-Type', 'application/xml');
-  const fake_data = comments.get();
-  const data = [];
-  for (const key in fake_data) {
-    fake_data[key].forEach(item => {
-      data.push(Object.assign(item, { url: key }));
-    });
-  }
-  data.sort((a, b) => {
-    return (+new Date(a.createTime)) - (+new Date(b.createTime));
-  });
-  res.status(200).end(template({
-    data: data.slice(-20).reverse()
-  }));
-});
-
-/*
-app.post('/comas', upload.any(), (req, res) => {
-  res.header('Content-Type', 'application/json');
-  const url     = req.body.url     || '';
-  const nick    = req.body.nick    || '';
-  const mail    = req.body.mail    || '';
-  const link    = req.body.link    || '';
-  const content = req.body.content || '';
-  const rid     = req.body.rid     || '';
-  const ua      = req.body.ua      || '';
-  const createAt= req.body.createAt|| '';
-  const id      = req.body.id      || '';
-  const title   = req.body.title   || '';
-  res.status(200).json(createCommentMaster(url, nick, mail, link, content, rid, ua, createAt, id, title));
-});
-*/
+app.get('/comments.xml', rssComment);
 
 app.use(express.static('public'));
-
 https.createServer(options, app).listen(443);
 
 console.log('listening...');

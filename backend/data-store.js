@@ -14,7 +14,6 @@ const mkdirs = (dirname) => {
   }
 };
 
-
 module.exports = (name, fname = name, defaultData = {}) => {
 
   let data = defaultData;

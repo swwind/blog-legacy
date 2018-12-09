@@ -6,7 +6,6 @@
  */
 'use strict';
 
-import md5 from 'blueimp-md5';
 import marked from 'marked';
 import detect from './assets/detect.js';
 import { timeAgo, getLink, Event, decodeHTML } from './assets/utils.js';
@@ -15,23 +14,9 @@ import emoji from './assets/emoji.js';
 const gravatar = {
   cdn: 'https://gravatar.loli.net/avatar/',
   get(mail) {
-    return `<img class="vimg" src="${this.cdn + md5(mail)}?d=mm&s=40">`;
+    return `<img class="vimg" src="${this.cdn + mail}?d=mm&s=40">`;
   }
 };
-
-/*
-const dfc = {
-  comment: '',
-  rid: '',
-  nick: touristName,
-  mail: '',
-  link: '',
-  ua: navigator.userAgent,
-  url: '',
-  auth: false,
-  title: ''
-};
-*/
 
 const shorten = (str) => str.trim().replace(/>\s+</g, '><');
 const data = {
@@ -122,18 +107,6 @@ export default function valine(option) {
       }
     }
   };
-
-  // preparation end =======================
-
-  /* 过长的评论做折叠处理
-  const expandEvt = (el) => {
-    if (el.offsetHeight > 180) {
-      el.classList.add('expand');
-      Event.on('click', el, (e) => {
-        el.setAttribute('class', 'vcontent');
-      });
-    }
-  } */
 
   // 插入一个评论
   const insertDom = ({ rid, ua, id, link, nick, title, content, mail, createTime }) => {
@@ -242,7 +215,7 @@ export default function valine(option) {
       // nothing typed
       return;
     }
-    const nick = inputs.nick.value || 'tourist';
+    const nick = inputs.nick.value;
     const mail = inputs.mail.value;
     const link = inputs.link.value;
     const dfc = new FormData();
