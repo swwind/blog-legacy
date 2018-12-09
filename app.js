@@ -137,7 +137,7 @@ app.get('/comments.xml', (req, res) => {
   const data = [];
   for (const key in fake_data) {
     fake_data[key].forEach(item => {
-      data.push({ ...item, url: key });
+      data.push(Object.assign(item, { url: key }));
     });
   }
   data.sort((a, b) => {
