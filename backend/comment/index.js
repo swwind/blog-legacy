@@ -13,8 +13,12 @@ const getRandomId = () => {
   return res;
 }
 
+const cloneObject = (obj) => {
+  return Object.assign(Object.create(null), obj);
+}
+
 const encodeComment = (comment) => {
-  return Object.assign(comment, {
+  return Object.assign(cloneObject(comment), {
     mail: md5(comment.mail)
   });
 }

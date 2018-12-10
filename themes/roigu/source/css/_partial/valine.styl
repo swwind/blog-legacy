@@ -149,6 +149,8 @@
       padding-top 1.5rem
       position relative
       display block
+      &.hightlight
+        animation hightlight 2s
       &:after
         content ''
         clear both
@@ -308,4 +310,8 @@
       transform scale(0, 0)
     to
       transform scale(1, 1)
-
+  @keyframes hightlight
+    from
+      background rgba(255, 142, 0, .4)
+    to
+      background transparent

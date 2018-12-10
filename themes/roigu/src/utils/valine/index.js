@@ -171,6 +171,22 @@ export default function valine(option) {
         el.querySelector('.count').innerHTML = `评论(<span class="num">${res.length}</span>)`;
       }
       loading.hide();
+
+      // hightlight comment accroding to id
+      if (/#\w+$/.test(window.location.href)) {
+        const id = window.location.href.split('#')[1];
+        console.log(id);
+        const elem = document.getElementById(id);
+        if (elem) {
+          const rect = elem.getBoundingClientRect();
+          const win = elem.ownerDocument.defaultView;
+          fly((rect.top + win.pageYOffset) - 60);
+          setTimeout(() => {
+            elem.classList.add('hightlight');
+          }, 500);
+        }
+      }
+
     }).catch((ex) => {
       loading.hide();
       nodata.show('评论系统暂不可用');
@@ -188,9 +204,9 @@ export default function valine(option) {
 
   // 保存和加载游客的信息
   const setCache = (nick, mail, link) => {
-    if (nick) document.cookie = 'nick=' + nick;
-    if (mail) document.cookie = 'mail=' + mail;
-    if (link) document.cookie = 'link=' + link;
+    if (nick) document.cookie = 'nick=' + nick + ';path=/';
+    if (mail) document.cookie = 'mail=' + mail + ';path=/';
+    if (link) document.cookie = 'link=' + link + ';path=/';
   }
   const getCache = () => {
     const cookie = document.cookie.split(';')
