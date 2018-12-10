@@ -14,8 +14,9 @@ const getRandomId = () => {
 }
 
 const encodeComment = (comment) => {
-  comment.mail = md5(comment.mail);
-  return comment;
+  return Object.assign(comment, {
+    mail: md5(comment.mail)
+  });
 }
 
 const rss_data = ((fake_data) => {
