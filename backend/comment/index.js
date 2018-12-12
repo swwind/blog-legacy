@@ -108,9 +108,8 @@ const template = ejs.compile(comments_template);
 // 订阅评论
 const rssComment = (req, res) => {
   res.header('Content-Type', 'application/xml');
-  res.status(200).end(template({
-    data: rss_data.reverse()
-  }));
+  const data = Array.from(rss_data).reverse();
+  res.status(200).end(template({ data }));
 };
 
 module.exports = {

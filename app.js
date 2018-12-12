@@ -19,6 +19,10 @@ const options = {
   key: fs.readFileSync('cert.key')
 }
 
+const { log } = require('./backend/log');
+// 日志
+app.use(log);
+
 const { count } = require('./backend/count');
 // 统计阅读量
 app.get('/count', count);
