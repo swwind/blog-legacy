@@ -5,7 +5,7 @@
     <description>这是给我自己用的</description>
     <% data.forEach(item => { %>
       <item>
-        <title><![CDATA[<%- item.nick %> 评论于 <%- item.url %>]]></title>
+        <title><![CDATA[<%- item.nick %> 评论于 <%- item.url %> (<%- item.id %>)]]></title>
         <link>https://blog.swwind.me<%- item.url %>#<%- item.id %></link>
         <description><![CDATA[<%- item.content %>]]></description>
         <pubDate><%- new Date(item.createTime).toString() %></pubDate>
