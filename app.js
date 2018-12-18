@@ -7,16 +7,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const upload = multer();
-const app = express();
-
-app.use(bodyParser.json());         // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-}));
+const vhost = require('vhost');
 
 const options = {
   cert: fs.readFileSync('cert.crt'),
   key: fs.readFileSync('cert.key')
+}
+
+const cors = (domain) => (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', domain);
+  next();
 }
 
 const { log } = require('./backend/log');
@@ -24,20 +24,42 @@ const { decode } = require('./backend/utils.js');
 const { count, query } = require('./backend/count');
 const { createComment, getComment, rssComment } = require('./backend/comment');
 
+const blog = express();
+blog.use(cors('*'));
+blog.use(bodyParser.json());         // to support JSON-encoded bodies
+blog.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
 // 日志
-app.use(log);
+blog.use(log);
 // 统计阅读量 (+1)
-app.get('/count/:url', decode('url'), count);
+blog.get('/count/:url', decode('url'), count);
 // 只获取阅读量 (+0)
-app.get('/query/:url', decode('url'), query);
+blog.get('/query/:url', decode('url'), query);
 // 评论
-app.post('/comment', upload.any(), createComment);
+blog.post('/comment', upload.any(), createComment);
 // 获取评论
-app.get('/getcomment/:url', decode('url'), getComment);
+blog.get('/getcomment/:url', decode('url'), getComment);
 // 订阅评论
-app.get('/comments.xml', rssComment);
+blog.get('/comments.xml', rssComment);
+// Static site
+blog.use(express.static('public'));
 
-app.use(express.static('public'));
-https.createServer(options, app).listen(443);
+const home = express();
+home.use(express.static('homepage'));
 
-console.log('listening...');
+const app = express();
+if (process.argv[2] === 'local') {
+  https.createServer(options, blog).listen(3000);
+  https.createServer(options, home).listen(4000);
+  console.log('blog opening on https://localhost:3000');
+  console.log('home opening on https://localhost:4000');
+} else {
+  app.use(vhost('blog.swwind.me', blog));
+  app.use(vhost('swwind.me', home));
+  app.use((req, res) => {
+    res.status(403).json({ message: 'forbidden' });
+  });
+  https.createServer(options, app).listen(443);
+  console.log('have a nice day!');
+}

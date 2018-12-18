@@ -6,7 +6,7 @@ const path = require('path');
 const SAVE_DIR = './data/logs';
 const generateFileName = () => {
   const today = new Date();
-  const filename = [today.getFullYear(), today.getMonth(), today.getDate()].join('-');
+  const filename = [today.getFullYear(), today.getMonth() + 1, today.getDate()].join('-');
   for (let i = 1; true; ++ i) {
     const logname = path.resolve(SAVE_DIR, filename + '-' + i + '.log');
     if (!fs.existsSync(logname)) {

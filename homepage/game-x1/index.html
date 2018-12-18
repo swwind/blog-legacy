@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GAME x1</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/matter-js/0.12.0/matter.min.js"></script>
+  <link href="//fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
+  <style type="text/css">
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .text {
+      font-family: 'Gugi', cursive;
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      animation: shake 50s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      white-space: pre;
+    }
+    @keyframes shake {
+      2% { transform: translate(0.5px, -1.5px) rotate(-0.5deg); }
+      4% { transform: translate(0.5px, 1.5px) rotate(1.5deg); }
+      6% { transform: translate(1.5px, 1.5px) rotate(1.5deg); }
+      8% { transform: translate(2.5px, 1.5px) rotate(0.5deg); }
+      10% { transform: translate(0.5px, 2.5px) rotate(0.5deg); }
+      12% { transform: translate(1.5px, 1.5px) rotate(0.5deg); }
+      14% { transform: translate(0.5px, 0.5px) rotate(0.5deg); }
+      16% { transform: translate(-1.5px, -0.5px) rotate(1.5deg); }
+      18% { transform: translate(0.5px, 0.5px) rotate(1.5deg); }
+      20% { transform: translate(2.5px, 2.5px) rotate(1.5deg); }
+      22% { transform: translate(0.5px, -1.5px) rotate(1.5deg); }
+      24% { transform: translate(-1.5px, 1.5px) rotate(-0.5deg); }
+      26% { transform: translate(1.5px, 0.5px) rotate(1.5deg); }
+      28% { transform: translate(-0.5px, -0.5px) rotate(-0.5deg); }
+      30% { transform: translate(1.5px, -0.5px) rotate(-0.5deg); }
+      32% { transform: translate(2.5px, -1.5px) rotate(1.5deg); }
+      34% { transform: translate(2.5px, 2.5px) rotate(-0.5deg); }
+      36% { transform: translate(0.5px, -1.5px) rotate(0.5deg); }
+      38% { transform: translate(2.5px, -0.5px) rotate(-0.5deg); }
+      40% { transform: translate(-0.5px, 2.5px) rotate(0.5deg); }
+      42% { transform: translate(-1.5px, 2.5px) rotate(0.5deg); }
+      44% { transform: translate(-1.5px, 1.5px) rotate(0.5deg); }
+      46% { transform: translate(1.5px, -0.5px) rotate(-0.5deg); }
+      48% { transform: translate(2.5px, -0.5px) rotate(0.5deg); }
+      50% { transform: translate(-1.5px, 1.5px) rotate(0.5deg); }
+      52% { transform: translate(-0.5px, 1.5px) rotate(0.5deg); }
+      54% { transform: translate(-1.5px, 1.5px) rotate(0.5deg); }
+      56% { transform: translate(0.5px, 2.5px) rotate(1.5deg); }
+      58% { transform: translate(2.5px, 2.5px) rotate(0.5deg); }
+      60% { transform: translate(2.5px, -1.5px) rotate(1.5deg); }
+      62% { transform: translate(-1.5px, 0.5px) rotate(1.5deg); }
+      64% { transform: translate(-1.5px, 1.5px) rotate(1.5deg); }
+      66% { transform: translate(0.5px, 2.5px) rotate(1.5deg); }
+      68% { transform: translate(2.5px, -1.5px) rotate(1.5deg); }
+      70% { transform: translate(2.5px, 2.5px) rotate(0.5deg); }
+      72% { transform: translate(-0.5px, -1.5px) rotate(1.5deg); }
+      74% { transform: translate(-1.5px, 2.5px) rotate(1.5deg); }
+      76% { transform: translate(-1.5px, 2.5px) rotate(1.5deg); }
+      78% { transform: translate(-1.5px, 2.5px) rotate(0.5deg); }
+      80% { transform: translate(-1.5px, 0.5px) rotate(-0.5deg); }
+      82% { transform: translate(-1.5px, 0.5px) rotate(-0.5deg); }
+      84% { transform: translate(-0.5px, 0.5px) rotate(1.5deg); }
+      86% { transform: translate(2.5px, 1.5px) rotate(0.5deg); }
+      88% { transform: translate(-1.5px, 0.5px) rotate(1.5deg); }
+      90% { transform: translate(-1.5px, -0.5px) rotate(-0.5deg); }
+      92% { transform: translate(-1.5px, -1.5px) rotate(1.5deg); }
+      94% { transform: translate(0.5px, 0.5px) rotate(-0.5deg); }
+      96% { transform: translate(2.5px, -0.5px) rotate(-0.5deg); }
+      98% { transform: translate(-1.5px, -1.5px) rotate(-0.5deg); }
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    }
+  </style>
+</head>
+<body>
+  <p class="text" style="top: 20px;left: 20px;"></p>
+<script type="text/javascript">
+
+var show = function (en, ja) {
+  ja = ja || "";
+  document.querySelector('p.text').innerHTML = en + '<br>' + ja;
+}
+show('Welcome to swwind\'s homepage. =￣ω￣=\nCan you reach the other side?')
+
+var Engine = Matter.Engine;
+var Render = Matter.Render;
+var Bodies = Matter.Bodies;
+var Events = Matter.Events;
+var World  = Matter.World;
+var Body   = Matter.Body;
+
+var engine = Engine.create();
+
+var render = Render.create({
+  element: document.body,
+  engine: engine,
+  options: {
+    width: window.innerWidth,
+    height: window.innerHeight,
+    background: 'rgba(255, 255, 255, 0)',
+    wireframes: false
+  }
+});
+
+var groundHeight = 150; // 地面高度
+var maxWidth = 200; // 平台的最大高度
+var minWidth = 50;
+var maxHeight = 100;
+var minHeight = 50;
+
+// 创建刚体
+var rect = Bodies.circle(300, 100, 25, { restitution: .5 }), // 圆
+    // circle = Bodies.rectangle(200, 100, 50, 50), // 矩形
+    // polygon = Bodies.polygon(450, 100, 5, 25), // 多边形
+    // trapezoid = Bodies.trapezoid(590, 100, 50, 50, 3); // 梯形
+    ground = Bodies.rectangle(window.innerWidth / 2, window.innerHeight - groundHeight / 2, window.innerWidth, groundHeight, { isStatic: true }),
+    wall = [
+      Bodies.rectangle(800, 100, 500, 200, { isStatic: true }),
+    ],
+    walls = [
+      Bodies.rectangle(window.innerWidth / 2, -50, window.innerWidth, 100, { isStatic: true }),
+      Bodies.rectangle(-50, window.innerHeight / 2, 100, window.innerHeight, { isStatic: true }),
+      Bodies.rectangle(window.innerWidth + 50, window.innerHeight / 2, 100, window.innerHeight, { isStatic: true }),
+      Bodies.rectangle(800, 250 + (window.innerHeight - groundHeight - 250) / 2, 500, window.innerHeight - groundHeight - 250, { isStatic: true }),
+    ]
+
+wall.forEach(x => x.render.fillStyle = '#e61863');
+
+var pass = Bodies.rectangle(window.innerWidth - (window.innerWidth - 1050) / 2, window.innerHeight - groundHeight - 50, window.innerWidth - 1050, 100, { render: { fillStyle: '#66ccff' } })
+
+// 将刚体添加到世界中
+World.add(engine.world, [rect, ground, pass]);
+World.add(engine.world, wall);
+World.add(engine.world, walls);
+
+var keydown = {
+  left: false,
+  right: false,
+  up: false,
+  down: false
+}
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowRight' || e.key === 'd') {
+    !keydown.right && Body.applyForce(rect, rect.position, {x: .05, y: 0});
+    keydown.right = true;
+  }
+  if (e.key === 'ArrowLeft' || e.key === 'a') {
+    !keydown.left && Body.applyForce(rect, rect.position, {x: -.05, y: 0});
+    keydown.left = true;
+  }
+  if (e.key === 'ArrowUp' || e.key === 'w') {
+    !keydown.up && Body.applyForce(rect, rect.position, {x: 0, y: -.05});
+    keydown.up = true;
+  }
+  if (e.key === 'ArrowDown' || e.key === 's') {
+    !keydown.down && Body.applyForce(rect, rect.position, {x: 0, y: .05});
+    keydown.down = true;
+  }
+})
+document.addEventListener('keyup', function (e) {
+  if (e.key === 'ArrowRight' || e.key === 'd') {
+    keydown.right = false;
+  }
+  if (e.key === 'ArrowLeft' || e.key === 'a') {
+    keydown.left = false;
+  }
+  if (e.key === 'ArrowUp' || e.key === 'w') {
+    keydown.up = false;
+  }
+  if (e.key === 'ArrowDown' || e.key === 's') {
+    keydown.down = false;
+  }
+})
+var has = function (e, a) {
+  for (var i = 0; i < a.length; ++ i)
+    if (a[i] === e) return true;
+  return false;
+}
+var check = function (a) {
+  for (var i in a) {
+    if (a[i][0] === rect && has(a[i][1], wall))
+      return 'die';
+    if (a[i][0].label === 'Circle Body' && a[i][1] === pass)
+      return 'pass';
+  }
+  return false;
+}
+
+var dieTimes = 0;
+Events.on(engine, 'collisionStart', function (e) {
+  switch (check(e.source.broadphase.pairs)) {
+    case 'die': {
+      ++ dieTimes;
+      if (dieTimes === 1) {
+        show('When you hit the red wall, you will die')
+      }
+      if (dieTimes === 50) {
+        show('Come on, man! You should hurry now!')
+      }
+      rect = Bodies.circle(300, 100, 25, { restitution: .5 });
+      World.add(engine.world, rect);
+      break;
+    }
+    case 'pass': {
+      show('Congratulation!\nYou win the game with ' + dieTimes + ' times try.\nMy frinend\'s blog is here -> https://q234rty.top'); 
+      break;
+    }
+  }
+})
+
+Engine.run(engine);
+Render.run(render);
+</script>
+</body>
+</html>

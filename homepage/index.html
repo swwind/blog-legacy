@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<!--
+  Hyperspace by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <title>SW_Wind's Homepage</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+  </head>
+  <body>
+
+    <!-- Sidebar -->
+      <section id="sidebar">
+        <div class="inner">
+          <nav>
+            <ul>
+              <li><a href="#intro">Welcome</a></li>
+              <li><a href="#one">Who I am</a></li>
+              <li><a href="#two">What I do</a></li>
+              <li><a href="#three">Get in touch</a></li>
+            </ul>
+          </nav>
+        </div>
+      </section>
+
+    <!-- Wrapper -->
+      <div id="wrapper">
+
+        <!-- Intro -->
+          <section id="intro" class="wrapper style1 fullscreen fade-up">
+            <div class="inner">
+              <h1>Hi, I am SW_Wind(swwind)</h1>
+              <p>No Pains No Gains</p>
+              <ul class="actions">
+                <li><a href="#one" class="button scrolly">Learn more</a></li>
+              </ul>
+            </div>
+          </section>
+
+        <!-- One -->
+          <section id="one" class="wrapper style2 spotlights">
+            <section>
+              <a href="https://blog.swwind.me" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
+              <div class="content">
+                <div class="inner">
+                  <h2>My blog</h2>
+                  <p>I am used to share my experience here.</p>
+                  <ul class="actions">
+                    <li><a href="https://blog.swwind.me" class="button">Have a look</a></li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+            <section>
+              <a href="/game-x1" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+              <div class="content">
+                <div class="inner">
+                  <h2>My first game</h2>
+                  <p>It is boring and meaningless.</p>
+                  <ul class="actions">
+                    <li><a href="/game-x1" class="button">Have a look</a></li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+            <section>
+              <a href="/game-x2" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+              <div class="content">
+                <div class="inner">
+                  <h2>My second game</h2>
+                  <p>It is also boring and meaningless.</p>
+                  <ul class="actions">
+                    <li><a href="/game-x2" class="button">Have a look</a></li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </section>
+
+        <!-- Two -->
+          <section id="two" class="wrapper style3 fade-up">
+            <div class="inner">
+              <h2>What I do</h2>
+              <p>I am a programmer.</p>
+              <div class="features">
+                <section>
+                  <span class="icon major fa-code"></span>
+                  <h3>HTML</h3>
+                  <p>Yes, I have learnt some about this.</p>
+                </section>
+                <section>
+                  <span class="icon major fa-lock"></span>
+                  <h3>A lock</h3>
+                  <p>All of my sites are encrypted via HTTPS.</p>
+                </section>
+                <section>
+                  <span class="icon major fa-cog"></span>
+                  <h3>Settings</h3>
+                  <p>You cannot set anything on this site.</p>
+                </section>
+                <section>
+                  <span class="icon major fa-desktop"></span>
+                  <h3>PC</h3>
+                  <p>I prefer you to visit my blog by PC.</p>
+                </section>
+                <section>
+                  <span class="icon major fa-chain"></span>
+                  <h3>Chain?</h3>
+                  <p>No, it is a pair of glasses.<br>
+                  <s>To whom it belongs?</s><br>
+                  -1s</p>
+                </section>
+                <section>
+                  <span class="icon major fa-diamond"></span>
+                  <h3>Diamond</h3>
+                  <p>Cool! Isn't it?<br>
+                  But I'm penniless.<br>
+                  Uhaaaaaa...</p>
+                </section>
+              </div>
+            </div>
+          </section>
+
+        <!-- Three -->
+          <section id="three" class="wrapper style1 fade-up">
+            <div class="inner">
+              <h2>Get in touch</h2>
+              <p>Try to contact me if you want to know more about me.</p>
+              <div class="split style1">
+                <section>
+                  <p>Do you like me?</p>
+                  <a href="javascript:;" class="button submit" id="like-button"><i class="icon fa-heart" style="color: #ff3f58;"></i>&nbsp;<span id="like-numbers">0</span></a>
+                  <script type="text/javascript">
+                    var el = document.querySelector('span#like-numbers');
+                    el.innerText = 'LOADING...';
+                    fetch('https://blog.swwind.me/query/bGlrZQ')
+                    .then(res => res.json())
+                    .then(res => el.innerText = res.data);
+                    document.querySelector('a#like-button')
+                      .addEventListener('click', function () {
+                        fetch('https://blog.swwind.me/count/bGlrZQ')
+                        .then(res => res.json())
+                        .then(res => el.innerText = res.data);
+                      });
+                  </script>
+                </section>
+                <section>
+                  <ul class="contact">
+                    <li>
+                      <h3>Address</h3>
+                      <span>You Guess?</span>
+                    </li>
+                    <li>
+                      <h3>Email</h3>
+                      <a href="mailto:swwind233@gmail.com">swwind233@gmail.com</a>
+                    </li>
+                    <li>
+                      <h3>Phone</h3>
+                      <span>+86 183 **** 4092</span>
+                    </li>
+                    <li>
+                      <h3>Social</h3>
+                      <ul class="icons">
+                        <li><a href="https://twitter.com/swwind233" class="fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="https://fb.me/smith.jimmy.54966" class="fa-facebook"><span class="label">Facebook</span></a></li>
+                        <li><a href="https://github.com/swwind" class="fa-github"><span class="label">GitHub</span></a></li>
+                        <li><a href="https://t.me/swwind" class="fa-paper-plane"><span class="label">Telegram</span></a></li>
+                        <li><a href="https://steamcommunity.com/id/swwind233" class="fa-steam"><span class="label">Steam</span></a></li>
+                        <li><a href="https://plus.google.com/106036930416439548709" class="fa-google-plus"><span class="label">Google+</span></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </section>
+              </div>
+            </div>
+          </section>
+
+      </div>
+
+    <!-- Footer -->
+      <footer id="footer" class="wrapper style1-alt">
+        <div class="inner">
+          <ul class="menu">
+            <li>&copy; swwind. All rights reserved.</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+          </ul>
+        </div>
+      </footer>
+
+    <!-- Scripts -->
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/js/jquery.scrollex.min.js"></script>
+      <script src="assets/js/jquery.scrolly.min.js"></script>
+      <script src="assets/js/skel.min.js"></script>
+      <script src="assets/js/util.js"></script>
+      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+      <script src="assets/js/main.js"></script>
+
+  </body>
+</html>
