@@ -290,7 +290,7 @@ const counter = (res) => {
   const elem = document.querySelector(res);
   if (!elem) return;
   elem.innerHTML = '?';
-  fetch('/count?url=' + encodeURI(page_path))
+  fetch('/count/' + btoa(page_path).replace(/=/g, ''))
   .then(res => res.json())
   .then(res => elem.innerHTML = res.data);
 }

@@ -161,38 +161,36 @@ export default function valine(option) {
   }
 
   // 初始化所有评论
-  ;(() => {
-    loading.show();
-    fetch('/getcomment?url=' + encodeURI(window.location.pathname.replace(/index\.html?$/, '')))
-    .then(res => res.json())
-    .then(res => {
-      if (res.length) {
-        res.forEach(insertDom);
-        el.querySelector('.count').innerHTML = `评论(<span class="num">${res.length}</span>)`;
-      }
-      loading.hide();
+  loading.show();
+  fetch('/getcomment/' + btoa(window.location.pathname.replace(/index\.html?$/, '')).replace(/=/g, ''))
+  .then(res => res.json())
+  .then(res => {
+    if (res.length) {
+      res.forEach(insertDom);
+      el.querySelector('.count').innerHTML = `评论(<span class="num">${res.length}</span>)`;
+    }
+    loading.hide();
 
-      // hightlight comment accroding to id
-      if (/#\w+$/.test(window.location.href)) {
-        const id = window.location.href.split('#')[1];
-        console.log(id);
-        const elem = document.getElementById(id);
-        if (elem) {
-          const rect = elem.getBoundingClientRect();
-          const win = elem.ownerDocument.defaultView;
-          fly((rect.top + win.pageYOffset) - 60);
-          setTimeout(() => {
-            elem.classList.add('hightlight');
-          }, 500);
-        }
+    // hightlight comment accroding to id
+    if (/#\w+$/.test(window.location.href)) {
+      const id = window.location.href.split('#')[1];
+      console.log(id);
+      const elem = document.getElementById(id);
+      if (elem) {
+        const rect = elem.getBoundingClientRect();
+        const win = elem.ownerDocument.defaultView;
+        fly((rect.top + win.pageYOffset) - 60);
+        setTimeout(() => {
+          elem.classList.add('hightlight');
+        }, 500);
       }
+    }
 
-    }).catch((ex) => {
-      loading.hide();
-      nodata.show('评论系统暂不可用');
-      inputs.comment.disabled = true;
-    });
-  })();
+  }).catch((ex) => {
+    loading.hide();
+    nodata.show('评论系统暂不可用');
+    inputs.comment.disabled = true;
+  });
 
   // 加载输入框
   let inputs = {
@@ -204,18 +202,15 @@ export default function valine(option) {
 
   // 保存和加载游客的信息
   const setCache = (nick, mail, link) => {
-    if (nick) document.cookie = 'nick=' + nick + ';path=/';
-    if (mail) document.cookie = 'mail=' + mail + ';path=/';
-    if (link) document.cookie = 'link=' + link + ';path=/';
+    if (nick) localStorage.setItem('nick', nick);
+    if (mail) localStorage.setItem('mail', mail);
+    if (link) localStorage.setItem('link', link);
   }
   const getCache = () => {
-    const cookie = document.cookie.split(';')
-      .map((str) => str.trim().split('='))
-      .reduce((obj, [key, value]) => { obj[key] = value; return obj; }, {});
     return {
-      nick: cookie.nick || '',
-      mail: cookie.mail || '',
-      link: cookie.link || '',
+      nick: localStorage.getItem('nick') || '',
+      mail: localStorage.getItem('mail') || '',
+      link: localStorage.getItem('link') || '',
     }
   }
   const cache = getCache();

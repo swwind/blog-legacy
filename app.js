@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/node
 
 const fs = require('fs');
 const https = require('https');
@@ -20,22 +20,20 @@ const options = {
 }
 
 const { log } = require('./backend/log');
+const { decode } = require('./backend/utils.js');
+const { count, query } = require('./backend/count');
+const { createComment, getComment, rssComment } = require('./backend/comment');
+
 // 日志
 app.use(log);
-
-const { count } = require('./backend/count');
-// 统计阅读量
-app.get('/count', count);
-
-const {
-  createComment,
-  getComment,
-  rssComment,
-} = require('./backend/comment');
+// 统计阅读量 (+1)
+app.get('/count/:url', decode('url'), count);
+// 只获取阅读量 (+0)
+app.get('/query/:url', decode('url'), query);
 // 评论
 app.post('/comment', upload.any(), createComment);
 // 获取评论
-app.get('/getcomment', getComment);
+app.get('/getcomment/:url', decode('url'), getComment);
 // 订阅评论
 app.get('/comments.xml', rssComment);
 

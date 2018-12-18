@@ -1,4 +1,5 @@
 width-mini = 1000px
+supermini = "only screen and (max-width: 500px)"
 mini = "only screen and (max-width: " + width-mini + ")"
 notmini = "only screen and (min-width: " + width-mini + ")"
 
@@ -7,11 +8,9 @@ wallpaper = hexo-config('wallpaper')
 tab-size = hexo-config('tab_size')
 title-font = hexo-config('title_font')
 
-if title-font
-  @import url("https://fonts.loli.net/css?family=" + title-font)
+@import '_partial/fonts'
 @import '_partial/animate'
 @import '_partial/main'
-@import '_partial/fonts'
 @import '_partial/roigu'
 @import '_partial/icons'
 
