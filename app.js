@@ -18,6 +18,9 @@ const cors = (domain) => (req, res, next) => {
   res.header('Access-Control-Allow-Origin', domain);
   next();
 }
+const resolve404 = (message) => (req, res, next) => {
+  res.status(404).end(message);
+}
 
 const { log } = require('./backend/log');
 const { decode } = require('./backend/utils.js');
@@ -44,12 +47,15 @@ blog.get('/getcomment/:url', decode('url'), getComment);
 blog.get('/comments.xml', rssComment);
 // Static site
 blog.use(express.static('public'));
+blog.use(resolve404(fs.readFileSync('public/404.html')));
 
 const home = express();
 home.use(express.static('homepage'));
+blog.use(resolve404(fs.readFileSync('homepage/404.html')));
 
 const cdn = express();
 cdn.use(express.static('cdn'));
+cdn.use(resolve404('404 NOT FOUND'));
 
 const app = express();
 if (process.argv[2] === 'local') {
