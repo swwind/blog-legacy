@@ -57,7 +57,7 @@ home.use(resolve404(fs.readFileSync('public/404.html')));
 
 const cdn = express();
 cdn.use(express.static('cdn'));
-cdn.use(serveIndex('cdn', { icons: true }));
+// cdn.use(serveIndex('cdn', { icons: true }));
 cdn.use(resolve404('404 NOT FOUND'));
 
 const app = express();
@@ -65,8 +65,10 @@ app.use(cors);
 if (process.argv[2] === 'local') {
   https.createServer(options, blog).listen(3000);
   https.createServer(options, home).listen(4000);
+  https.createServer(options, cdn).listen(5000);
   console.log('blog opening on https://localhost:3000');
   console.log('home opening on https://localhost:4000');
+  console.log('cdn  opening on https://localhost:5000');
 } else {
   app.use(vhost('blog.swwind.me', blog));
   app.use(vhost('swwind.me', home));
