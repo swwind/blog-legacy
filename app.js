@@ -48,6 +48,9 @@ blog.use(express.static('public'));
 const home = express();
 home.use(express.static('homepage'));
 
+const cdn = express();
+cdn.use(express.static('cdn'));
+
 const app = express();
 if (process.argv[2] === 'local') {
   https.createServer(options, blog).listen(3000);
@@ -57,8 +60,9 @@ if (process.argv[2] === 'local') {
 } else {
   app.use(vhost('blog.swwind.me', blog));
   app.use(vhost('swwind.me', home));
+  app.use(vhost('cdn.swwind.me', cdn));
   app.use((req, res) => {
-    res.status(403).json({ message: 'forbidden' });
+    res.redirect('https://swwind.me');
   });
   https.createServer(options, app).listen(443);
   console.log('have a nice day!');
