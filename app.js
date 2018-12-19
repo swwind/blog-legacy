@@ -8,14 +8,17 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const upload = multer();
 const vhost = require('vhost');
+const serveIndex = require('serve-index');
 
 const options = {
   cert: fs.readFileSync('cert.crt'),
   key: fs.readFileSync('cert.key')
 }
 
-const cors = (domain) => (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', domain);
+const cors = (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 }
 const resolve404 = (message) => (req, res, next) => {
@@ -28,7 +31,6 @@ const { count, query } = require('./backend/count');
 const { createComment, getComment, rssComment } = require('./backend/comment');
 
 const blog = express();
-blog.use(cors('*'));
 blog.use(bodyParser.json());         // to support JSON-encoded bodies
 blog.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
@@ -51,13 +53,15 @@ blog.use(resolve404(fs.readFileSync('public/404.html')));
 
 const home = express();
 home.use(express.static('homepage'));
-blog.use(resolve404(fs.readFileSync('homepage/404.html')));
+home.use(resolve404(fs.readFileSync('public/404.html')));
 
 const cdn = express();
 cdn.use(express.static('cdn'));
+cdn.use(serveIndex('cdn', { icons: true }));
 cdn.use(resolve404('404 NOT FOUND'));
 
 const app = express();
+app.use(cors);
 if (process.argv[2] === 'local') {
   https.createServer(options, blog).listen(3000);
   https.createServer(options, home).listen(4000);
