@@ -7,7 +7,6 @@ public/
 .deploy*/
 data/
 gallery/
-!backend/
 
 package-lock.json
 cert.crt
