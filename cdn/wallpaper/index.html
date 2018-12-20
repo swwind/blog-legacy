@@ -25,6 +25,8 @@
       <a href="./2018-11/">2018-11 (x60)</a>
       <a href="./2018-10/">2018-10 (x50)</a>
       <a href="./2018-9/">2018-9 (x30)</a>
+      <a href="./2018-7/">2018-7 (x42)</a>
+      <a href="./2018-6/">2018-6 (x65)</a>
     </div>
     <div class="fresh" onclick="loadImage()">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -58,8 +60,8 @@
       }
       const queue = [];
       const generateImage = () => {
-        const month = [9, 10, 11][Math.floor(Math.random() * 3)];
-        const data = {'9': 30, '10': 50, '11': 60}[month];
+        const month = [6, 7, 9, 10, 11][Math.floor(Math.random() * 5)];
+        const data = {'6': 65, '7': 42, '9': 30, '10': 50, '11': 60}[month];
         const id = Math.floor(Math.random() * data) + 1;
         const id_str = id < 10 ? '0' + id : id.toString();
         const url = './2018-' + month + '/' + id_str;
