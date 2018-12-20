@@ -21,22 +21,23 @@ for (const dir of galleryDir) {
     const picnumber = filelist.filter((filename) => filename.indexOf('thumbnail') > -1).length;
     if (picnumber) {
       data.set(dir, picnumber);
+      console.log('scanned gallery folder `%s` with %d pictures.', dir, picnumber);
     }
   }
 }
-const css = fs.readFileSync(path.resolve(__dirname, 'style.css'), 'utf-8');
 
-// :dirname
+// '/:dirname'
 const viewDir = (req, res, next) => {
   const dirname = req.params.dirname;
-  const picnumber = data.get(dirname)
+  const picnumber = data.get(dirname);
   if (picnumber) {
     res.status(200).end(dir_template({ dirname, picnumber }));
   } else {
     next();
   }
 }
-// /
+
+// '/'
 const viewRoot = (req, res, next) => {
   if (req.originalUrl === '/') {
     res.status(200).end(root_template({ data }));
@@ -44,10 +45,14 @@ const viewRoot = (req, res, next) => {
     next();
   }
 }
-// /gallery.css
-const requestForCss = (req, res, next) => {
-  res.header('Content-Type', 'text/css');
-  res.status(200).end(css);
+
+// '/random.jpg'
+const dirs = Array.from(data);
+const randomWallpaper = (req, res, next) => {
+  res.header('Cache-Control', 'no-cache');
+  const [dirname, picnumber] = dirs[Math.floor(Math.random() * dirs.length)];
+  const id = Math.floor(Math.random() * picnumber) + 1;
+  res.status(200).sendFile(path.resolve('./gallery', dirname, id + '.jpg'));
 }
 
-module.exports = { viewDir, viewRoot, requestForCss };
+module.exports = { viewDir, viewRoot, randomWallpaper };

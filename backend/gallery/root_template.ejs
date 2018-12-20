@@ -3,32 +3,45 @@
   <head>
     <meta charset="utf8">
     <title>Gallery</title>
+    <meta name="description" content="A little gallery for wallpaper collection">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <style>
       body, html { padding: 0; margin: 0; }
       html { height: 100%; }
-      .panel { background-color: rgba(0, 0, 0, .5); color: #fff; margin: 50px auto; width: 200px; padding: 20px 50px; user-select: none; }
-      .panel a { padding: 20px; display: block; color: #fff; transition: background-color .5s; }
-      .panel a:hover { background-color: rgba(255, 255, 255, .5);  transition: background-color .5s; }
+      .panel { background-color: rgba(0, 0, 0, .5); color: #fff; width: 250px; user-select: none; position: fixed; left: 0; top: 0; height: 100vh; }
+      .panel a { padding: 20px; display: block; color: #fff; transition: background-color .5s; text-decoration: none; }
+      .panel a:hover { background-color: rgba(255, 255, 255, .2);  transition: background-color .5s; }
       .panel p { text-align: center; font-size: 2rem; }
+      @media only screen and (max-width: 400px) { .panel { width: 100vw; } }
+
+      @media only screen and (max-width: 400px) { .fresh { display: none; } }
       .fresh { position: fixed; right: 50px; bottom: 50px; cursor: pointer; background-color: rgba(0, 0, 0, .5); padding: 10px; }
       .fresh svg { height: 25px; width: 25px; fill: #fff; }
 
-      .wallpaper { z-index: -1; position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; background-position-x: center; background-position-y: center; background-size: cover; background-repeat: no-repeat; }
-      .wallpaper { transition: background-image .5s; }
+      .wallpaper { z-index: -1; position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; background-position: center; }
+      .wallpaper { transition: background-image .5s; background-size: cover; background-repeat: no-repeat; }
+
+      @media only screen and (max-width: 600px) { .info { display: none; } }
+      .info { position: fixed; right: 25px; top: 25px; color: #fff; background-color: rgba(0, 0, 0, .5); padding: 5px 10px; }
+      .info { font-family: 'Courier New', consolas, monospace; }
     </style>
     <script>
-      window.$data = new Map();<%
-      for (const [dirname, picnumber] of data) { %>
-      window.$data.set('<%- dirname %>', <%- picnumber %>);<% } %>
+      window.$data = new Map();
+      <% for (const [dirname, picnumber] of data) { %>
+      window.$data.set('<%- dirname %>', <%- picnumber %>);
+      <% } %>
     </script>
   </head>
   <body>
     <div class="wallpaper"></div>
     <div class="panel">
       <p>Gallery</p>
+      <% for (const [dirname, picnumber] of Array.from(data).reverse()) { %>
+      <a href="/<%- dirname %>/"><%- dirname %> (x<%- picnumber %>)</a>
+      <% } %>
+      <a href="/random.jpg" target="_blank">random</a>
     </div>
-    <div class="fresh" onclick="loadImage()">
+    <div class="fresh" onclick="loadImage()" title="Next Wallpaper">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         width="438.528px" height="438.528px" viewBox="0 0 438.528 438.528" xml:space="preserve">
         <path d="M433.109,23.694c-3.614-3.612-7.898-5.424-12.848-5.424c-4.948,0-9.226,1.812-12.847,5.424l-37.113,36.835
@@ -48,9 +61,11 @@
           C426.874,256.72,424.731,255.813,422.253,255.813z"/>
       </svg>
     </div>
+    <a class="info" target="_blank"></a>
     <script>
       const wallpaper = document.querySelector('.wallpaper');
       const panel = document.querySelector('.panel');
+      const info = document.querySelector('.info');
       const preload = (url) => {
         return new Promise((resolve, reject) => {
           const image = new Image();
@@ -64,22 +79,21 @@
       for (const dir of window.$data.keys()) {
         dirs.push(dir);
       }
+      dirs.reverse();
       const generateImage = () => {
         const month = dirs[Math.floor(Math.random() * dirs.length)];
         const days = window.$data.get(month);
         const id = Math.floor(Math.random() * days) + 1;
-        const id_str = id < 10 ? '0' + id : id.toString();
-        const url = './' + month + '/' + id_str + '.jpg';
+        const url = '/' + month + '/' + id + '.jpg';
         preload(url);
         queue.push(url);
       }
       const loadImage = () => {
         const url = queue.shift();
         wallpaper.style.backgroundImage = 'url(' + url + ')';
+        info.innerText = 'https://' + window.location.host + url;
+        info.href = 'https://' + window.location.host + url;
         generateImage();
-      }
-      for (const dir of dirs) {
-        panel.innerHTML += `<a href="./${dir}/">${dir} (x${window.$data.get(dir)})</a>`;
       }
       window.addEventListener('load', (e) => {
         generateImage();

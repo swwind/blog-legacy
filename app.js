@@ -29,7 +29,7 @@ const { log } = require('./backend/log');
 const { decode } = require('./backend/utils.js');
 const { count, query } = require('./backend/count');
 const { createComment, getComment, rssComment } = require('./backend/comment');
-const { viewDir, viewRoot, requestForCss } = require('./backend/gallery');
+const { viewDir, viewRoot, randomWallpaper } = require('./backend/gallery');
 
 const blog = express();
 blog.use(bodyParser.json());         // to support JSON-encoded bodies
@@ -58,7 +58,7 @@ home.use(resolve404(fs.readFileSync('public/404.html')));
 
 const gallery = express();
 gallery.use(express.static('gallery'));
-gallery.use('/gallery.css', requestForCss);
+gallery.use('/random.jpg', randomWallpaper)
 gallery.use('/:dirname', viewDir);
 gallery.use('/', viewRoot);
 gallery.use(resolve404('404 NOT FOUND'));
