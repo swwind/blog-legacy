@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <title>Wallpapers (<%= dirname %>)</title>
+    <base target="_blank">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/gallery.css">
+  </head>
+  <body>
+    <div class="main"><%
+    for (let id = 1; id <= picnumber; id ++) {
+      const id_str = id < 10 ? '0' + id : id.toString();
+      %>
+      <a class="item" href="<%- id_str %>.jpg" style="background-image: url(<%- id_str %>-thumbnail.jpg)"></a><%
+    }
+    %>
+    </div>
+    <p>Source From Liuli Shrine</p>
+  </body>
+</html>

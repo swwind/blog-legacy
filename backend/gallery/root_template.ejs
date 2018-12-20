@@ -17,17 +17,16 @@
       .wallpaper { z-index: -1; position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; background-position-x: center; background-position-y: center; background-size: cover; background-repeat: no-repeat; }
       .wallpaper { transition: background-image .5s; }
     </style>
+    <script>
+      window.$data = new Map();<%
+      for (const [dirname, picnumber] of data) { %>
+      window.$data.set('<%- dirname %>', <%- picnumber %>);<% } %>
+    </script>
   </head>
   <body>
     <div class="wallpaper"></div>
     <div class="panel">
       <p>Gallery</p>
-      <a href="./2018-11/">2018-11 (x60)</a>
-      <a href="./2018-10/">2018-10 (x50)</a>
-      <a href="./2018-9/">2018-9 (x30)</a>
-      <a href="./2018-8/">2018-8 (x39)</a>
-      <a href="./2018-7/">2018-7 (x42)</a>
-      <a href="./2018-6/">2018-6 (x65)</a>
     </div>
     <div class="fresh" onclick="loadImage()">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -51,33 +50,43 @@
     </div>
     <script>
       const wallpaper = document.querySelector('.wallpaper');
+      const panel = document.querySelector('.panel');
       const preload = (url) => {
         return new Promise((resolve, reject) => {
           const image = new Image();
           image.src = url;
-          image.onload = resolve;
+          image.onload = () => resolve(image);
           image.onerror = reject;
         });
       }
       const queue = [];
+      const dirs = [];
+      for (const dir of window.$data.keys()) {
+        dirs.push(dir);
+      }
       const generateImage = () => {
-        const month = [6, 7, 8, 9, 10, 11][Math.floor(Math.random() * 6)];
-        const data = {'6': 65, '7': 42, '8': 39, '9': 30, '10': 50, '11': 60}[month];
-        const id = Math.floor(Math.random() * data) + 1;
+        const month = dirs[Math.floor(Math.random() * dirs.length)];
+        const days = window.$data.get(month);
+        const id = Math.floor(Math.random() * days) + 1;
         const id_str = id < 10 ? '0' + id : id.toString();
-        const url = './2018-' + month + '/' + id_str;
-        preload(url + '.jpg');
-        queue.push(url + '.jpg');
+        const url = './' + month + '/' + id_str + '.jpg';
+        preload(url);
+        queue.push(url);
       }
       const loadImage = () => {
         const url = queue.shift();
         wallpaper.style.backgroundImage = 'url(' + url + ')';
         generateImage();
       }
-      generateImage();
-      generateImage();
-      generateImage();
-      loadImage();
+      for (const dir of dirs) {
+        panel.innerHTML += `<a href="./${dir}/">${dir} (x${window.$data.get(dir)})</a>`;
+      }
+      window.addEventListener('load', (e) => {
+        generateImage();
+        generateImage();
+        generateImage();
+        loadImage();
+      });
     </script>
   </body>
 </html>

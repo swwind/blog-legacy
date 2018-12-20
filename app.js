@@ -29,6 +29,7 @@ const { log } = require('./backend/log');
 const { decode } = require('./backend/utils.js');
 const { count, query } = require('./backend/count');
 const { createComment, getComment, rssComment } = require('./backend/comment');
+const { viewDir, viewRoot, requestForCss } = require('./backend/gallery');
 
 const blog = express();
 blog.use(bodyParser.json());         // to support JSON-encoded bodies
@@ -55,24 +56,26 @@ const home = express();
 home.use(express.static('homepage'));
 home.use(resolve404(fs.readFileSync('public/404.html')));
 
-const cdn = express();
-cdn.use(express.static('cdn'));
-// cdn.use(serveIndex('cdn', { icons: true }));
-cdn.use(resolve404('404 NOT FOUND'));
+const gallery = express();
+gallery.use(express.static('gallery'));
+gallery.use('/gallery.css', requestForCss);
+gallery.use('/:dirname', viewDir);
+gallery.use('/', viewRoot);
+gallery.use(resolve404('404 NOT FOUND'));
 
 const app = express();
 app.use(cors);
 if (process.argv[2] === 'local') {
   https.createServer(options, blog).listen(3000);
   https.createServer(options, home).listen(4000);
-  https.createServer(options, cdn).listen(5000);
-  console.log('blog opening on https://localhost:3000');
-  console.log('home opening on https://localhost:4000');
-  console.log('cdn  opening on https://localhost:5000');
+  https.createServer(options, gallery).listen(5000);
+  console.log('blog    opening on https://localhost:3000');
+  console.log('home    opening on https://localhost:4000');
+  console.log('gallery opening on https://localhost:5000');
 } else {
   app.use(vhost('blog.swwind.me', blog));
   app.use(vhost('swwind.me', home));
-  app.use(vhost('cdn.swwind.me', cdn));
+  app.use(vhost('gallery.swwind.me', gallery));
   app.use((req, res) => {
     res.redirect('https://swwind.me');
   });
