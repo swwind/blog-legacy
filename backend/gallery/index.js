@@ -24,7 +24,7 @@ for (const dir of galleryDir) {
     }
   }
 }
-const css = fs.readFileSync(path.resolve(__dirname, 'gallery.css'), 'utf-8');
+const css = fs.readFileSync(path.resolve(__dirname, 'style.css'), 'utf-8');
 
 // :dirname
 const viewDir = (req, res, next) => {
