@@ -37,12 +37,12 @@ $$(a+b)^n = \sum_{i=0}^nC^i_na^{n-i}b^i$$
 关于二项式定理的证明可以看[wiki](https://zh.wikipedia.org/wiki/%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86)上的证明，这里就不赘述了。
 这个式子是不是和要求的式子很像？
 我们再来看看求斐波那契第i项的做法：
-设$A=\begin{bmatrix}1&1\\1&0\end{bmatrix}$
+设$A=\begin{bmatrix}1&1\\\\1&0\end{bmatrix}$
 $$f[i]=A^i[0][0]$$
 于是我们可以得出以下结论
-$$\begin{aligned}原式&=\sum_{i=0}^nC_n^iA^i\\&=(A+1)^n\end{aligned}$$
-$1$用单位矩阵$\begin{bmatrix}1&0\\0&1\end{bmatrix}$代替，那么答案就是
-$$\begin{bmatrix}2&1\\1&1\end{bmatrix}^n$$
-注意到$A^2$就是$\begin{bmatrix}2&1\\1&1\end{bmatrix}$，所以答案就是
+$$\begin{aligned}原式&=\sum_{i=0}^nC_n^iA^i\\\\&=(A+1)^n\end{aligned}$$
+$1$用单位矩阵$\begin{bmatrix}1&0\\\\0&1\end{bmatrix}$代替，那么答案就是
+$$\begin{bmatrix}2&1\\\\1&1\end{bmatrix}^n$$
+注意到$A^2$就是$\begin{bmatrix}2&1\\\\1&1\end{bmatrix}$，所以答案就是
 $$A^{2n}=f[2n]$$
 代码就不用了吧。。

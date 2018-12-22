@@ -22,7 +22,7 @@ transform: matrix(a, b, c, d, e, f);
 
 $$
 \begin{pmatrix}
-a & c \\
+a & c \\\\
 b & d
 \end{pmatrix}
 $$
@@ -31,17 +31,17 @@ $$
 
 $$
 \begin{pmatrix}
-a & c \\
+a & c \\\\
 b & d
 \end{pmatrix}
 \times
 \begin{pmatrix}
-x \\
+x \\\\
 y
 \end{pmatrix}
 =
 \begin{pmatrix}
-ax+by \\
+ax+by \\\\
 cx+dy
 \end{pmatrix}
 $$
@@ -50,7 +50,7 @@ $$
 
 $$
 \begin{pmatrix}
-\cos\alpha & -\sin\alpha \\
+\cos\alpha & -\sin\alpha \\\\
 \sin\alpha & \cos\alpha
 \end{pmatrix}
 $$
@@ -59,7 +59,7 @@ $$
 
 $$
 \begin{pmatrix}
-scaleX & 0 \\
+scaleX & 0 \\\\
 0 & scaleY
 \end{pmatrix}
 $$

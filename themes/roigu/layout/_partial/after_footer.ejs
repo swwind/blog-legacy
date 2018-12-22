@@ -9,3 +9,23 @@
   </script>
 <% } %>
 <script type="text/javascript">requestReadTimes('#read-times')</script>
+
+<!-- KaTeX auto render -->
+<% if (page.mathjax !== false) { %>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+  Array.from(document.querySelectorAll('.artc p')).forEach(function (item) {
+    item.innerHTML = item.innerHTML.replace(/<br\/?>/g, '\n');
+  });
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: '$$', right: '$$', display: true },
+      { left: '\\(', right: '\\)', display: false },
+      { left: '$', right: '$', display: false },
+      { left: '\\[', right: '\\]', display: true }
+    ]
+  });
+});
+</script>
+<% } %>
+<!-- end KaTeX auto render -->

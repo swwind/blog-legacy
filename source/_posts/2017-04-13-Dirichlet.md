@@ -27,7 +27,7 @@ $$
 - $ld_k(n)=n^k$
 - $l(n)=lk_0(n)=1$
 - $ld(n)=ld_1(n)=n$（记住这个就好）
-- $\varepsilon(n)=\begin{cases}1,&n=1\\0,&n>1\end{cases}$
+- $\varepsilon(n)=\begin{cases}1,&n=1\\\\0,&n>1\end{cases}$
 
 然后试图理解下面的
 - $d(n)=\sum_{d|n}l\Leftrightarrow l\times l$

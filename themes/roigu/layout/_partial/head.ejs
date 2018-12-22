@@ -45,6 +45,8 @@ if (is_archive()) {
 
 <!-- KaTeX -->
 <% if (page.mathjax !== false) { %>
-  <link href="/katex/katex.min.css" rel="stylesheet">
+<%- js('katex/katex.min.js') %>
+<%- js('katex/contrib/auto-render.js') %>
+<%- css('katex/katex.min.css') %>
 <% } %>
 <!-- end KaTeX -->
