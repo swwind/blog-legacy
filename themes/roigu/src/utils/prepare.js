@@ -77,6 +77,11 @@ const ripple = () => {
   })
 }
 
+const counter = (path, increase = false) => {
+  const url = (increase ? '/count/' : '/query/') + btoa(path).replace(/=/g, '');
+  return fetch(url).then(res => res.json());
+}
+
 const prepare = () => {
   // create totop button
   let totop = document.createElement('div');
@@ -103,6 +108,21 @@ const prepare = () => {
   })
   // ripple
   ripple();
+
+  // load read times
+  const elem = document.getElementById('read-times');
+  if (elem) {
+    const path = window.location.pathname.replace(/index\.html$/, '');
+    counter(path, true).then(res => elem.innerText = res.data);
+  }
+  const elems = Array.from(document.querySelectorAll('.read-count'));
+  if (elems.length) {
+    elems.forEach((item) => {
+      counter(item.getAttribute('data-href'))
+      .then((res) => item.innerText = res.data);
+    });
+  }
+
   // create bilibili card
   document.querySelectorAll('.bilibili-card-pre')
     .forEach(bilibili)
@@ -285,16 +305,6 @@ const search = (path, search_id, content_id, regex_id, case_id) => {
     .then(success);
 }
 
-const counter = (res) => {
-  const page_path = window.location.pathname.replace(/index\.html?$/, "");
-  const elem = document.querySelector(res);
-  if (!elem) return;
-  elem.innerHTML = '?';
-  fetch('/count/' + btoa(page_path).replace(/=/g, ''))
-  .then(res => res.json())
-  .then(res => elem.innerHTML = res.data);
-}
-
 const show = (str, timeout) => {
   if (typeof str !== 'string') {
     str = str.toString();
@@ -324,7 +334,6 @@ const show = (str, timeout) => {
 
 export {
   prepare,
-  counter,
   search,
   fly,
   show,

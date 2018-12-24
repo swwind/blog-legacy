@@ -1,6 +1,9 @@
 <section class="index-section">
   <a href="<%- url_for(item.path) %>" title="<%- item.title %>" class="link under_line"><%= item.title %></a>
-  <time class="time time-icon"><%= item.date.format(config.date_format) %></time>
+  <div class="infos">
+    <span class="time-icon"><%= item.date.format(config.date_format) %></span>
+    <span class="book-icon read-count" data-href="<%- url_for(item.path) %>">?</span>
+  </div>
   <% if (item.desc) { %>
     <p class="artc" ><%= item.desc %></p>
   <% } %>

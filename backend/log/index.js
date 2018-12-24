@@ -41,7 +41,7 @@ const log = (req, res, next) => {
   const method = req.method;
   const url = req.originalUrl;
   const ua = req.get('User-Agent');
-  if (!/\.(?:png|jpg|ttf|css|js|svg|ico)$/.test(url)) {
+  if (!/\.(?:png|jpg|ttf|css|js|svg|ico|woff2)$/.test(url)) {
     _log([ip, method, url, ua].join(' '));
   }
   next();

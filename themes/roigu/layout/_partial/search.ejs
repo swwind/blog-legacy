@@ -5,5 +5,17 @@
 		<label class="search-case"><input type="checkbox" id="local-search-case" checked>忽略大小写</label>
 	</div>
 	<div id="local-search-result"></div>
-	<script type="text/javascript">;(function(){searchFunc("<%- url_for(config.search.path || 'search.xml') %>", 'local-search-input', 'local-search-result', 'local-search-regex', 'local-search-case');var k=document.querySelector('#local-search-input'),s=decodeURIComponent(document.URL).match(/\?s=[\s\S]+$/i);if(s)k.value=s[0].substr(3).replace(/\+/g, ' ');k.focus()})();</script>
+	<script type="text/javascript">
+	search('<%- url_for(config.search.path || 'search.xml') %>',
+				 'local-search-input',
+				 'local-search-result',
+				 'local-search-regex',
+				 'local-search-case');
+	var k = document.getElementById('local-search-input')
+	  , s = decodeURIComponent(document.URL).match(/\?s=([\s\S]+)$/i);
+	if (s) {
+		k.value = s[1].replace(/\+/g, ' ');
+	}
+	k.focus();
+	</script>
 </div>
