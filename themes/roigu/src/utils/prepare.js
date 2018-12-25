@@ -1,6 +1,7 @@
 'use strict';
 
 import bilibili from './bilibili';
+import snow from './snow';
 
 const setScrollTop = (top) => {
   document.body.scrollTop = top; // For Safari
@@ -108,6 +109,8 @@ const prepare = () => {
   })
   // ripple
   ripple();
+  // snow
+  snow();
 
   // load read times
   const elem = document.getElementById('read-times');
