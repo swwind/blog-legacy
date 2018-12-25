@@ -102,7 +102,7 @@ $$(x+y)^n = \sum_{i=0}^{n}\binom{n}{i}x^{n-i}y^i$$
 
 **欧拉函数** $\varphi(n)$ 表示小于 $n$ 的与 $n$ 互质的正整数的个数。
 
-设 $n = p_1p_2...p_k$，则
+设 $n = p_1^{a_1}p_2^{a_2}...p_k^{a_k}$，则有
 $$\varphi(n) = n(1-\frac{1}{p_1})(1-\frac{1}{p_2})...(1-\frac{1}{p_k})$$
 
 $\varphi(n)$ 是**积性函数**。
@@ -115,22 +115,20 @@ $\varphi(n)$ 是**积性函数**。
 
 **费马小定理**：设 $p$ 是质数，$(a,p)=1$，则 $$a^{p-1} \equiv 1 \pmod p$$
 
-**逆元**：如果 $ab=1 \pmod p$，那么我们称 $b$ 是 $a$ 在 $p$ 模域下的逆元。
+**扩展欧拉定理**：
+$$a^b \equiv \begin{cases}
+a^{b \mod \varphi(p)}, &a \bot p \\\\
+a^{b} , &b < \varphi(p) \\\\
+a^{b \mod \varphi(p) + \varphi(p)}, &b \geq \varphi(p)
+\end{cases} \pmod p$$
 
-$b$ 也可以表示成 $a^{-1} \pmod p$。
+> **例题：** 求 $$2^{2^{2^{...}}} \mod p$$
 
-注意：$a^{-1}$ 不一定存在。
-一般情况下我们可以这么求逆元：
-
-$$a^{-1} = a^{\varphi(p) - 1} \pmod p$$
-
-如果 $p$ 是质数，则
-
-$$a^{-1} = a^{p-2} \pmod p$$
-
-于是我们可能可以求一个分数在模域下的逆元了：
-
-$$\frac{a}{b} = a \times b^{-1} \pmod p$$
+> **解：**令 $$S = 2^{2^{2^{...}}}$$
+> 则 $$S \equiv 2^{S \mod \varphi(p) + \varphi(p)} \pmod p$$
+> 于是问题可以转化为求 $S$ 对 $\varphi(p)$ 取模的子问题。
+> 以此类推，当模数为 $1$ 时，答案显然为 $0$。
+> 然后递归回去计算即可。
 
 ## 莫比乌斯函数
 
