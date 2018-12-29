@@ -38,14 +38,14 @@ blog.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 // 日志
 blog.use(log);
-// 统计阅读量 (+1)
-blog.get('/count/:url', decode('url'), count);
-// 只获取阅读量 (+0)
-blog.get('/query/:url', decode('url'), query);
+// 统计阅读量
+blog.get('/count', decode('url'), count);
+// 只获取阅读量
+blog.get('/query', decode('url'), query);
 // 评论
 blog.post('/comment', upload.any(), createComment);
 // 获取评论
-blog.get('/getcomment/:url', decode('url'), getComment);
+blog.get('/getcomment', decode('url'), getComment);
 // 订阅评论
 blog.get('/comments.xml', rssComment);
 // Static site

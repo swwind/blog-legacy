@@ -18,18 +18,18 @@ const _count = (url) => {
 
 const count = (req, res) => {
   res.header('Content-Type', 'application/json');
-  if (!req.params.url) {
+  if (!req.query.url) {
     res.status(403).json({ message: 'forbidden' });
   } else {
-    res.status(200).json(_count(req.params.url));
+    res.status(200).json(req.query.url.map(_count));
   }
 }
 const query = (req, res) => {
   res.header('Content-Type', 'application/json');
-  if (!req.params.url) {
+  if (!req.query.url) {
     res.status(403).json({ message: 'forbidden' });
   } else {
-    res.status(200).json(_query(req.params.url));
+    res.status(200).json(req.query.url.map(_query));
   }
 }
 

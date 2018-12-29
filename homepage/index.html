@@ -140,14 +140,14 @@
                   <script type="text/javascript">
                     var el = document.querySelector('span#like-numbers');
                     el.innerText = 'LOADING...';
-                    fetch('https://blog.swwind.me/query/bGlrZQ')
+                    fetch('https://blog.swwind.me/query?url=bGlrZQ')
                     .then(res => res.json())
-                    .then(res => el.innerText = res.data);
+                    .then(res => el.innerText = res[0].data);
                     document.querySelector('a#like-button')
                       .addEventListener('click', function () {
-                        fetch('https://blog.swwind.me/count/bGlrZQ')
+                        fetch('https://blog.swwind.me/count?url=bGlrZQ')
                         .then(res => res.json())
-                        .then(res => el.innerText = res.data);
+                        .then(res => el.innerText = res[0].data);
                       });
                   </script>
                 </section>

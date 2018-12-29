@@ -78,9 +78,15 @@ const ripple = () => {
   })
 }
 
+const url2base64 = (url) => {
+  return btoa(url).replace(/=/g, '');
+}
 const counter = (path, increase = false) => {
-  const url = (increase ? '/count/' : '/query/') + btoa(path).replace(/=/g, '');
-  return fetch(url).then(res => res.json());
+  if (increase) {
+    return fetch('/count?url=' + path.map(url2base64).join(',')).then(res => res.json());
+  } else {
+    return fetch('/query?url=' + path.map(url2base64).join(',')).then(res => res.json());
+  }
 }
 
 const prepare = () => {
@@ -116,14 +122,17 @@ const prepare = () => {
   const elem = document.getElementById('read-times');
   if (elem) {
     const path = window.location.pathname.replace(/index\.html$/, '');
-    counter(path, true).then(res => elem.innerText = res.data);
+    counter([path], true).then(res => elem.innerText = res[0].data);
   }
   const elems = Array.from(document.querySelectorAll('.read-count'));
   if (elems.length) {
-    elems.forEach((item) => {
-      counter(item.getAttribute('data-href'))
-      .then((res) => item.innerText = res.data);
-    });
+    const map = new Map(elems.map((item) => [item.getAttribute('data-href'), item]));
+    counter(elems.map(item => item.getAttribute('data-href')), false)
+    .then((data) => {
+      data.forEach((item) => {
+        map.get(item.url).innerText = item.data;
+      })
+    })
   }
 
   // create bilibili card

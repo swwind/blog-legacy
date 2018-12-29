@@ -94,10 +94,10 @@ const createComment = (req, res) => {
 // 获取评论
 const getComment = (req, res) => {
   res.header('Content-Type', 'application/json');
-  if (!req.params.url) {
+  if (!req.query.url) {
     res.status(403).json({ message: 'forbidden' });
   } else {
-    res.status(200).json(_getComment(req.params.url));
+    res.status(200).json(req.query.url.map(_getComment));
   }
 };
 

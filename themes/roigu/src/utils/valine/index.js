@@ -162,9 +162,10 @@ export default function valine(option) {
 
   // 初始化所有评论
   loading.show();
-  fetch('/getcomment/' + btoa(window.location.pathname.replace(/index\.html?$/, '')).replace(/=/g, ''))
-  .then(res => res.json())
-  .then(res => {
+  fetch('/getcomment?url=' + btoa(window.location.pathname.replace(/index\.html?$/, '')).replace(/=/g, ''))
+  .then((res) => res.json())
+  .then((data) => {
+    const res = data[0];
     if (res.length) {
       res.forEach(insertDom);
       el.querySelector('.count').innerHTML = `评论(<span class="num">${res.length}</span>)`;
