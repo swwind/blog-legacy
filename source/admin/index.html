@@ -1,0 +1,50 @@
+<script type="text/javascript" src="/js/vue.min.js"></script>
+<script type="text/javascript" src="/js/md5.min.js"></script>
+
+<table id="table">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Content</td>
+      <td>Reply</td>
+      <td>Title</td>
+      <td>Nick</td>
+      <td>Link</td>
+      <td>URL</td>
+      <td>Time</td>
+      <td>Action</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="comment in comments" :id="comment.id">
+      <td v-text="comment.id"></td>
+      <td v-text="comment.content"></td>
+      <td><a v-text="comment.rid" :href="'#' + comment.id"></a></td>
+      <td v-text="comment.title"></td>
+      <td v-text="comment.nick"></td>
+      <td v-text="comment.link"></td>
+      <td><a v-text="comment.url" :href="comment.url + '#' + comment.id"></a></td>
+      <td v-text="comment.createTime"></td>
+      <td><a href="javascript:;" @click="handleDelete(comment.id)">Delete</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+fetch('/getcomments').then((res) => res.json())
+.then((comments) => new Vue({
+  el: '#table',
+  data: { comments },
+  methods: {
+    handleDelete(id) {
+      if (confirm('Sure to delete?')) {
+        const masterkey = md5(prompt('Please enter you key:'));
+        fetch('/delcomment?id=' + id + '&masterkey=' + masterkey)
+        .then((res) => res.json())
+        .then((res) => { alert(res.message); res.code === 200 && (location.href = location.href); })
+        .catch((err) => alert('Failed to fetch'));
+      }
+    }
+  }
+}));
+</script>

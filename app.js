@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const upload = multer();
 const vhost = require('vhost');
-const serveIndex = require('serve-index');
 
 const options = {
   cert: fs.readFileSync('cert.crt'),
@@ -28,7 +27,7 @@ const resolve404 = (message) => (req, res, next) => {
 const { log } = require('./backend/log');
 const { decode } = require('./backend/utils.js');
 const { count, query } = require('./backend/count');
-const { createComment, getComment, rssComment } = require('./backend/comment');
+const { createComment, getComment, rssComment, getComments, delComment } = require('./backend/comment');
 const { viewDir, viewRoot, randomWallpaper } = require('./backend/gallery');
 
 const blog = express();
@@ -46,6 +45,8 @@ blog.get('/query', decode('url'), query);
 blog.post('/comment', upload.any(), createComment);
 // 获取评论
 blog.get('/getcomment', decode('url'), getComment);
+blog.get('/getcomments', getComments);
+blog.get('/delcomment', delComment);
 // 订阅评论
 blog.get('/comments.xml', rssComment);
 // Static site

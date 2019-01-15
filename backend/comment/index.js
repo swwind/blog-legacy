@@ -23,26 +23,6 @@ const encodeComment = (comment) => {
   });
 }
 
-const rss_data = ((fake_data) => {
-  const rss_data = [];
-  for (const key in fake_data) {
-    fake_data[key].forEach(item => {
-      rss_data.push(Object.assign(item, { url: key }));
-    });
-  }
-  rss_data.sort((a, b) => {
-    return (+new Date(a.createTime)) - (+new Date(b.createTime));
-  });
-  return rss_data.slice(-20);
-})(comments.get());
-
-const updateRssData = (obj) => {
-  rss_data.push(obj);
-  if (rss_data.length > 20) {
-    rss_data.shift();
-  }
-}
-
 // { rid, ua, id, link, nick, title, content, mail, createTime }
 const _createComment = (url, nick, mail, link, content, rid, ua) => {
   // check mail
@@ -66,12 +46,35 @@ const _createComment = (url, nick, mail, link, content, rid, ua) => {
   } else {
     comments.set(url, comments.get(url).concat(obj));
   }
-  updateRssData(Object.assign(obj, { url }));
   return encodeComment(obj);
 }
 
 const _getComment = (url) => {
   return (comments.get(url) || []).map(encodeComment);
+}
+const _getComments = (url) => {
+  const all = comments.get();
+  const res = [];
+  for (const key in all) {
+    for (const cmt of all[key]) {
+      res.push(cmt);
+    }
+  }
+  return res.sort((a, b) => {
+    return (+new Date(b.createTime)) - (+new Date(a.createTime));
+  }).map(encodeComment);
+}
+const _delComment = (id) => {
+  const all = comments.get();
+  let ok = false;
+  for (const key in all) {
+    const res = all[key].filter((a) => a.id !== id);
+    if (res.length !== all[key].length) {
+      comments.set(key, res);
+      ok = true;
+    }
+  }
+  return ok;
 }
 
 // 评论
@@ -100,6 +103,23 @@ const getComment = (req, res) => {
     res.status(200).json(req.query.url.map(_getComment));
   }
 };
+// 获取所有评论
+const getComments = (req, res) => {
+  res.header('Content-Type', 'application/json');
+  res.status(200).json(_getComments());
+};
+// 删除评论
+const delComment = (req, res) => {
+  res.header('Content-Type', 'application/json');
+  if (req.query.masterkey !== 'd5c00449b3d3dae17498696189b14f3c') {
+    return res.status(403).json({ code: 403, message: 'fuck you' });
+  }
+  if (_delComment(req.query.id)) {
+    res.status(200).json({ code: 200, message: 'ok, removed' });
+  } else {
+    res.status(500).json({ code: 500, message: 'oh no, something happened' });
+  }
+}
 
 const ejs = require('ejs');
 const comments_template = fs.readFileSync('./backend/comment/template.xml', 'utf-8');
@@ -108,7 +128,7 @@ const template = ejs.compile(comments_template);
 // 订阅评论
 const rssComment = (req, res) => {
   res.header('Content-Type', 'application/xml');
-  const data = Array.from(rss_data).reverse();
+  const data = _getComments().slice(0, 20);
   res.status(200).end(template({ data }));
 };
 
@@ -116,4 +136,6 @@ module.exports = {
   createComment,
   getComment,
   rssComment,
+  getComments,
+  delComment,
 }
