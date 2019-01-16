@@ -183,7 +183,7 @@ var vuedemo = new Vue({
 <div id="vue-demo">
   <p><b>Vue Demo</b></p>
   <textarea v-on:input="handle"></textarea>
-  <div>{{ result }}</div>
+  <div v-text="result"></div>
 </div>
 <!-- cdn -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.min.js"></script>
@@ -193,7 +193,7 @@ var vuedemo = new Vue({
 <div id="vue-demo" class="demo">
   <p><b>Vue Demo</b></p>
   <textarea v-on:input="handle"></textarea>
-  <div>{{ result }}</div>
+  <div v-text="result"></div>
 </div>
 {% endraw %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.min.js"></script>
@@ -239,7 +239,7 @@ Vue | 2 | 2 | 86KB
 <div class="demo" id="anti-reverse">
   <p><b>Anti-Reverse</b></p>
   <textarea v-on:input="handle"></textarea>
-  <div>{{ result }}</div>
+  <div v-text="result"></div>
 </div>
 {% endraw %}
 
