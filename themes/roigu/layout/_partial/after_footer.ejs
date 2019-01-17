@@ -28,3 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 <% } %>
 <!-- end KaTeX auto render -->
+
+<!-- prism render -->
+<script type="text/javascript">
+Array.from(document.querySelectorAll('pre code'))
+  .map(function (code) { code.classList.add('line-numbers'); });
+</script>
+<%- js('js/prism.min.js') %>
+<!-- end prism render -->

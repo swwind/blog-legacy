@@ -1,0 +1,266 @@
+---
+title: Arch Linux 的安装和开发环境的配置
+date: 2019-01-17 08:52:53
+tags: archlinux
+categories: 教程
+---
+
+Arch Linux 是我目前觉得最好用的 linux 操作系统。本文讲一讲 Arch Linux 的安装过程和一些坑。
+
+<div style="text-align:center;background-color:#666;padding:40px 0;"><img src="https://wiki.archlinux.org/extensions/ArchLinux/modules/archnavbar/archlogo.svg?29b1c"></div>
+
+本文主要学习自 [官方的安装教程(EN)](https://wiki.archlinux.org/index.php/installation_guide)
+
+**前排警告：如果要装双系统，先装 Windows 10。**
+
+# 烧镜像
+
+**假设现在你在 Windows 7/10 系统上**
+
+首先下载镜像文件（`archlinux-xxxx.xx.xx-x86_64.iso`）。
+国内为了追求速度，可以到清华大学开源软件镜像站（TUNA）下载。
+
+<https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/>
+
+当然也可以用其他的镜像网站，关系不大。
+下载完成后记得效验一下 md5 hash 值。
+
+下载完成后，我们需要使用 [Rufus](https://rufus.ie/) 软件进行 U 盘的烧制。
+过程过于简单，不讲。
+
+烧完之后重启电脑，进 BIOS 选择 U 盘启动，然后静静地等待 Arch Linux 启动。
+
+# 安装到磁盘
+
+Arch Linux Live 默认使用 zsh 作为 shell，也就是说我们可以自由地使用 Tab 补全机制。
+
+## 联网
+
+第一个要解决的问题是联网。
+
+1. **我能 ping 通 baidu.com**
+
+   那你什么也不用做
+
+2. **我有 Wifi 可以连**
+
+   ```bash
+   wifi-menu
+   ```
+
+3. **我有网线插着**
+
+   首先找到你的设备名字
+
+   ```bash
+   ip addr
+   ```
+
+   你应该能找到一个名字长得像 `enpXsX` 的设备，把它记下来。
+
+   ```bash
+   vim /etc/systemd/network/20-wired.network
+   ```
+
+   ```plain
+   [Match]
+   Name=enpXsX
+
+   [Network]
+   Address=192.168.0.xx/24
+   Gateway=192.168.0.1
+   ```
+
+   具体 IP 地址和网关请自行询问路由器。
+
+   ```bash
+   vim /etc/systemd/resolved.conf
+   ```
+
+   ```plain
+   [Resolve]
+   DNS=202.96.207.28
+   # 这是绍兴的 DNS 服务器
+   # 你也可以用 Google 的 8.8.8.8
+   ```
+
+   修改完毕后
+
+   ```bash
+   rm -f /etc/resolv.conf
+   ln -s /etc/systemd/resolved.conf /etc/resolv.conf
+
+   systemctl disable dhcpcd@enpXsX.service
+   systemctl start systemd-networkd.service
+   systemctl start systemd-resolved.service
+   ```
+
+   等待若干秒之后再尝试 `ping baidu.com`，如果不行应该是你 ip 地址什么的填错了。
+
+### 更改 pacman 镜像（可选）
+
+```bash
+vim /etc/pacman.d/mirrorlist
+```
+
+将不要用的镜像地址用 `#` 注释掉即可。
+建议使用 TUNA 的镜像。
+
+## 准备磁盘空间
+
+使用 `fdisk -l` 查看磁盘情况，使用 `cfdisk /dev/sda` 来编辑磁盘分区。
+
+> 如果你电脑有什么找阿的硬盘保护系统，直接把它搞掉免除后患。
+> 要搞掉硬盘保护系统，推荐直接全盘格式化，简单粗暴而最行之有效。
+>
+> ```bash
+> parted /dev/sda
+> ```
+>
+> ```plain
+> GNU Parted 3.2
+> Using /dev/sda
+> Welcome to GNU Parted! Type 'help' to view a list of commands.
+> (parted)
+> ```
+>
+> 输入 `mklabel`，然后会跳出提示，此时输入 `gpt` 然后回车。
+> 输入 `quit` 退出 `parted`。
+
+你需要三个分区：
+
+1. 主分区，可以设的大一点，分区类型选择 `Linux extended`。(/dev/sdaX)
+2. Swap 分区，一般是 RAM 的两倍大小（？），分区类型选择 `Linux swap / Solaris`。(/dev/sdaY)
+3. EFI 引导分区，300 MB 左右，分区类型选择 `EFI (FAT-12/16/32)`。(/dev/sdaZ)
+
+在 `cfdisk` 中划分好之后，需要格式化分区。
+
+```bash
+mkfs.ext4 /dev/sdaX # 格式化主分区
+mkswap /dev/sdaY # 格式化 swap 分区
+swapon /dev/sdaY
+```
+
+注意，如果你已经存在一个 `EFI` 分区，则不需要格式化，否则使用以下命令格式化。
+
+``` bash
+mkfs.fat /dev/sdaZ
+```
+
+## 安装系统
+
+先 mount 分区。
+
+```bash
+mount /dev/sdaX /mnt
+mkdir /mnt/boot
+mount /dev/sdaZ /mnt/boot
+```
+
+使用 `pacstrap` 安装基本软件包。
+
+```bash
+pacstrap /mnt base base-devel
+```
+
+接着生成 fstab 文件。
+
+```bash
+genfstab -U /mnt >> /mnt/etc/fstab
+```
+
+### chroot
+
+等待安装完成后使用 `arch-chroot /mnt` 进入新系统。
+
+{% remark %}
+
+如果你是用 `wifi-menu` 联网的，请在这时安装下面两个包：
+
+```bash
+pacman -S dialog wpa_supplicant
+```
+
+{% endremark %}
+
+接下来我们要做一些简单的设置。
+
+```bash
+# 设置时区
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+# 更新时间
+hwclock --systohc
+
+# 语言设置
+vim /etc/locale.gen # 将需要的语言去掉注释
+locale-gen # 生成
+# 选择默认语言
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+```
+
+### 写引导
+
+**注意这一步非常重要。**
+
+现在应该还在 `chroot` 里面。
+
+```bash
+pacman -S grub os-prober
+grub-install --target=x86_64-efi --efi-directory=/boot/EFI --bootloader-id=grub
+```
+
+生成主配置文件：
+
+```bash
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+看一看 `stdout` 的输出，`os-prober` 应该能找到电脑上所有的其他盘的系统。
+
+如果不能，则手动修复引导。
+
+注意：完成 grub 修复之后必须**再生成一次主配置文件**，之后退出 `chroot` 并 `reboot`。
+
+#### 修复 Windows 10 引导
+
+你现在能找到 `/boot/EFI/Microsoft/Boot/bootmgfw.efi` 这个文件，如果没有，那就凉了。
+
+编辑 `/etc/grub.d/40_custom` 这个文件，在后面加上：
+
+```plain
+menuentry "Microsoft Windows 10" {
+  insmod part_gpt
+  insmod fat
+  insmod search_fs_uuid
+  insmod chain
+  chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+}
+```
+
+#### 修复 Ubuntu 引导
+
+假设 Ubuntu 在 `/dev/sda2`。
+
+同样编辑 `/etc/grub.d/40_custom` 这个文件，在后面加上：
+
+```plain
+menuentry "Ubuntu Linux" {
+	set root=(hd0,2)
+	linux /boot/vmlinuz // TODO???
+	initrd /boot/initrd.img
+}
+```
+
+## 装机配置
+
+### 联网
+
+同上。
+
+### 安装桌面环境
+
+```bash
+pacman -S xorg xorg-xinit i3
+startx
+```
+
