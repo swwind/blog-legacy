@@ -23,7 +23,8 @@ const encodeComment = (comment) => {
   });
 }
 
-// { rid, ua, id, link, nick, title, content, mail, createTime }
+
+// { rid, ua, id, link, nick, title, content, mail, createTime, url }
 const _createComment = (url, nick, mail, link, content, rid, ua) => {
   // check mail
   if (!/[\w-\.]+@([\w-]+\.)+[a-z]{2,3}/.test(mail)) {
@@ -40,7 +41,7 @@ const _createComment = (url, nick, mail, link, content, rid, ua) => {
   const createTime = new Date().toISOString();
   const title = '';
   const id = getRandomId();
-  const obj = { rid, ua, id, link, nick, title, content, mail, createTime };
+  const obj = { rid, ua, id, link, nick, title, content, mail, createTime, url };
   if (!comments.get(url)) {
     comments.set(url, [obj]);
   } else {
@@ -52,7 +53,7 @@ const _createComment = (url, nick, mail, link, content, rid, ua) => {
 const _getComment = (url) => {
   return (comments.get(url) || []).map(encodeComment);
 }
-const _getComments = (url) => {
+const _getComments = () => {
   const all = comments.get();
   const res = [];
   for (const key in all) {
@@ -75,6 +76,17 @@ const _delComment = (id) => {
     }
   }
   return ok;
+}
+
+// 修正评论中的错误
+const __all = comments.get();
+for (const c in __all) {
+  for (const cc of __all[c]) {
+    if (!cc.url) {
+      cc.url = c;
+    }
+  }
+  comments.set(c, __all[c]);
 }
 
 // 评论

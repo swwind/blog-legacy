@@ -129,9 +129,9 @@ vim /etc/pacman.d/mirrorlist
 
 你需要三个分区：
 
-1. 主分区，可以设的大一点，分区类型选择 `Linux extended`。(/dev/sdaX)
-2. Swap 分区，一般是 RAM 的两倍大小（？），分区类型选择 `Linux swap / Solaris`。(/dev/sdaY)
-3. EFI 引导分区，300 MB 左右，分区类型选择 `EFI (FAT-12/16/32)`。(/dev/sdaZ)
+1. 主分区，可以设的大一点，分区类型选择 `Linux extended`。(`/dev/sdaX`)
+2. Swap 分区，一般是 RAM 的两倍大小（？），分区类型选择 `Linux swap / Solaris`。(`/dev/sdaY`)
+3. EFI 引导分区，300 MB 左右，分区类型选择 `EFI System`。(`/dev/sdaZ`)（可能已经存在了）
 
 在 `cfdisk` 中划分好之后，需要格式化分区。
 
@@ -181,6 +181,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 pacman -S dialog wpa_supplicant
 ```
 
+<span class="truth" title="mdzz">我因为这两个包的缺失重启了两三次。。。</span>
+
 {% endremark %}
 
 接下来我们要做一些简单的设置。
@@ -219,11 +221,12 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 如果不能，则手动修复引导。
 
-注意：完成 grub 修复之后必须**再生成一次主配置文件**，之后退出 `chroot` 并 `reboot`。
+注意：修改 grub 配置文件后必须**再生成一次主配置文件**，最后再退出 `chroot` 并 `reboot`。
 
 #### 修复 Windows 10 引导
 
-你现在能找到 `/boot/EFI/Microsoft/Boot/bootmgfw.efi` 这个文件，如果没有，那就凉了。
+你现在能找到 `/boot/EFI/Microsoft/Boot/bootmgfw.efi` 这个文件。
+<span class="truth">如果没有，重装 win10 吧</span>
 
 编辑 `/etc/grub.d/40_custom` 这个文件，在后面加上：
 
@@ -237,30 +240,11 @@ menuentry "Microsoft Windows 10" {
 }
 ```
 
-#### 修复 Ubuntu 引导
-
-假设 Ubuntu 在 `/dev/sda2`。
-
-同样编辑 `/etc/grub.d/40_custom` 这个文件，在后面加上：
-
-```plain
-menuentry "Ubuntu Linux" {
-	set root=(hd0,2)
-	linux /boot/vmlinuz // TODO???
-	initrd /boot/initrd.img
-}
-```
+注意这只是一个临时的解决办法。
+也许你进去 arch 之后再 `grub-mkconfig` 一下就能找到 win10 了。
+如果是这样，那么删除这一段就行了（否则你将会看到两个 win10 的选项）。
 
 ## 装机配置
 
-### 联网
-
-同上。
-
-### 安装桌面环境
-
-```bash
-pacman -S xorg xorg-xinit i3
-startx
-```
+TODO
 
