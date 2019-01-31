@@ -246,5 +246,5 @@ menuentry "Microsoft Windows 10" {
 
 ## 装机配置
 
-TODO
+咕咕咕
 

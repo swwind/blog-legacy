@@ -24,6 +24,8 @@ const putSnow = (init) => {
 
 const snow = () => {
 
+  if (!isCristmas) return;
+
   for (let i = 1; i <= 50; ++ i) {
     putSnow(true);
   }
