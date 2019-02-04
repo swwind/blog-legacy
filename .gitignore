@@ -6,8 +6,8 @@ node_modules/
 public/
 .deploy*/
 data/
-gallery
-gallery/
+/gallery
+/gallery/
 .vscode/
 
 package-lock.json
