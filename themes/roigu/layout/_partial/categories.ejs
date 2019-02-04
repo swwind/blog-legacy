@@ -1,8 +1,0 @@
-<div class="category-cloud">
-	<p class="cloud-title"><%= __('categories') %></p>
-	<div class="items">
-  	<% site.categories.sort('name').each(function (item) { %>
-    	<a href="<%- url_for(item.path) %>" title="<%- item.name %>" class="cloud-item"><%= item.name %><sup><%= item.posts.length %></sup></a>
-  	<% }); %>
-  </div>
-</div>

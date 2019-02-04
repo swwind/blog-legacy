@@ -1,0 +1,16 @@
+.main.links-block
+  h1.links-title
+    = __('links')
+  ul.end-float.links-ul
+    for link in theme.links
+      li
+        a.friend-link-block(href=link.link,target="_blank")
+          img(src=url_for(link.avatar || 'img/avatar/default.png'))
+          div.name-desc
+            span.friend-link-name
+              = link.name
+            if link.desc
+              br
+              span.friend-link-desc
+                = link.desc
+  != partial('post/comment')

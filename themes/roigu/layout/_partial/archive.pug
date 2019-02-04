@@ -1,0 +1,32 @@
+-
+  var title = '';
+  var icon = '';
+  if (page.category) {
+    title = page.category;
+    icon = 'category';
+  }
+  if (page.tag) {
+    title = page.tag;
+    icon = 'tag';
+  }
+  if (page.archive) {
+    icon = 'archive';
+    if (page.year) title = page.year + (page.month ? '/' + page.month : '');
+    else title = __('archive_a');
+  }
+
+.end-float.archive-block
+  .archive-title
+    h2(class="title " + icon + "-icon")
+      = title
+    if page.archive
+      .archiveslist.archive-float
+        != list_archives({ format: __('archive_date') })
+  .archive-part#main
+    #archive-page
+      each item in page.posts.data
+        != partial('_partial/article', { item: item, index: true, desc: true })
+
+if page.total > 1
+  nav.page-nav
+    != paginator({ prev_text: 'Prev', next_text: 'Next' })

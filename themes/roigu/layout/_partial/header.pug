@@ -1,0 +1,13 @@
+header
+  .top-menu-div
+    ul.top-menu-links
+      each value, key in theme.menu
+        li.ripple
+          a(href=value)
+            = key
+    if page.layout !== 'search'
+      form(action="/search/",method="get",class="search-icon")
+        input(type="text",name="s",placeholder=__('search'))
+      a.search.search-icon(href="/search/")
+
+.bgimg

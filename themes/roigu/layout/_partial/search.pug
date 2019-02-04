@@ -1,0 +1,23 @@
+.search-main
+  input#local-search-input(type="text")
+  .search-checkboxes
+    label.search-regex
+      input#local-search-regex(type="checkbox")
+      = "使用正则表达式"
+    label.search-case
+      input#local-search-case(type="checkbox",checked)
+      = "忽略大小写"
+  #local-search-result
+  script.
+    search(
+      '!{url_for(config.search.path || 'search.xml')}',
+      'local-search-input',
+      'local-search-result',
+      'local-search-regex',
+      'local-search-case');
+    var k = document.getElementById('local-search-input')
+      , s = decodeURIComponent(document.URL).match(/\?s=([\s\S]+)$/i);
+    if (s) {
+      k.value = s[1].replace(/\+/g, ' ');
+    }
+    k.focus();

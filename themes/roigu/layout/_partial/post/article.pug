@@ -1,0 +1,22 @@
+div(class=item.layout)
+  article
+    .artc-title
+      h1= item.title
+      p
+        span.time-icon= item.date.format(config.date_format)
+        span.author-icon= config.author
+        span.book-icon#read-times= "?"
+    .artc
+      if item.sora === true
+        != partial('top_block/sora')
+      if item.warning
+        != partial('top_block/warning', { msg: item.warning })
+      if item.toc !== false
+        .toc-father
+          strong.toc-title= __('contents')
+          if item.list_number === false
+            != toc(item.content, { list_number: false })
+          else
+            != toc(item.content)
+      != item.content
+    != partial('catetags')

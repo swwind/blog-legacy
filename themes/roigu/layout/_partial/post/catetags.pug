@@ -1,0 +1,9 @@
+.article-catetags
+
+  if item.categories && item.categories.length
+    .categories-icon
+      != list_categories(item.categories, { show_count: false, style: 'none', separator: '' })
+
+  if item.tags && item.tags.length
+    .tags-icon
+      != list_tags(item.tags, { show_count: false, style: 'none', separator: '' })

@@ -215,14 +215,16 @@ header
         &:hover
           background-color rgba(0, 0, 0, .125)
           transition all .3s
-  .tag-cloud>.items
+  .tag-list-link, .tag-list-count, .category-list-link, .category-list-count
+    color #666
+  .tag-list-count, .category-list-count
+    vertical-align super
+    font-size smaller
+  .tag-list, .category-list
     margin 0 auto
-    width 90%
-    .cloud-item
-      color #666
-      padding 5px 10px
+    padding 0
+    .tag-list-item, .category-list-item
       margin 2px 5px
-      display inline-block
       text-decoration none
       font-size 20px
       transition all 1s
@@ -230,22 +232,17 @@ header
       &:hover
         background-color #ccc
         transition all .1s
-  .category-cloud>.items
-    margin 0 auto
+  .tag-list
+    width 90%
+    .tag-list-item
+      display inline-block
+      padding 5px 10px
+  .category-list
     display inline-block
     text-align left
-    .cloud-item
-      color #666
-      padding 5px 50px
-      margin 2px 5px
+    .category-list-item
       display block
-      text-decoration none
-      font-size 20px
-      transition all 1s
-      background-color #fcfcfc
-      &:hover
-        background-color #ccc
-        transition all .1s
+      padding 5px 50px
   .article-catetags
     user-select none
     margin 10px 0

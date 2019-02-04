@@ -1,0 +1,33 @@
+if theme.google_analytics.enable
+  // Global site tag (gtag.js) - Google Analytics
+  script(async,src="https://www.googletagmanager.com/gtag/js?id=" + theme.google_analytics.id)
+  script.
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', '!{theme.google_analytics.id}');
+
+// KaTeX auto render
+if page.mathjax !== false
+  script.
+    document.addEventListener('DOMContentLoaded', function () {
+      Array.from(document.querySelectorAll('.artc p')).forEach(function (item) {
+        item.innerHTML = item.innerHTML.replace(/<br\/?>/g, '\n');
+      });
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '$', right: '$', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ]
+      });
+    });
+// end KaTeX auto render
+
+// prism render
+script.
+  Array.from(document.querySelectorAll('pre code'))
+    .map(function (code) { code.classList.add('line-numbers'); });
+!= js('/js/prism.min.js')
+// end prism render

@@ -1,0 +1,6 @@
+div.index-box
+  each item in page.posts.data
+    != partial('_partial/article', { item: item, index: true, desc: true })
+  if (page.total > 1)
+    nav.page-nav
+      != paginator({ prev_text: 'Prev', next_text: 'Next' })

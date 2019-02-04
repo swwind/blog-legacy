@@ -1,0 +1,48 @@
+if 'string' === typeof page.source && page.source.match(/\.html$/)
+
+  // html page
+  != page.content
+
+else
+
+  doctype html
+
+  html(lang=config.language)
+    head!= partial('_partial/head')
+    body
+      if page.layout === 'post' || page.layout === 'page'
+        // post | page
+        != partial('_partial/header')
+        .container
+          != body
+          if page.comments !== false
+            != partial('_partial/post/comment')
+        != partial('_partial/footer')
+        != partial('_partial/after_footer')
+
+      else if page.layout === 'tags' || page.layout === 'categories' || page.layout === 'search' || page.layout === 'links'
+        // tags | categories | search | links
+        != partial('_partial/header')
+        .container
+          != partial('_partial/' + page.layout)
+        != partial('_partial/footer')
+        != partial('_partial/after_footer')
+
+      else if page.category != null || page.tag != null || page.archive != null
+        // category | tag | archive
+        != partial('_partial/header')
+        .container
+          != body
+        != partial('_partial/footer')
+        != partial('_partial/after_footer')
+
+      else
+        // index
+        .index-header
+          != partial('_partial/index_header')
+        .index-body
+          .container
+            != body
+          != partial('_partial/footer')
+        != partial('_partial/after_footer')
+

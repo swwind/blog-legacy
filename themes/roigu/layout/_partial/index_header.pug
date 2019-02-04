@@ -1,0 +1,11 @@
+.blog-title
+  p.title
+    = config.title
+  p.subtitle
+    = config.subtitle
+
+.search-box.search-icon#search-box
+  form(action="/search/",method="get")
+    .placeholder
+      = __('search')
+    input.color-ccc(type="text",name="s")

@@ -1,0 +1,11 @@
+footer
+  p
+    = "(c) 2017-" + new Date().getFullYear() + " " + theme.author
+    br
+    = "Powered by "
+    a(href="https://hexo.io/",target="_blank")
+      = "Hexo"
+    if (theme.hosted_by.enable)
+      = ", Hosted on "
+      a(href=theme.hosted_by.site,target="_blank")
+        = theme.hosted_by.name

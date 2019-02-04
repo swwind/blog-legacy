@@ -1,0 +1,14 @@
+section.index-section
+  a.link.under_line(href=url_for(item.path),title=item.title)
+    = item.title
+  .infos
+    span.time-icon
+      = item.date.format(config.date_format)
+    span.book-icon.read-count(data-href=url_for(item.path))
+      = "?"
+  if item.desc
+    p.artc
+      = item.desc
+  .readmore
+    a(href=url_for(item.path))
+      = "read more"

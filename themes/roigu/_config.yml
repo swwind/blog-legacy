@@ -69,16 +69,12 @@ links:
     avatar: https://secure.gravatar.com/avatar/b8204e5e9d1fd3d7eb24822cc2acd33f?s=64&d=mm&r=g
   - name: zhuerding
     desc: 朱二丁的小窝
-    link: http://yangwanlt.com/wordpress/
-    avatar: http://www.yangwanlt.com/wordpress/wp-content/uploads/2018/06/3e1a8455-150x150.jpg
+    link: https://www.zhuerding.top/wordpress
+    avatar: https://zhuerding.top/wordpress/wp-content/uploads/2018/06/3e1a8455-150x150.jpg
   - name: sxyugao
     desc: (=・ω・=)
     link: https://sxyugao.top/
-    avatar: https://sxyugao.top/images/avatar.gif
-  - name: timber2523
-    desc: 王强路(wasted)
-    link: https://timber2523.bitbucket.io/
-    avatar: https://timber2523.bitbucket.io/img/avatar.png
+    avatar: https://sxyugao.top/images/avatar.png
 
 # 谷歌统计
 google_analytics: # https://analytics.google.com/
