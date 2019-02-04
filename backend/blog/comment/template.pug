@@ -1,0 +1,12 @@
+doctype xml
+rss(version="2.0")
+  channel
+    title swwind 博客的评论
+    link https://blog.swwind.me
+    description 这是给我自己用的
+    each item in data
+      item
+        title= item.nick + " 评论于 " + item.url + " (" + item.id + ")"
+        link!= "https://blog.swwind.me" + item.url + "#" + item.id
+        description= item.content
+        pubDate= new Date(item.createTime).toString()

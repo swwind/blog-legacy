@@ -15,6 +15,18 @@ const decode = (key) => (req, res, next) => {
   next();
 }
 
+const cors = (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+}
+const resolve404 = (message) => (req, res, next) => {
+  res.status(404).end(message);
+}
+
 module.exports = {
   decode,
+  cors,
+  resolve404,
 }

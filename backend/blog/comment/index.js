@@ -2,7 +2,9 @@
 
 const fs = require('fs');
 const md5 = require('md5');
-const store = require('../data-store.js');
+const path = require('path');
+const store = require('../../data-store');
+
 const comments = store('comment');
 
 const getRandomId = () => {
@@ -27,11 +29,12 @@ const encodeComment = (comment) => {
 // { rid, ua, id, link, nick, title, content, mail, createTime, url }
 const _createComment = (url, nick, mail, link, content, rid, ua) => {
   // check mail
-  if (!/[\w-\.]+@([\w-]+\.)+[a-z]{2,3}/.test(mail)) {
-    mail = '';
-  }
+  // if (!/[\w-\.]+@([\w-]+\.)+[a-z]{2,3}/.test(mail)) {
+  //   mail = '';
+  // }
   // check link
   if (!/(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/.test(link)) {
+    // invalid link
     link = '';
   }
   if (!nick) {
@@ -79,15 +82,15 @@ const _delComment = (id) => {
 }
 
 // 修正评论中的错误
-const __all = comments.get();
-for (const c in __all) {
-  for (const cc of __all[c]) {
-    if (!cc.url) {
-      cc.url = c;
-    }
-  }
-  comments.set(c, __all[c]);
-}
+// const __all = comments.get();
+// for (const c in __all) {
+//   for (const cc of __all[c]) {
+//     if (!cc.url) {
+//       cc.url = c;
+//     }
+//   }
+//   comments.set(c, __all[c]);
+// }
 
 // 评论
 const createComment = (req, res) => {
@@ -104,7 +107,7 @@ const createComment = (req, res) => {
   } else {
     res.status(200).json(_createComment(url, nick, mail, link, content, rid, ua));
   }
-};
+}
 
 // 获取评论
 const getComment = (req, res) => {
@@ -114,12 +117,12 @@ const getComment = (req, res) => {
   } else {
     res.status(200).json(req.query.url.map(_getComment));
   }
-};
+}
 // 获取所有评论
 const getComments = (req, res) => {
   res.header('Content-Type', 'application/json');
   res.status(200).json(_getComments());
-};
+}
 // 删除评论
 const delComment = (req, res) => {
   res.header('Content-Type', 'application/json');
@@ -133,16 +136,16 @@ const delComment = (req, res) => {
   }
 }
 
-const ejs = require('ejs');
-const comments_template = fs.readFileSync('./backend/comment/template.xml', 'utf-8');
-const template = ejs.compile(comments_template);
+const pug = require('pug');
+const tmpstr = fs.readFileSync(path.resolve(__dirname, 'template.pug'), 'utf-8');
+const template = pug.compile(tmpstr);
 
 // 订阅评论
 const rssComment = (req, res) => {
   res.header('Content-Type', 'application/xml');
   const data = _getComments().slice(0, 20);
   res.status(200).end(template({ data }));
-};
+}
 
 module.exports = {
   createComment,

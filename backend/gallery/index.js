@@ -1,16 +1,19 @@
 'use strict';
 
 const fs = require('fs');
-const ejs = require('ejs');
+const pug = require('pug');
 const path = require('path');
+const express = require('express');
 
-const dir_template_path = path.resolve(__dirname, 'dir_template.ejs');
+const { resolve404 } = require('../utils');
+
+const dir_template_path = path.resolve(__dirname, 'dir_template.pug');
 const dir_template_text = fs.readFileSync(dir_template_path, 'utf-8');
-const dir_template = ejs.compile(dir_template_text);
+const dir_template = pug.compile(dir_template_text);
 
-const root_template_path = path.resolve(__dirname, 'root_template.ejs');
+const root_template_path = path.resolve(__dirname, 'root_template.pug');
 const root_template_text = fs.readFileSync(root_template_path, 'utf-8');
-const root_template = ejs.compile(root_template_text);
+const root_template = pug.compile(root_template_text);
 
 const data = new Map();
 const galleryDir = fs.readdirSync('./gallery');
@@ -26,8 +29,17 @@ for (const dir of galleryDir) {
   }
 }
 
-// '/:dirname'
-const viewDir = (req, res, next) => {
+const gallery = express();
+gallery.use(express.static('gallery'));
+
+const dirs = Array.from(data);
+gallery.use('/random', (req, res, next) => {
+  res.header('Cache-Control', 'no-cache');
+  const [dirname, picnumber] = dirs[Math.floor(Math.random() * dirs.length)];
+  const id = Math.floor(Math.random() * picnumber) + 1;
+  res.redirect('/' + dirname + '/' + id + '.jpg');
+})
+gallery.use('/:dirname', (req, res, next) => {
   const dirname = req.params.dirname;
   const picnumber = data.get(dirname);
   if (picnumber) {
@@ -35,24 +47,14 @@ const viewDir = (req, res, next) => {
   } else {
     next();
   }
-}
-
-// '/'
-const viewRoot = (req, res, next) => {
+})
+gallery.use('/', (req, res, next) => {
   if (req.originalUrl === '/') {
     res.status(200).end(root_template({ data }));
   } else {
     next();
   }
-}
+})
+gallery.use(resolve404('404 NOT FOUND'));
 
-// '/random.jpg'
-const dirs = Array.from(data);
-const randomWallpaper = (req, res, next) => {
-  res.header('Cache-Control', 'no-cache');
-  const [dirname, picnumber] = dirs[Math.floor(Math.random() * dirs.length)];
-  const id = Math.floor(Math.random() * picnumber) + 1;
-  res.status(200).sendFile(path.resolve('./gallery', dirname, id + '.jpg'));
-}
-
-module.exports = { viewDir, viewRoot, randomWallpaper };
+module.exports = gallery;

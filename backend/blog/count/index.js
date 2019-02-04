@@ -1,6 +1,6 @@
 'use strict';
 
-const store = require('../data-store.js');
+const store = require('../../data-store');
 const counter = store('count');
 
 const _query = (url) => {
