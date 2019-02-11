@@ -1,0 +1,11 @@
+doctype xml
+rss(version="2.0")
+  channel
+    title= domain + " 的评论"
+    link= "https://" + domain
+    each item in data
+      item
+        title= item.title
+        link= item.link
+        description= item.description
+        pubDate= item.time

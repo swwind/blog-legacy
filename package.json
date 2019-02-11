@@ -25,10 +25,14 @@
     "hexo-renderer-pug": "^0.0.5",
     "hexo-renderer-stylus": "^0.3.1",
     "hexo-server": "^0.2.0",
+    "leancloud-storage": "^3.11.1",
     "marked": "^0.6.0",
     "md5": "^2.2.1",
     "multer": "^1.4.1",
     "serve-index": "^1.9.1",
     "vhost": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.1"
   }
 }
