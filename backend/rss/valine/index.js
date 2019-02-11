@@ -31,6 +31,7 @@ app.use('/valine/:appid/:appkey/:domain', (req, res) => {
 
   const query = new AV.Query('Comment');
   query.limit(10);
+  query.descending('createdAt');
   query.find().then((saves) => {
     const data = saves.map((save) => {
       const nick = save.get('nick');
