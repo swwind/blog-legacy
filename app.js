@@ -35,5 +35,12 @@ if (process.argv[2] === 'local') {
   app.use(vhost('gallery.swwind.me', gallery));
   app.use(vhost('rss.swwind.me', rss));
   https.createServer(options, app).listen(443);
+
+  // redirect http to https
+  const http = express();
+  http.get('*', (req, res) => {  
+      res.redirect('https://' + req.headers.host + req.url);
+  });
+  http.listen(80);
   console.log('have a nice day!');
 }
