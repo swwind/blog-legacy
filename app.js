@@ -38,8 +38,12 @@ if (process.argv[2] === 'local') {
 
   // redirect http to https
   const http = express();
-  http.get('*', (req, res) => {  
+  http.get('*', (req, res) => {
+    if (req.get('User-Agent') === 'Go-http-client/1.1') {
+      res.status(403).end('nmsl');
+    } else {
       res.redirect('https://' + req.headers.host + req.url);
+    }
   });
   http.listen(80);
   console.log('have a nice day!');
