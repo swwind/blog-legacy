@@ -13,6 +13,10 @@ favicon: img/favicon.ico # 站标
 
 # 友链
 links:
+  - name: swwind
+    desc: 我自己
+    link: https://swwind.me
+    avatar: img/avatar.jpg
   - name: black_moon
     desc: ljz大佬
     link: https://littleredstar.github.io/
@@ -74,7 +78,11 @@ links:
   - name: sxyugao
     desc: (=・ω・=)
     link: https://sxyugao.top/
-    avatar: https://sxyugao.top/images/avatar.png
+    avatar: https://cdn.jsdelivr.net/gh/sxyugao/cdn/images/avatar.png
+  - name: shajjl
+    desc: 大佬
+    link: https://shajjl.github.io
+    avatar: https://avatars2.githubusercontent.com/u/46836484?s=400&v=4
 
 # 谷歌统计
 google_analytics: # https://analytics.google.com/
