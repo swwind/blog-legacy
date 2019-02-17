@@ -23,22 +23,22 @@ links:
     avatar: img/avatar/black_moon.jpg
   - name: Fop_zz
     desc: 小猪
-    link: http://blog.csdn.net/Fop_zz/
+    link: https://fop_zz.coding.me/
     avatar: img/avatar/fop_zz.jpg
   - name: Hammer_cwz_77
     desc: 不知名大佬
-    link: http://www.cnblogs.com/Hammer-cwz-77/
+    link: https://www.cnblogs.com/Hammer-cwz-77/
   - name: jzq233jzq
     desc: 金犇
     link: https://jzqjzq.coding.me/
     avatar: img/avatar/jzq233jzq.jpg
   - name: largecub233
     desc: 巨形方块
-    link: http://blog.csdn.net/largecub233/
+    link: https://blog.csdn.net/largecub233/
     avatar: img/avatar/largecub233.jpg
   - name: mdnd
     desc: 萌呆
-    link: http://blog.csdn.net/mdnd1234/
+    link: https://blog.csdn.net/mdnd1234/
     avatar: img/avatar/mdnd.jpg
   - name: nn020701
     desc: 陈天才
@@ -57,7 +57,7 @@ links:
     link: https://shenzhebei.github.io/
   - name: zhouyuyang233
     desc: 初三一本爷
-    link: http://blog.csdn.net/zhouyuyang233/
+    link: https://blog.csdn.net/zhouyuyang233/
     avatar: img/avatar/zhouyuyang233.jpg
   - name: zhzh2001
     desc: zhzh巨佬
@@ -70,19 +70,19 @@ links:
   - name: fancydreams
     desc: 大佬
     link: https://fancydreams.top/
-    avatar: https://secure.gravatar.com/avatar/b8204e5e9d1fd3d7eb24822cc2acd33f?s=64&d=mm&r=g
+    avatar: img/avatar/fancydreams.jpg
   - name: zhuerding
     desc: 朱二丁的小窝
     link: https://www.zhuerding.top/wordpress
-    avatar: https://zhuerding.top/wordpress/wp-content/uploads/2018/06/3e1a8455-150x150.jpg
+    avatar: img/avatar/zhuerding.jpg
   - name: sxyugao
     desc: (=・ω・=)
     link: https://sxyugao.top/
-    avatar: https://cdn.jsdelivr.net/gh/sxyugao/cdn/images/avatar.png
+    avatar: img/avatar/sxyugao.png
   - name: shajjl
     desc: 大佬
     link: https://shajjl.github.io
-    avatar: https://avatars2.githubusercontent.com/u/46836484?s=400&v=4
+    avatar: img/avatar/shajjl.png
 
 # 谷歌统计
 google_analytics: # https://analytics.google.com/
