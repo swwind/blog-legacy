@@ -8,13 +8,13 @@ html
     style.
       body, html { padding: 0; margin: 0; }
       html { height: 100%; }
-      .panel { background-color: rgba(0, 0, 0, .5); color: #fff; width: 250px; user-select: none; position: fixed; left: 0; top: 0; height: 100vh; }
+      .panel { background-color: rgba(0, 0, 0, .5); color: #fff; width: 250px; user-select: none; position: fixed; left: 0; top: 0; height: 100vh; overflow-y: auto; }
       .panel a { padding: 20px; display: block; color: #fff; transition: background-color .5s; text-decoration: none; }
       .panel a:hover { background-color: rgba(255, 255, 255, .2);  transition: background-color .5s; }
       .panel p { text-align: center; font-size: 2rem; }
-      @media only screen and (max-width: 400px) { .panel { width: 100vw; } }
+      @media only screen and (max-width: 600px) { .panel { width: 100vw; } }
 
-      @media only screen and (max-width: 400px) { .fresh { display: none; } }
+      @media only screen and (max-width: 600px) { .fresh { display: none; } }
       .fresh { position: fixed; right: 50px; bottom: 50px; cursor: pointer; background-color: rgba(0, 0, 0, .5); padding: 10px; }
       .fresh svg { height: 25px; width: 25px; fill: #fff; }
 
@@ -45,39 +45,69 @@ html
         path(d="M422.253,255.813h-54.816c-4.188,0-7.043,2.187-8.562,6.566c-7.99,19.034-13.038,30.163-15.129,33.4c-13.326,21.693-31.028,38.735-53.102,51.106c-22.083,12.375-45.874,18.556-71.378,18.556c-18.461,0-36.259-3.423-53.387-10.273c-17.13-6.858-32.454-16.567-45.966-29.13l39.115-39.112c3.615-3.613,5.424-7.901,5.424-12.847c0-4.948-1.809-9.236-5.424-12.847c-3.617-3.62-7.898-5.431-12.847-5.431H18.274c-4.952,0-9.235,1.811-12.851,5.431C1.807,264.844,0,269.132,0,274.08v127.907c0,4.945,1.807,9.232,5.424,12.847c3.619,3.61,7.902,5.428,12.851,5.428c4.948,0,9.229-1.817,12.847-5.428l36.829-36.833c20.367,19.41,43.542,34.355,69.523,44.823c25.981,10.472,52.866,15.701,80.653,15.701c52.155,0,97.643-15.845,136.471-47.534c38.828-31.688,64.333-73.042,76.52-124.05c0.191-0.38,0.281-1.047,0.281-1.995c0-2.478-0.907-4.612-2.715-6.427C426.874,256.72,424.731,255.813,422.253,255.813z")
     a.info(target="_blank")
     script.
-      const wallpaper = document.querySelector('.wallpaper');
-      const panel = document.querySelector('.panel');
-      const info = document.querySelector('.info');
-      const preload = (url) => {
-        return new Promise((resolve, reject) => {
-          const image = new Image();
+      var wallpaper = document.querySelector('.wallpaper');
+      var panel = document.querySelector('.panel');
+      var info = document.querySelector('.info');
+
+      var preload = function preload(url) {
+        return new Promise(function (resolve, reject) {
+          var image = new Image();
           image.src = url;
-          image.onload = () => resolve(image);
+
+          image.onload = function () {
+            return resolve(image);
+          };
+
           image.onerror = reject;
         });
+      };
+
+      var queue = [];
+      var dirs = [];
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = window.$data.keys()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var dir = _step.value;
+          dirs.push(dir);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
-      const queue = [];
-      const dirs = [];
-      for (const dir of window.$data.keys()) {
-        dirs.push(dir);
-      }
+
       dirs.reverse();
-      const generateImage = () => {
-        const month = dirs[Math.floor(Math.random() * dirs.length)];
-        const days = window.$data.get(month);
-        const id = Math.floor(Math.random() * days) + 1;
-        const url = '/' + month + '/' + id + '.jpg';
+
+      var generateImage = function generateImage() {
+        var month = dirs[Math.floor(Math.random() * dirs.length)];
+        var days = window.$data.get(month);
+        var id = Math.floor(Math.random() * days) + 1;
+        var url = '/' + month + '/' + id + '.jpg';
         preload(url);
         queue.push(url);
-      }
-      const loadImage = () => {
-        const url = queue.shift();
+      };
+
+      var loadImage = function loadImage() {
+        var url = queue.shift();
         wallpaper.style.backgroundImage = 'url(' + url + ')';
         info.innerText = 'https://' + window.location.host + url;
         info.href = 'https://' + window.location.host + url;
         generateImage();
-      }
-      window.addEventListener('load', (e) => {
+      };
+
+      window.addEventListener('load', function (e) {
         generateImage();
         generateImage();
         generateImage();
