@@ -91,7 +91,7 @@ google_analytics: # https://analytics.google.com/
 # Your hoster. (such as Coding Pages)
 # 你的托管商
 hosted_by:
-  enable: false
+  enable: true
   name: Netlify
   site: https://netlify.com
 

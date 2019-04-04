@@ -27,6 +27,9 @@ if (process.argv[2] === 'local') {
   console.log('home    --> https://localhost:4000');
   console.log('gallery --> https://localhost:5000');
   console.log('rss     --> https://localhost:5001');
+} else if (process.argv[2] === 'server') {
+  https.createServer(options, blog).listen(8000);
+  console.log('API running on https://localhost:8000');
 } else {
   const app = express();
   app.use(cors);
