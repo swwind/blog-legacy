@@ -83,9 +83,9 @@ const url2base64 = (url) => {
 }
 const counter = (path, increase = false) => {
   if (increase) {
-    return fetch('/count?url=' + path.map(url2base64).join(',')).then(res => res.json());
+    return fetch('https://api.swwind.me:8000/count?url=' + path.map(url2base64).join(',')).then(res => res.json());
   } else {
-    return fetch('/query?url=' + path.map(url2base64).join(',')).then(res => res.json());
+    return fetch('https://api.swwind.me:8000/query?url=' + path.map(url2base64).join(',')).then(res => res.json());
   }
 }
 
