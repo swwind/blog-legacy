@@ -15,8 +15,8 @@ const decode = (key) => (req, res, next) => {
   next();
 }
 
-const cors = (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+const cors = (allow) => (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', allow);
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();

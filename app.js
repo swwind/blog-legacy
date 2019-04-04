@@ -13,7 +13,7 @@ const options = {
 
 const { cors } = require('./backend/utils');
 
-const blog = require('./backend/blog');
+const { blog, api } = require('./backend/blog');
 const home = require('./backend/home');
 const gallery = require('./backend/gallery');
 const rss = require('./backend/rss');
@@ -28,11 +28,14 @@ if (process.argv[2] === 'local') {
   console.log('gallery --> https://localhost:5000');
   console.log('rss     --> https://localhost:5001');
 } else if (process.argv[2] === 'server') {
-  https.createServer(options, blog).listen(8000);
+  const app = express();
+  app.use(cors('https://blog.swwind.me'));
+  app.use(api);
+  https.createServer(options, app).listen(8000);
   console.log('API running on https://localhost:8000');
 } else {
   const app = express();
-  app.use(cors);
+  app.use(cors('*'));
   app.use(vhost('blog.swwind.me', blog));
   app.use(vhost('swwind.me', home));
   app.use(vhost('gallery.swwind.me', gallery));
