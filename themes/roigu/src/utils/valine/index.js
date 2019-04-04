@@ -162,7 +162,7 @@ export default function valine(option) {
 
   // 初始化所有评论
   loading.show();
-  fetch('https://api.swwind.me:8000/getcomment?url=' + btoa(window.location.pathname.replace(/index\.html?$/, '')).replace(/=/g, ''))
+  fetch(window.APIPrefix + '/getcomment?url=' + btoa(window.location.pathname.replace(/index\.html?$/, '')).replace(/=/g, ''))
   .then((res) => res.json())
   .then((data) => {
     const res = data[0];
@@ -243,7 +243,7 @@ export default function valine(option) {
 
     submitBtn.setAttribute('disabled', true);
     loading.show();
-    fetch('https://api.swwind.me:8000/comment', {
+    fetch(window.APIPrefix + '/comment', {
       method: 'POST',
       body: dfc,
     }).then(res => res.json())

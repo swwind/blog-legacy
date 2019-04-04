@@ -36,6 +36,9 @@ meta(property="og:image",content=url_for(theme.favicon))
 meta(property="og:description",content=page.desc || config.description)
 // end The Open Graph protocol
 
+script.
+  window.APIPrefix = '#{theme.api}';
+
 // theme js and css
 != js('js/roigu.min.js')
 != css('css/style.css')
