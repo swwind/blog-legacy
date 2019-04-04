@@ -4,7 +4,6 @@ menu:
   归档: /archives
   标签: /tags
   分类: /categories
-  画廊: https://gallery.swwind.me
   友链: /links
   RSS: /atom.xml
 
@@ -100,7 +99,7 @@ hosted_by:
 tab_size: 2
 
 # 自定义壁纸
-wallpaper: https://gallery.swwind.me/2018-06/28.jpg
+wallpaper: /img/background.jpg
 
 # title font (google fonts)
 # 首页标题字体 (google fonts)
