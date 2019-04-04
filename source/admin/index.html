@@ -31,7 +31,7 @@
 </table>
 
 <script type="text/javascript">
-fetch('/getcomments').then((res) => res.json())
+fetch('https://api.swwind.me:8000/getcomments').then((res) => res.json())
 .then((comments) => new Vue({
   el: '#table',
   data: { comments },
@@ -39,7 +39,7 @@ fetch('/getcomments').then((res) => res.json())
     handleDelete(id) {
       if (confirm('Sure to delete?')) {
         const masterkey = md5(prompt('Please enter you key:'));
-        fetch('/delcomment?id=' + id + '&masterkey=' + masterkey)
+        fetch('https://api.swwind.me:8000/delcomment?id=' + id + '&masterkey=' + masterkey)
         .then((res) => res.json())
         .then((res) => { alert(res.message); res.code === 200 && (location.href = location.href); })
         .catch((err) => alert('Failed to fetch'));
