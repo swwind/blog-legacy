@@ -105,5 +105,6 @@ wallpaper: /img/background.jpg
 # 首页标题字体 (google fonts)
 title_font: Pacifico
 
-api: https://blog.swwind.me
+api:
+# api: https://blog.swwind.me
 # api: https://api.swwind.me:8000
