@@ -158,6 +158,17 @@ label
   transition all .2s
 
 
+@media mini
+  #bgvideo
+    display none
+@media notmini
+  #bgvideo
+    position fixed
+    right 0
+    bottom 0
+    min-width 100%
+    min-height 100%
+
 .bilibili-card-pre.active
   display -webkit-flex
   display flex
