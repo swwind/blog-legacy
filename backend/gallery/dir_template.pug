@@ -29,11 +29,16 @@ html
         image.onerror = console.error;
       };
 
-      var elems = document.querySelectorAll('a.item');
-      for (let i = 0; i < elems.length; ++ i) {
-        elems[i].href = elems[i].getAttribute('data-id') + '.jpg';
-        preload(elems[i].getAttribute('data-id') + '-thumbnail.jpg', function () {
-          elems[i].style.backgroundImage = 'url(' + elems[i].getAttribute('data-id') + '-thumbnail.jpg)';
-          elems[i].style.opacity = '1';
+      var fuckIE = function fuckIE(elem) {
+        var id = elem.getAttribute('data-id');
+        elem.href = id + '.jpg';
+        preload(id + '-thumbnail.jpg', function () {
+          elem.style.backgroundImage = 'url(' + id + '-thumbnail.jpg)';
+          elem.style.opacity = '1';
         });
+      };
+
+      var elems = document.querySelectorAll('a.item');
+      for (var i = 0; i < elems.length; ++ i) {
+        fuckIE(elems[i]);
       }
