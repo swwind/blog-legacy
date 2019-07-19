@@ -99,7 +99,7 @@ hosted_by:
 tab_size: 2
 
 # 自定义壁纸
-wallpaper: /img/background.jpg
+wallpaper: /img/kyoani.png
 
 # title font (google fonts)
 # 首页标题字体 (google fonts)
@@ -108,3 +108,5 @@ title_font: Pacifico
 api:
 # api: https://blog.swwind.me
 # api: https://api.swwind.me:8000
+
+rip: true
