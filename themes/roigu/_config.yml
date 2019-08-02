@@ -99,7 +99,7 @@ hosted_by:
 tab_size: 2
 
 # 自定义壁纸
-wallpaper: /img/kyoani.png
+wallpaper: /img/background.jpg
 
 # title font (google fonts)
 # 首页标题字体 (google fonts)
@@ -109,4 +109,4 @@ api:
 # api: https://blog.swwind.me
 # api: https://api.swwind.me:8000
 
-rip: true
+rip: false
