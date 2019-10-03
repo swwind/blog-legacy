@@ -41,7 +41,7 @@ for (const tag of db.models.PostTag) {
 }
 
 const push = async (post) => {
-  await axios.put('http://new.swwind.me/api/post?token=bUKZVHnLBIsCyiP', post);
+  await axios.put('https://blog.swwind.me/api/post?token=GhJLENIYXEObKpU', post);
 }
 
 const work = async () => {
