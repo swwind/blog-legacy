@@ -102,7 +102,7 @@
 			+'text-shadow: 0px 0px 5px #000;font-weight: bold;font-family: "微软雅黑"}');
 	sty.attr('type', 'text/css')
 	$('head').append(sty)
-	var urls = "../img/a.txt";
+	var urls = "https://cdn.jsdelivr.net/gh/swwind/blog/source/img/a.txt";
 	var htmlobj = $.ajax({url:urls,async:false})
 	var dataString = htmlobj.responseText
 	speed = 1
